@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 390px;
+  height: 850px;
+  position: relative;
+  /* 임시 border */
+  border: 1px solid #c4c4c4;
+}
+
+.full-logo {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 270px;
+  left: 95px;
+}
