@@ -7,15 +7,26 @@
 
   a {
     text-decoration: none;
+    color: none;
   }
 
   .main-container {
-    width: 390px;
+    width: 100vw;
+    max-width: 767px;
     height: 844px;
     background: #fff;
     position: relative;
     border: 1px solid #c4c4c4;
     overflow: hidden;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .input-container {
+    width: 100vw;
+    max-width: 767px;
+    margin: 0 auto;
   }
 
   .login-form h1 {
@@ -28,9 +39,9 @@
   }
 
   .input-area {
-    width: 390px;
+    width: 322px;
     position: relative;
-    margin: 16px 34px 0;
+    margin: 16px auto 0;
   }
 
   .input-area:first-child {
@@ -66,6 +77,10 @@
     transition: all .5s ease;
   }
 
+  .btn-area {
+    text-align: center;
+  }
+
   #btn-login {
     outline: 0;
     border: 0;
@@ -78,7 +93,7 @@
     text-align: center;
     line-height: 44px;
     color: #fff;
-    margin: 30px 34px 0;
+    margin: 30px auto 0;
     cursor: pointer;
   }
 
