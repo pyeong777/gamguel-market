@@ -23,6 +23,7 @@
       <h2 class="sr-only">프로필</h2>
       <img src="../images/basic-profile-img-.svg" alt="프로필 이미지" class="profile__user-img">
       <dl class="profile-info">
+        <h3 class="sr-only">유저 정보</h3>
         <dt class="sr-only">닉네임</dt>
         <dd class="profile-info__user-name">애월읍 위니브 감귤농장</dd>
         <dt class="sr-only">아이디</dt>
@@ -100,9 +101,59 @@
         </label>
         <input type="radio" id="album-type" name="type" class="sr-only feed__button--album">
       </form>
-      <ul class="feed__list"></ul>
+      <ul class="feed-list"></ul>
+      <ul class="feed-album">
+        <li>
+          <img src="../images/album1.png" alt="피드 이미지" class="feed-album__picture">
+        </li>
+        <li class="feed-album__multi">
+          <img src="../images/album2.png" alt="피드 이미지" class="feed-album__picture">
+        </li>
+        <li>
+          <img src="../images/album3.png" alt="피드 이미지" class="feed-album__picture">
+        </li>
+        <li>
+          <img src="../images/album4.png" alt="피드 이미지" class="feed-album__picture">
+        </li>
+        <li>
+          <img src="../images/album5.png" alt="피드 이미지" class="feed-album__picture">
+        </li>
+        <li class="feed-album__multi">
+          <img src="../images/album6.png" alt="피드 이미지" class="feed-album__picture">
+        </li>
+        <li>
+          <img src="../images/album7.png" alt="피드 이미지" class="feed-album__picture">
+        </li>
+        <li>
+          <img src="../images/album8.png" alt="피드 이미지" class="feed-album__picture">
+        </li>
+        <li class="feed-album__multi">
+          <img src="../images/album9.png" alt="피드 이미지" class="feed-album__picture">
+        </li>
+      </ul>
     </section>
-    <div class="modal"></div>
+    <section class="modal">
+      <h2 class="sr-only">상단 바 메뉴</h2>
+      <ul class="modal-bottom">
+        <li class="modal-bottom__list">
+          <button type="button" class="modal-bottom__button">설정 및 개인정보</button>
+        </li>
+        <li class="modal-bottom__list">
+          <button type="button" class="modal-bottom__button">로그아웃</button>
+        </li>
+      </ul>
+      <div class="modal-logout">
+        <p class="modal-logout__content">로그아웃하시겠어요?</p>
+        <ul class="modal-logout__list">
+          <li class="modal-logout__item--cancel">
+            <button type="button" class="modal-logout__button--cancel">취소</button>
+          </li>
+          <li class="modal-logout__item--logout">
+            <button type="button" class="modal-logout__button--logout">로그아웃</button>
+          </li>
+        </ul>
+      </div>
+    </section>
   </main>
   <nav></nav>
 </body>
