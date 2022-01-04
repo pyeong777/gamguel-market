@@ -1,0 +1,135 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+  * {
+    box-sizing: border-box;
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  }
+
+  a {
+    text-decoration: none;
+    color: none;
+  }
+
+  .main-container {
+    width: 100vw;
+    max-width: 767px;
+    height: 844px;
+    background: #fff;
+    position: relative;
+    border: 1px solid #c4c4c4;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  .profile-form h1 {
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 30px;
+    margin: 54px auto 40px;
+    color: #000;
+  }
+
+  .profile-form h1 {
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 30px;
+    margin: 54px auto 0;
+    color: #000;
+  }
+
+  .profile-form p {
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 30px;
+    margin: 12px auto 0;
+    color: #767676;
+  }
+
+  .profile-img-area {
+    width: 110px;
+    height: 110px;
+    margin: 30px auto 30PX;
+    position: relative;
+  }
+
+  .profile-img-area::after {
+    content: "";
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background: url("/images/upload-file.svg") no-repeat;
+    background-size: 36px 36px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+
+
+  .input-container {
+    width: 100vw;
+    max-width: 767px;
+    margin: 0 auto;
+  }
+
+  .input-area {
+    width: 322px;
+    position: relative;
+    margin: 16px auto 0;
+  }
+
+  .input-area:first-child {
+    margin-top: 0;
+  }
+
+  .input-area input {
+    width: 322px;
+    padding: 32px 0 8px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #dbdbdb;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+    outline: none;
+  }
+
+  .input-area input:focus::-webkit-input-placeholder {
+    color: transparent;
+  }
+
+  .input-area input::placeholder {
+    color: #dbdbdb;
+  }
+
+  .input-area label {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    font-size: 12px;
+    color: #767676;
+    transition: all .5s ease;
+  }
+
+  .btn-area {
+    text-align: center;
+  }
+
+  #btn-login {
+    outline: 0;
+    border: 0;
+    width: 322px;
+    height: 44px;
+    background: #F26E22;
+    border-radius: 44px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 44px;
+    color: #fff;
+    margin: 30px auto 0;
+    cursor: pointer;
+  }
