@@ -1,0 +1,74 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css);
+
+* {
+  box-sizing: border-box;
+  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+}
+
+.sr-only {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+}
+
+body {
+  width: 390px;
+}
+
+section {
+  padding: 24px 16px;
+}
+
+/* chat */
+.chat {
+  display: flex;
+
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.user-img {
+  width: 42px;
+  height: 42px;
+  margin-right: 12px;
+  position: relative;
+}
+
+.chat-online {
+  width: 12px;
+  height: 12px;
+  background-color: #f26e22;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.chat-content h2 {
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.chat-content p {
+  font-size: 12px;
+  line-height: 15px;
+  color: #767676;
+  width: 238px;
+}
+
+.chat-date {
+  font-size: 10px;
+  line-height: 13px;
+  color: #dbdbdb;
+  position: absolute;
+  bottom: 5px;
+  right: 0px;
+}
