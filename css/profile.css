@@ -14,12 +14,12 @@ a, button {
   cursor: pointer;
 }
 
-.main-header,
-.profile,
-.products,
-.feed,
-.modal-bottom,
-.modal-logout {
+.container {
+  width: 100vw;
+  max-width: 767px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #DBDBDB;
   background-color: #FFFFFF;
 }
 
@@ -41,10 +41,8 @@ a, button {
 .main-header {
   display: flex;
   justify-content: space-between;
-  width: 100vw;
-  max-width: 767px;
   padding: 13px 16px;
-  margin: 0 auto;
+  border: none;
 }
 
 .main-header__back {
@@ -63,14 +61,6 @@ a, button {
   background-size: contain;
 }
 
-/* main */
-
-main {
-  width: 100vw;
-  max-width: 767px;
-  margin: 0 auto;
-}
-
 /* profile */
 
 .profile {
@@ -80,7 +70,6 @@ main {
   position: relative;
   padding: 30px 0 26px;
   margin-bottom: 6px;
-  border: 1px solid #DBDBDB;
 }
 
 .profile__user-img {
@@ -112,8 +101,7 @@ main {
   color: #767676;
 }
 
-.profile-info__followers-info,
-.profile-info__followings-info {
+.profile__follow-info {
   display: flex;
   flex-direction: column-reverse;
   position: absolute;
@@ -122,38 +110,36 @@ main {
   text-align: center;
 }
 
-.profile-info__followers-info {
+.profile__follow-info--followers {
   left: calc(50% - 91px);
   transform: translateX(-100%);
 }
 
-.profile-info__followings-info {
+.profile__follow-info--followings {
   right: calc(50% - 91px);
   transform: translateX(100%);
 }
 
-.profile-info__followers-title,
-.profile-info__followings-title {
+.profile__follow-title {
   font-size: 10px;
   color: #767676;
 }
 
-.profile-info__followers-value,
-.profile-info__followings-value {
+.profile__follow-value {
   margin-bottom: 10px;
   font-size: 18px;
   font-weight: 700;
 }
 
-.profile-info__followings-value {
+.profile__follow-value--followings {
   color: #767676;
 }
 
-.profile__button {
+.profile-list-button {
   position: relative;
 }
 
-.profile__button--follow {
+.profile__button-follow {
   width: 120px;
   height: 34px;
   border-radius: 30px;
@@ -163,8 +149,7 @@ main {
   color: #FFFFFF;
 }
 
-.profile__button--message,
-.profile__button--share {
+.profile__button {
   position: absolute;
   top: 0;
   width: 34px;
@@ -189,7 +174,6 @@ main {
 
 .products {
   padding: 20px 0 20px 16px;
-  border: 1px solid #DBDBDB;
   margin-bottom: 6px;
 }
 
@@ -230,7 +214,6 @@ main {
 /* feed */
 
 .feed {
-  border: 1px solid #DBDBDB;
   margin-bottom: 6px;
 }
 
@@ -241,12 +224,10 @@ main {
   padding: 9px 16px 9px 0;
 }
 
-.feed__label-list,
-.feed__label-list--on,
-.feed__label-album,
-.feed__label-album--on {
+.feed__label {
   width: 26px;
   height: 26px;
+  cursor: pointer;
 }
 
 .feed__label-list {
@@ -295,6 +276,7 @@ main {
 }
 
 /* modal */
+
 .modal {
   display: none;
   position: fixed;
@@ -305,10 +287,16 @@ main {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+.modal-window {
+  background-color: #FFFFFF;
+}
+
 .modal-bottom {
   display: none;
   position: fixed;
+  left: 50%;
   bottom: 0;
+  transform: translateX(-50%);
   width: 100vw;
   height: 138px;
   max-width: 767px;
@@ -362,8 +350,7 @@ main {
   justify-content: center;
 }
 
-.modal-logout__item--cancel,
-.modal-logout__item--logout {
+.modal-logout__item {
   width: 50%;
   height: 46px;
 }
@@ -372,8 +359,7 @@ main {
   border-left: 1px solid #DBDBDB;
 }
 
-.modal-logout__button--cancel,
-.modal-logout__button--logout {
+.modal-logout__button {
   display: flex;
   justify-content: center;
   align-items: center;
