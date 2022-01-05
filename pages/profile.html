@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>감귤마켓</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body>
+  <header class="container main-header">
+    <h1 class="sr-only">감귤마켓 프로필</h1>
+    <a href="javascript:void(0)" class="main-header__back">
+      <strong class="sr-only">뒤로 가기</strong>
+    </a>
+    <button type="button" class="main-header__button">
+      <strong class="sr-only">메뉴</strong>
+    </button>
+  </header>
+  <main>  
+    <section class="container profile">
+      <h2 class="sr-only">프로필</h2>
+      <button type="button" class="profile__button-user-img">
+        <img src="../images/basic-profile-img-.svg" alt="프로필 이미지" class="profile__user-img">
+      </button>
+      <dl class="profile-info">
+        <dt class="sr-only">닉네임</dt>
+        <dd class="profile-info__user-name">애월읍 위니브 감귤농장</dd>
+        <dt class="sr-only">아이디</dt>
+        <dd class="profile-info__user-id">@ weniv_Mandarin</dd>
+        <dt class="sr-only">프로필 메시지</dt>
+        <dd class="profile-info__user-desc">애월읍 감귤 전국 배송, 귤따기 체험, 감귤 농장</dd>
+      </dl>
+      <a href="javascript:void(0)" class="profile__follow-info profile__follow-info--followers">
+        <dl>
+          <dt class="profile__follow-title">followers</dt>
+          <dd class="profile__follow-value">2950</dd>
+        </dl>
+      </a>
+      <a href="javascript:void(0)" class="profile__follow-info profile__follow-info--followings">
+        <dl>
+          <dt class="profile__follow-title">followings</dt>
+          <dd class="profile__follow-value proflie__follow-value--followings">128</dd>
+        </dl>
+      </a>
+      <ul class="profile-list-button">
+        <li>
+          <button type="button" class="profile__button-follow">팔로우</button>
+        </li>
+        <li>
+          <button type="button" class="profile__button profile__button--message"></button>
+        </li>
+        <li>
+          <button type="button" class="profile__button profile__button--share"></button>
+        </li>
+      </ul>
+    </section>
+    <section class="container products">
+      <h2 class="products__title">판매 중인 상품</h2>
+      <ul class="products__on-sale">
+        <li>
+          <a href="javascript:void(0)">
+            <article class="products__info">
+              <img src="../images/product1.png" alt="감귤 사진" class="products__img">
+              <dl>
+                <dt class="sr-only">상품명</dt>
+                <dd class="products__name">애월읍 노지 감귤</dd>
+                <dt class="sr-only">가격</dt>
+                <dd class="products__price">35,000</dd>
+              </dl>
+            </article>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)">
+            <article class="products__info">
+              <img src="../images/product2.png" alt="감귤 사진" class="products__img">
+              <dl>
+                <dt class="sr-only">상품명</dt>
+                <dd class="products__name">애월읍 한라봉 10kg...</dd>
+                <dt class="sr-only">가격</dt>
+                <dd class="products__price">45,000</dd>
+              </dl>
+            </article>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:void(0)">
+            <article class="products__info">
+              <img src="../images/product2.png" alt="감귤 사진" class="products__img">
+              <dl>
+                <dt class="sr-only">상품명</dt>
+                <dd class="products__name">감귤 파치</dd>
+                <dt class="sr-only">가격</dt>
+                <dd class="products__price">25,000</dd>
+              </dl>
+            </article>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <section class="container feed">
+      <h2 class="sr-only">피드 목록</h2>
+      <form class="feed__button">
+        <label for="list-type" class="feed__label feed__label-list--on">
+          <strong class="sr-only">목록형으로 보기</strong>
+        </label>
+        <input type="radio" id="list-type" name="type" class="sr-only feed__button--list">
+        <label for="album-type" class="feed__label feed__label-album">
+          <strong class="sr-only">앨범형으로 보기</strong>
+        </label>
+        <input type="radio" id="album-type" name="type" class="sr-only feed__button--album">
+      </form>
+      <ul class="feed-list"></ul>
+      <ul class="feed-album">
+        <li>
+          <button type="button" class="feed-album__button">
+            <img src="../images/album1.png" alt="피드 이미지" class="feed-album__picture">
+          </butto>
+        </li>
+        <li class="feed-album__multi">
+          <button type="button" class="feed-album__button">
+            <img src="../images/album2.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
+        </li>
+        <li>
+          <button type="button" class="feed-album__button">
+            <img src="../images/album3.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
+        </li>
+        <li>
+          <button type="button" class="feed-album__button">
+            <img src="../images/album4.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
+        </li>
+        <li>
+          <button type="button" class="feed-album__button">
+            <img src="../images/album5.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
+        </li>
+        <li class="feed-album__multi">
+          <button type="button" class="feed-album__button">
+            <img src="../images/album6.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
+        </li>
+        <li>
+          <button type="button" class="feed-album__button">
+            <img src="../images/album7.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
+        </li>
+        <li>
+          <button type="button" class="feed-album__button">
+            <img src="../images/album8.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
+        </li>
+        <li class="feed-album__multi">
+          <button type="button" class="feed-album__button">
+            <img src="../images/album9.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
+        </li>
+      </ul>
+    </section>
+    <section class="modal">
+      <h2 class="sr-only">상단 바 메뉴</h2>
+      <ul class="modal-window modal-bottom">
+        <li class="modal-bottom__list">
+          <button type="button" class="modal-bottom__button">설정 및 개인정보</button>
+        </li>
+        <li class="modal-bottom__list">
+          <button type="button" class="modal-bottom__button">로그아웃</button>
+        </li>
+      </ul>
+      <div class="modal-window modal-logout">
+        <p class="modal-logout__content">로그아웃하시겠어요?</p>
+        <ul class="modal-logout__list">
+          <li class="modal-logout__item modal-logout__item--cancel">
+            <button type="button" class="modal-logout__button modal-logout__button--cancel">취소</button>
+          </li>
+          <li class="modal-logout__item modal-logout__item--logout">
+            <button type="button" class="modal-logout__button modal-logout__button--logout">로그아웃</button>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <nav></nav>
+</body>
+</html>
