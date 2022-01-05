@@ -11,7 +11,7 @@
 <body>
   <header class="main-header">
     <h1 class="sr-only">감귤마켓 프로필</h1>
-    <a class="main-header__back">
+    <a href="javascript:void(0)" class="main-header__back">
       <strong class="sr-only">뒤로 가기</strong>
     </a>
     <button type="button" class="main-header__button">
@@ -21,24 +21,29 @@
   <main>
     <section class="profile">
       <h2 class="sr-only">프로필</h2>
-      <img src="../images/basic-profile-img-.svg" alt="프로필 이미지" class="profile__user-img">
+      <button type="button" class="profile__button-user-img">
+        <img src="../images/basic-profile-img-.svg" alt="프로필 이미지" class="profile__user-img">
+      </button>
       <dl class="profile-info">
-        <h3 class="sr-only">유저 정보</h3>
         <dt class="sr-only">닉네임</dt>
         <dd class="profile-info__user-name">애월읍 위니브 감귤농장</dd>
         <dt class="sr-only">아이디</dt>
         <dd class="profile-info__user-id">@ weniv_Mandarin</dd>
         <dt class="sr-only">프로필 메시지</dt>
         <dd class="profile-info__user-desc">애월읍 감귤 전국 배송, 귤따기 체험, 감귤 농장</dd>
-        <div class="profile-info__followers-info">
+      </dl>
+      <a href="javascript:void(0)" class="profile-info__followers-info">
+        <dl>
           <dt class="profile-info__followers-title">followers</dt>
           <dd class="profile-info__followers-value">2950</dd>
-        </div>
-        <div class="profile-info__followings-info">
+        </dl>
+      </a>
+      <a href="javascript:void(0)" class="profile-info__followings-info">
+        <dl>
           <dt class="profile-info__followings-title">followings</dt>
           <dd class="profile-info__followings-value">128</dd>
-        </div>
-      </dl>
+        </dl>
+      </a>
       <ul class="profile__button">
         <li>
           <button type="button" class="profile__button--follow">팔로우</button>
@@ -55,37 +60,43 @@
       <h2 class="products__title">판매 중인 상품</h2>
       <ul class="products__on-sale">
         <li>
-          <article class="products__info">
-            <img src="../images/product1.png" alt="감귤 사진" class="products__img">
-            <dl>
-              <dt class="sr-only">상품명</dt>
-              <dd class="products__name">애월읍 노지 감귤</dd>
-              <dt class="sr-only">가격</dt>
-              <dd class="products__price">35,000</dd>
-            </dl>
-          </article>
+          <a href="javascript:void(0)">
+            <article class="products__info">
+              <img src="../images/product1.png" alt="감귤 사진" class="products__img">
+              <dl>
+                <dt class="sr-only">상품명</dt>
+                <dd class="products__name">애월읍 노지 감귤</dd>
+                <dt class="sr-only">가격</dt>
+                <dd class="products__price">35,000</dd>
+              </dl>
+            </article>
+          </a>
         </li>
         <li>
-          <article class="products__info">
-            <img src="../images/product2.png" alt="감귤 사진" class="products__img">
-            <dl>
-              <dt class="sr-only">상품명</dt>
-              <dd class="products__name">애월읍 한라봉 10kg...</dd>
-              <dt class="sr-only">가격</dt>
-              <dd class="products__price">45,000</dd>
-            </dl>
-          </article>
+          <a href="javascript:void(0)">
+            <article class="products__info">
+              <img src="../images/product2.png" alt="감귤 사진" class="products__img">
+              <dl>
+                <dt class="sr-only">상품명</dt>
+                <dd class="products__name">애월읍 한라봉 10kg...</dd>
+                <dt class="sr-only">가격</dt>
+                <dd class="products__price">45,000</dd>
+              </dl>
+            </article>
+          </a>
         </li>
         <li>
-          <article class="products__info">
-            <img src="../images/product2.png" alt="감귤 사진" class="products__img">
-            <dl>
-              <dt class="sr-only">상품명</dt>
-              <dd class="products__name">감귤 파치</dd>
-              <dt class="sr-only">가격</dt>
-              <dd class="products__price">25,000</dd>
-            </dl>
-          </article>
+          <a href="javascript:void(0)">
+            <article class="products__info">
+              <img src="../images/product2.png" alt="감귤 사진" class="products__img">
+              <dl>
+                <dt class="sr-only">상품명</dt>
+                <dd class="products__name">감귤 파치</dd>
+                <dt class="sr-only">가격</dt>
+                <dd class="products__price">25,000</dd>
+              </dl>
+            </article>
+          </a>
         </li>
       </ul>
     </section>
@@ -104,31 +115,49 @@
       <ul class="feed-list"></ul>
       <ul class="feed-album">
         <li>
-          <img src="../images/album1.png" alt="피드 이미지" class="feed-album__picture">
+          <button type="button" class="feed-album__button">
+            <img src="../images/album1.png" alt="피드 이미지" class="feed-album__picture">
+          </butto>
         </li>
         <li class="feed-album__multi">
-          <img src="../images/album2.png" alt="피드 이미지" class="feed-album__picture">
+          <button type="button" class="feed-album__button">
+            <img src="../images/album2.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
         </li>
         <li>
-          <img src="../images/album3.png" alt="피드 이미지" class="feed-album__picture">
+          <button type="button" class="feed-album__button">
+            <img src="../images/album3.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
         </li>
         <li>
-          <img src="../images/album4.png" alt="피드 이미지" class="feed-album__picture">
+          <button type="button" class="feed-album__button">
+            <img src="../images/album4.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
         </li>
         <li>
-          <img src="../images/album5.png" alt="피드 이미지" class="feed-album__picture">
+          <button type="button" class="feed-album__button">
+            <img src="../images/album5.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
         </li>
         <li class="feed-album__multi">
-          <img src="../images/album6.png" alt="피드 이미지" class="feed-album__picture">
+          <button type="button" class="feed-album__button">
+            <img src="../images/album6.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
         </li>
         <li>
-          <img src="../images/album7.png" alt="피드 이미지" class="feed-album__picture">
+          <button type="button" class="feed-album__button">
+            <img src="../images/album7.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
         </li>
         <li>
-          <img src="../images/album8.png" alt="피드 이미지" class="feed-album__picture">
+          <button type="button" class="feed-album__button">
+            <img src="../images/album8.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
         </li>
         <li class="feed-album__multi">
-          <img src="../images/album9.png" alt="피드 이미지" class="feed-album__picture">
+          <button type="button" class="feed-album__button">
+            <img src="../images/album9.png" alt="피드 이미지" class="feed-album__picture">
+          </button>
         </li>
       </ul>
     </section>
