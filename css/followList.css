@@ -1,0 +1,147 @@
+/* reset */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #F2F2F2;
+}
+
+a, button {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.container {
+  width: 100vw;
+  max-width: 767px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #DBDBDB;
+  background-color: #FFFFFF;
+}
+
+/* util */
+
+.sr-only {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* main header */
+
+.main-header {
+  display: flex;
+  align-items: center;
+  padding: 13px 16px;
+  border: none;
+}
+
+.main-header__title {
+  order: 1;
+  margin-left: 13px;
+  font-size: 14px;
+}
+
+.main-header__back {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background: url('../images/icon-arrow-left.svg') no-repeat;
+  background-size: contain;
+}
+
+/* follow */
+
+.follow {
+  padding: 24px 0;
+  min-height: 712px;
+}
+
+.follow-list {
+  display: flex;
+  flex-direction: column;
+  column-gap: 16px;
+}
+
+.follow__item {
+  position: relative;
+}
+
+.follow__user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.follow__user-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.follow__user-info {
+  flex: 1;
+  padding: 12px 6px;
+}
+
+.follow__user-name {
+  display: block;
+  padding-bottom: 7px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.follow__user-desc {
+  display: block;
+  font-size: 12px;
+  color: #767676;
+}
+
+.follow__button {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 28px;
+  border-radius: 26px;
+  font-size: 12px;
+}
+
+.follow__button--theme-orange {
+  background-color: #F26E22;
+  color: #FFFFFF;
+}
+
+.follow__button--theme-orange:hover {
+  background-color: #F78C4E;
+}
+
+.follow__button--theme-white {
+  border: 1px solid #DBDBDB;
+  background-color: #FFFFFF;
+}
+
+.follow__button--theme-white:hover {
+  background-color: #EEEEEE;
+}
+
+.follow__button--active {
+  display: block;
+}
+
+.follow__user:hover {
+  background-color: #EEEEEE;
+}
+
