@@ -139,17 +139,36 @@ a, button {
   position: relative;
 }
 
-.profile__button-follow {
+.profile__button--theme-big {
   width: 120px;
   height: 34px;
   border-radius: 30px;
-  background-color: #F26E22;
   font-size: 14px;
   font-weight: 500;
+}
+
+.profile__button--theme-orange {
+  background-color: #F26E22;
   color: #FFFFFF;
 }
 
-.profile__button {
+.profile__button--theme-white {
+  border: 1px solid #DBDBDB;
+  background-color: #FFFFFF;
+  color: #767676;
+}
+
+.profile__button--unfollow,
+.profile__button--modify,
+.profile__button--register {
+  display: none;
+}
+
+.profile__button--register {
+  width: 100px;
+}
+
+.profile__button--theme-small {
   position: absolute;
   top: 0;
   width: 34px;
