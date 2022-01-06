@@ -38,13 +38,14 @@
 }
 
 #header__input-search {
-    min-width: 300px;
+    width: 100%;
     background-color: #F2F2F2;
     border-radius: 32px;
     font-size: 14px;
     line-height: 18px;
     border: none;
     padding: 7px 16px;
+    margin-left: 10px;
 }
 
 .home-nav {
