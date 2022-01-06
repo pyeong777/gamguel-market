@@ -36,6 +36,12 @@ a, button {
   clip: rect(0, 0, 0, 0);
 }
 
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* main header */
 
 .main-header {
@@ -236,8 +242,10 @@ a, button {
 }
 
 .products__name {
+  width: 140px;
   margin-bottom: 4px;
   font-size: 14px;
+  line-height: 20px;
 }
 
 .products__price {
