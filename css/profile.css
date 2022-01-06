@@ -79,6 +79,10 @@ a, button {
   border-radius: 55px;
 }
 
+.profile__user-img:hover {
+  opacity: .8;
+}
+
 .profile-info {
   margin-bottom: 24px;
   text-align: center;
@@ -152,10 +156,18 @@ a, button {
   color: #FFFFFF;
 }
 
+.profile__button--theme-orange:hover {
+  background-color: #F78C4E;
+}
+
 .profile__button--theme-white {
   border: 1px solid #DBDBDB;
   background-color: #FFFFFF;
   color: #767676;
+}
+
+.profile__button--theme-white:hover {
+  background-color: #EEEEEE;
 }
 
 .profile__button--unfollow,
@@ -175,6 +187,10 @@ a, button {
   height: 34px;
   border: 1px solid #DBDBDB;
   border-radius: 30px;
+}
+
+.profile__button--theme-small:hover {
+  background-color: #EEEEEE;
 }
 
 .profile__button--message {
@@ -206,6 +222,10 @@ a, button {
   margin-bottom: 16px;
   font-size: 16px;
   font-weight: 700;
+}
+
+.products__info:hover {
+  opacity: .8;
 }
 
 .products__img {
@@ -249,6 +269,10 @@ a, button {
   cursor: pointer;
 }
 
+.feed__label:hover {
+  background-position: 1px 1px;
+}
+
 .feed__label-list {
   background: url('../images/icon-post-list-off.svg') no-repeat;
 }
@@ -281,11 +305,15 @@ a, button {
   height: 100%;
 }
 
-.feed-album__multi {
+.feed-album__item:hover {
+  opacity: .8;
+}
+
+.feed-album__item--multi {
   position: relative;
 }
 
-.feed-album__multi::after {
+.feed-album__item--multi::after {
   content: url('../images/iccon-img-layers.svg');
   position: absolute;
   width: 20px;
