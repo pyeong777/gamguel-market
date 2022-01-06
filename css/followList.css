@@ -36,6 +36,12 @@ a, button {
   clip: rect(0, 0, 0, 0);
 }
 
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* main header */
 
 .main-header {
@@ -96,6 +102,8 @@ a, button {
 
 .follow__user-name {
   display: block;
+  width: calc(100vw - 150px);
+  max-width: 240px;
   padding-bottom: 7px;
   font-size: 14px;
   font-weight: 500;
@@ -103,6 +111,8 @@ a, button {
 
 .follow__user-desc {
   display: block;
+  width: calc(100vw - 150px);
+  max-width: 240px;
   font-size: 12px;
   color: #767676;
 }
