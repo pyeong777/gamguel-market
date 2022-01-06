@@ -307,11 +307,11 @@ a, button {
 }
 
 .modal-window {
+  display: none;
   background-color: #FFFFFF;
 }
 
 .modal-bottom {
-  display: none;
   position: fixed;
   left: 50%;
   bottom: 0;
@@ -334,16 +334,18 @@ a, button {
   background-color: #DBDBDB;
 }
 
-.modal-bottom__list {
-  padding: 14px 0 14px 26px;
-}
-
 .modal-bottom__button {
+  width: 100%;
+  padding: 14px 0 14px 26px;
   font-size: 14px;
+  text-align: left;
 }
 
-.modal-logout {
-  display: none;
+.modal-bottom__button:hover {
+  background-color: #EEEEEE;
+}
+
+.modal-confirm {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -354,7 +356,7 @@ a, button {
   text-align: center;
 }
 
-.modal-logout__content {
+.modal-confirm__content {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -364,21 +366,21 @@ a, button {
   font-weight: 500;
 }
 
-.modal-logout__list {
+.modal-confirm__list {
   display: flex;
   justify-content: center;
 }
 
-.modal-logout__item {
+.modal-confirm__item {
   width: 50%;
   height: 46px;
 }
 
-.modal-logout__item--logout {
+.modal-confirm__item--yes {
   border-left: 1px solid #DBDBDB;
 }
 
-.modal-logout__button {
+.modal-confirm__button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -387,7 +389,7 @@ a, button {
   font-size: 14px;
 }
 
-.modal-logout__button--logout {
+.modal-confirm__button--yes {
   font-weight: 500;
   color: #F26E22;
 }
