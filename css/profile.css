@@ -19,7 +19,8 @@ a, button {
   max-width: 767px;
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid #DBDBDB;
+  border-top: 1px solid #DBDBDB;
+  border-bottom: 1px solid #DBDBDB;
   background-color: #FFFFFF;
 }
 
