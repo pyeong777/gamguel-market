@@ -1,0 +1,153 @@
+/* reset */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #F2F2F2;
+}
+
+a, button {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.container {
+  width: 100vw;
+  max-width: 767px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #DBDBDB;
+  background-color: #FFFFFF;
+}
+
+/* util */
+
+.sr-only {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* main header */
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 16px;
+  border: none;
+}
+
+.main-header__back {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background: url('../images/icon-arrow-left.svg') no-repeat;
+  background-size: contain;
+}
+
+.main-header__button {
+  width: 90px;
+  height: 32px;
+  border-radius: 32px;
+  background-color: #FFC7A7;
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.main-header__button--active {
+  background-color: #F26E22;
+}
+
+.main-header__button--active:hover {
+  opacity: .8;
+}
+
+/* feed */
+
+.product-modify { 
+  min-height: 712px;
+}
+
+/* joinMembership2.css 에서 가져와서 수정함 */
+
+.form-product {
+  padding-top: 30px;
+}
+
+.input-area {
+  width: calc(100vw - 68px);
+  position: relative;
+  margin: 16px auto 0;
+}
+
+.input-area__label-title {
+  display: inline-block;
+  margin-bottom: 18px;
+  font-size: 12px;
+  color: #767676;
+}
+
+.input-area__label-file {
+  display: block;
+  position: relative;
+  max-width: 322px;
+  height: 204px;
+  border: 1px solid #DBDBDB;
+  border-radius: 10px;
+  background-color: #F2F2F2;
+  cursor: pointer;
+}
+
+.input-area__label-file:hover {
+  opacity: .8;
+}
+
+.input-area__label-file::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  background: url('../images/img-button.svg') no-repeat;
+}
+
+.input-area__label {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #767676;
+}
+
+.input-area__input {
+  width: 100%;
+  background-color: transparent;
+  padding-bottom: 8px;
+  border: none;
+  border-bottom: 1px solid #DBDBDB;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  outline: none;
+}
+
+.input-area__input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.input-area__input::placeholder {
+  color: #DBDBDB;
+}
+/* joinMembership2.css 에서 가져와서 수정함 */
