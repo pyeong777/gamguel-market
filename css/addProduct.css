@@ -86,6 +86,7 @@ a, button {
 
 .input-area {
   width: calc(100vw - 68px);
+  max-width: 322px;
   position: relative;
   margin: 16px auto 0;
 }
