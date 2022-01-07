@@ -11,29 +11,41 @@
 </head>
 
 <body>
-  <main class="main-container">
-    <section class="login-form">
-      <h1>로그인</h1>
-      <form>
-        <div class="input-container">
-          <div class="input-area">
-            <input type="text" name="email" id="email" required>
-            <label for="id">이메일</label>
+  <div class="login-email-container">
+
+    <header class="login-email-header">
+      <h1 class="sr-only">로그인 이메일 화면</h1>
+      <em class="header-title">로그인</em>
+    </header>
+
+    <main class="login-email-main">
+      <section class="login-form">
+        <form>
+          <div class="input-container">
+            <div class="input-area">
+              <input type="text" name="email" id="email" required>
+              <label for="id">이메일</label>
+            </div>
+            <div class="input-area">
+              <input type="password" name="pw" id="pw" required>
+              <label for="pw">비밀번호</label>
+            </div>
+            <div class="btn-area">
+              <button id="btn-login" type="submit">
+                <span class="sr-only">로그인 버튼</span>
+                로그인
+              </button>
+            </div>
           </div>
-          <div class="input-area">
-            <input type="password" name="pw" id="pw" required>
-            <label for="pw">비밀번호</label>
-          </div>
-          <div class="btn-area">
-            <button id="btn-login" type="submit">로그인</button>
-          </div>
+        </form>
+
+        <div class="caption">
+          <a href="javascript:void(0)">이메일로 회원가입</a>
         </div>
-      </form>
-      <div class="caption">
-        <a href="#none">이메일로 회원가입</a>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
+  </div>
+
 </body>
 
 </html>
