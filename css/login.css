@@ -7,19 +7,33 @@
 
   a {
     text-decoration: none;
-    color: none;
+    color: #767676;
   }
 
-  .main-container {
+  .sr-only {
+    border: 0; 
+    clip: rect(0 0 0 0); 
+    clip-path: inset(50%); 
+    width: 1px; 
+    height: 1px; 
+    margin: -1px; 
+    overflow: hidden; 
+    padding: 0; 
+    position: absolute; 
+    white-space: nowrap; 
+}
+
+  .login-container {
     width: 100vw;
+    height: 100vh;
     max-width: 767px;
-    height: 844px;
-    background: #ea7f42;
-    /* 임시 border */
-    border: 1px solid #c4c4c4;
-    overflow: hidden;
-    text-align: center;
     margin: 0 auto;
+    background: #ea7f42;
+    overflow: hidden;
+  }
+
+  .login-header {
+    text-align: center;
   }
 
   .symbol-logo {
@@ -28,35 +42,40 @@
     margin: 180px auto 0;
   }
 
-  .login-container {
+  .login-main {
     width: 100vw;
     max-width: 767px;
     height: 362px;
     background: #fff;
     border-radius: 20px;
-    margin: 177px auto 0;
+    padding: 50px 0 0 0;
+    position: fixed;
+    bottom: -71px;
   }
 
-  .kakao-login {
+  .sns-login {
+    display: block;
     width: 322px;
     height: 44px;
-    border: 1px solid #F2C94C;
-    background: #fff;
     border-radius: 44px;
     font-size: 14px;
     font-weight: 400;
     text-align: center;
-    padding: 0 0 0 px;
     line-height: 44px;
     color: #767676;
-    margin: 50px 34px 10px;
     cursor: pointer;
+  }
+
+  .kakao-login {
+    border: 1px solid #F2C94C;
+    background: #fff;
+    margin: 0 auto 10px;
   }
 
   .kakao-login::before {
     content: "";
     display: block;
-    background: url("/images/icon-kakao.svg") no-repeat;
+    background: url("../images/icon-kakao.svg") no-repeat;
     width: 24px;
     height: 24px;
     float: left;
@@ -64,24 +83,15 @@
   }
 
   .google-login {
-    width: 322px;
-    height: 44px;
     border: 1px solid #767676;
     background: #fff;
-    border-radius: 44px;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
-    line-height: 44px;
-    color: #767676;
     margin: 0 auto 10px;
-    cursor: pointer;
   }
 
   .google-login::before {
     content: "";
     display: block;
-    background: url("/images/icon-google.svg") no-repeat;
+    background: url("../images/icon-google.svg") no-repeat;
     width: 24px;
     height: 24px;
     float: left;
@@ -89,24 +99,15 @@
   }
 
   .facebook-login {
-    width: 322px;
-    height: 44px;
     border: 1px solid #2D9CDB;
     background: #fff;
-    border-radius: 44px;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
-    line-height: 44px;
-    color: #767676;
     margin: 0 auto;
-    cursor: pointer;
   }
 
   .facebook-login::before {
     content: "";
     display: block;
-    background: url("/images/facebook.svg") center no-repeat;
+    background: url("../images/facebook.svg") center no-repeat;
     width: 24px;
     height: 24px;
     float: left;
