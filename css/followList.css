@@ -4,23 +4,20 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: #F2F2F2;
-}
-
 a, button {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
 
-.container {
+.wrap {
   width: 100vw;
+  height: 100vh;
   max-width: 767px;
-  margin-left: auto;
-  margin-right: auto;
-  border-top: 1px solid #DBDBDB;
-  border-bottom: 1px solid #DBDBDB;
+  margin: 0 auto;
+}
+
+.container {
   background-color: #FFFFFF;
 }
 
@@ -48,8 +45,9 @@ a, button {
 .main-header {
   display: flex;
   align-items: center;
+  height: 48px;
   padding: 13px 16px;
-  border: none;
+  border-bottom: 1px solid #DBDBDB;
 }
 
 .main-header__title {
@@ -70,7 +68,6 @@ a, button {
 
 .follow {
   padding: 24px 0;
-  min-height: 712px;
 }
 
 .follow-list {

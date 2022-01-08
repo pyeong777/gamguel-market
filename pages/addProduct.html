@@ -9,43 +9,45 @@
   <link rel="stylesheet" href="../css/addProduct.css">
 </head>
 <body>
-  <header class="container main-header">
-    <h1 class="sr-only">상품 등록</h1>
-    <a href="javascript:void(0)" class="main-header__back">
-      <strong class="sr-only">뒤로 가기</strong>
-    </a>
-    <button type="button" class="main-header__button">저장</button>
-  </header>
-  <main>
-    <section class="container product-modify">
-      <h2 class="sr-only">상품 정보 입력</h2>
-      <!-- joinMembership2.html 에서 가져와서 수정함 -->
-      <form class="form-product">
-        <div class="input-area">
-          <h3 class="input-area__label-title">이미지 등록</h3>
-          <label for="file" class="input-area__label-file"></label>
-          <input type="file" name="file" id="file" required
-          class="sr-only input-area__input--file">
-        </div>
-        <div class="input-area">
-          <label for="name" class="input-area__label">상품명</label>
-          <input type="text" name="name" id="name" placeholder="2~15자 이내여야 합니다." maxlength="15" required
-          class="input-area__input input-area__input--product-name">
-        </div>
-        <div class="input-area">
-          <label for="price" class="input-area__label">가격</label>
-          <input type="text" name="price" id="price" placeholder="숫자만 입력 가능합니다." required
-          class="input-area__input input-area__input--product-price">
-        </div>
-        <div class="input-area">
-          <label for="introduce" class="input-area__label">판매 링크</label>
-          <input type="text" name="link" id="link" placeholder="URL을 입력해 주세요." required
-          class="input-area__input input-area__input--product-url">
-        </div>
-      </form>
-      <!-- joinMembership2.html 에서 가져와서 수정함 -->
-    </section>
-  </main>
-  <nav></nav>
+  <div class="wrap">
+    <header class="container main-header">
+      <h1 class="sr-only">상품 등록</h1>
+      <a href="javascript:void(0)" class="main-header__back">
+        <strong class="sr-only">뒤로 가기</strong>
+      </a>
+      <button type="button" class="main-header__button">저장</button>
+    </header>
+    <main>
+      <section class="container product-modify">
+        <h2 class="sr-only">상품 정보 입력</h2>
+        <!-- joinMembership2.html 에서 가져와서 수정함 -->
+        <form class="form-product">
+          <div class="input-area">
+            <h3 class="input-area__label-title">이미지 등록</h3>
+            <label for="file" class="input-area__label-file"></label>
+            <input type="file" name="file" id="file" required
+            class="sr-only input-area__input--file">
+          </div>
+          <div class="input-area">
+            <label for="name" class="input-area__label">상품명</label>
+            <input type="text" name="name" id="name" placeholder="2~15자 이내여야 합니다." maxlength="15" required
+            class="input-area__input input-area__input--product-name">
+          </div>
+          <div class="input-area">
+            <label for="price" class="input-area__label">가격</label>
+            <input type="text" name="price" id="price" placeholder="숫자만 입력 가능합니다." required
+            class="input-area__input input-area__input--product-price">
+          </div>
+          <div class="input-area">
+            <label for="introduce" class="input-area__label">판매 링크</label>
+            <input type="text" name="link" id="link" placeholder="URL을 입력해 주세요." required
+            class="input-area__input input-area__input--product-url">
+          </div>
+        </form>
+        <!-- joinMembership2.html 에서 가져와서 수정함 -->
+      </section>
+    </main>
+    <nav></nav>
+  </div>
 </body>
 </html>
