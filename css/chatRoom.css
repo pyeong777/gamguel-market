@@ -6,9 +6,15 @@
   font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
 }
 
-body {
-  width: 390px;
-  height: 820px;
+.sr-only {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
 }
 
 main {
@@ -18,6 +24,43 @@ main {
 
 input {
   border: none;
+}
+
+.home-container {
+  width: 100vw;
+  height: 100vh;
+  max-width: 767px;
+  margin: 0 auto;
+}
+
+/* header */
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 13px 16px;
+  border-bottom: 0.5px solid #dbdbdb;
+}
+
+.main-header__title {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.main-header__back {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background: url('../images/icon-arrow-left.svg') no-repeat;
+  background-size: contain;
+}
+
+.main-header__button {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background: url('../images/icon- more-vertical.svg') no-repeat;
+  background-size: contain;
 }
 
 /* your-chat */
@@ -50,7 +93,7 @@ input {
   font-size: 10px;
   line-height: 13px;
   position: absolute;
-  right: 30px;
+  left: 300px;
   bottom: 10px;
 }
 
@@ -76,9 +119,6 @@ input {
 
 .img-transform {
   text-align: end;
-}
-
-.img-transform img {
 }
 
 .my-chat span,
@@ -127,7 +167,9 @@ input {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 36px 0 28px;
+  margin: 0 auto;
   background: url(../images/Rectangle\ 70.svg) no-repeat center 16px;
+  display: none;
 }
 
 .post-modal__content {

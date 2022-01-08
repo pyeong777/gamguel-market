@@ -1,5 +1,16 @@
-body {
-  width: 390px;
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css);
+
+* {
+  box-sizing: border-box;
+  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
+}
+
+.home-container {
+  width: 100vw;
+  height: 100vh;
+  max-width: 767px;
+  margin: 0 auto;
 }
 
 /* upload header */
