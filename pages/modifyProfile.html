@@ -9,36 +9,57 @@
   <link rel="stylesheet" href="../css/modifyProfile.css">
 </head>
 <body>
-  <header class="container main-header">
-    <h1 class="sr-only">프로필 수정</h1>
-    <a href="javascript:void(0)" class="main-header__back">
-      <strong class="sr-only">뒤로 가기</strong>
-    </a>
-    <button type="button" class="main-header__button main-header__button--active">저장</button>
-  </header>
-  <main>
-    <section class="container feed">
-      <!-- joinMembership2.html 에서 가져옴 -->
-      <button type="button" class="profile-img-area"> <!-- div 태그를 button 태그로 변경함 -->
-          <img src="/images/basic-profile-img-.svg" alt="profile-image" class="profile-img">
-      </button>
-      <form>
-        <div class="input-area">
-          <label for="name">사용자 이름</label>
-          <input type="text" name="name" id="name" placeholder="2- 10자 이내여야 합니다." required>
-        </div>
-        <div class="input-area">
-          <label for="id">계정 ID</label>
-          <input type="text" name="id" id="id" placeholder="영문 ,숫자, 특수문자(.),(_)만 사용 가능합니다." required>
-        </div>
-        <div class="input-area">
-          <label for="introduce">소개</label>
-          <input type="text" name="introduce" id="introduce" placeholder="자신과 판매할 상품에 대해 소개해 주세요!" required>
-        </div>
-      </form>
-      <!-- joinMembership2.html 에서 가져옴 -->
-    </section>
-  </main>
-  <nav></nav>
+  <div class="wrap">
+    <header class="container main-header">
+      <h1 class="sr-only">프로필 수정</h1>
+      <a href="javascript:void(0)" class="main-header__back">
+        <strong class="sr-only">뒤로 가기</strong>
+      </a>
+      <button type="button" class="main-header__button">저장</button>
+    </header>
+    <main>
+      <section class="container profile-modify">
+        <!-- joinMembership2.html 에서 가져옴 -->
+        <button type="button" class="profile-img-area"> <!-- div 태그를 button 태그로 변경함 -->
+            <img src="/images/basic-profile-img-.svg" alt="profile-image" class="profile-img">
+        </button>
+        <form>
+          <div class="input-area">
+            <label for="name">사용자 이름</label>
+            <input type="text" name="name" id="name" placeholder="2- 10자 이내여야 합니다." required>
+          </div>
+          <div class="input-area">
+            <label for="id">계정 ID</label>
+            <input type="text" name="id" id="id" placeholder="영문 ,숫자, 특수문자(.),(_)만 사용 가능합니다." required>
+          </div>
+          <div class="input-area">
+            <label for="introduce">소개</label>
+            <input type="text" name="introduce" id="introduce" placeholder="자신과 판매할 상품에 대해 소개해 주세요!" required>
+          </div>
+        </form>
+        <!-- joinMembership2.html 에서 가져옴 -->
+      </section>
+    </main>
+    <nav class="global-nav">
+      <ul class="nav-list">
+        <li class="list-item">
+          <img src="../images/icon-home-fill.svg" alt="home" class="list-img">
+          홈
+        </li>
+        <li class="list-item">
+          <img src="../images/icon-message-circle.svg" alt="message" class="list-img">
+          채팅
+        </li>
+        <li class="list-item">
+          <img src="../images/icon-edit.svg" alt="edit" class="list-img">
+          게시물 작성
+        </li>
+        <li class="list-item">
+          <img src="../images/icon-user.svg" alt="profile" class="list-img">
+          프로필
+        </li>
+      </ul>
+    </nav>
+  </div>
 </body>
 </html>
