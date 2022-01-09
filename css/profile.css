@@ -24,6 +24,13 @@ a, button {
   background-color: #FFFFFF;
 }
 
+.profile__button--follow,
+.profile__button--unfollow,
+.profile__button--modify,
+.profile__button--register {
+  display: none;
+}
+
 /* util */
 
 .sr-only {
@@ -41,6 +48,10 @@ a, button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.is-active {
+  display: flex;
 }
 
 /* main header */
@@ -152,6 +163,8 @@ a, button {
 }
 
 .profile__button--theme-big {
+  justify-content: center;
+  align-items: center;
   width: 120px;
   height: 34px;
   border-radius: 30px;
@@ -176,12 +189,6 @@ a, button {
 
 .profile__button--theme-white:hover {
   background-color: #EEEEEE;
-}
-
-.profile__button--unfollow,
-.profile__button--modify,
-.profile__button--register {
-  display: none;
 }
 
 .profile__button--register {
@@ -299,8 +306,81 @@ a, button {
   background: url('../images/icon-post-album-on.svg') no-repeat;
 }
 
+.feed-list,
 .feed-album {
-  display: grid;
+  display: none;
+}
+
+.feed-list {
+  padding-bottom: 100px;
+}
+
+.feed-article {
+  display: flex;
+  align-items: flex-start;
+  margin: 20px 16px;
+  
+}
+
+.article-profile {
+  width: 42px;
+  height: 42px;
+  margin-right: 12px;
+}
+
+.article-nickname {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.article-id {
+  font-size: 12px;
+  line-height: 14px;
+  color: #767676;
+}
+
+.article-cont {
+  font-size: 14px;
+  line-height: 18px;
+  margin: 16px 0;
+}
+
+.article-post__img {
+  display: block;
+  margin-bottom: 14.5px;
+  max-width: 100%;
+}
+
+.article-heart__btn {
+  width: 15px;
+  height: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.article-comment__btn {
+  width: 15px;
+  height: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.article-num {
+  font-size: 12px;
+  line-height: 12px;
+  color: #767676;
+  vertical-align: 3px;
+}
+
+.article-date {
+  font-size: 10px;
+  line-height: 12px;
+  color: #767676;
+  margin-top: 20px;
+}
+
+.feed-album {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: 8px;
@@ -330,6 +410,14 @@ a, button {
   height: 20px;
   top: 6px;
   right: 6px;
+}
+
+.list-checked {
+  display: block;
+}
+
+.album-checked {
+  display: grid;
 }
 
 /* modal */
@@ -430,6 +518,11 @@ a, button {
 .modal-confirm__button--yes {
   font-weight: 500;
   color: #F26E22;
+}
+
+.is-modal-active {
+  display: block;
+  z-index: 10;
 }
 
 /* gnb */

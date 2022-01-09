@@ -47,20 +47,20 @@
         </a>
         <ul class="profile-list-button">
           <li>
-            <button type="button" class="profile__button--theme-big profile__button--theme-orange">팔로우</button>
+            <button type="button" class="profile__button--theme-big profile__button--theme-orange profile__button--follow is-active">팔로우</button>
           </li>
           <li>
             <button type="button" class="profile__button--theme-big profile__button--theme-white profile__button--unfollow">언팔로우</button>
           </li>
           <li>
-            <button type="button" class="profile__button--theme-big profile__button--theme-white profile__button--modify">프로필 수정</button>
-            <button type="button" class="profile__button--theme-big profile__button--theme-white profile__button--register">상품 등록</button>
+            <a href="javascript:void(0)" class="profile__button--theme-big profile__button--theme-white profile__button--modify">프로필 수정</a>
+            <a href="javascript:void(0)" class="profile__button--theme-big profile__button--theme-white profile__button--register">상품 등록</a>
           </li>
           <li>
-            <button type="button" class="profile__button--theme-small profile__button--message"></button>
+            <a href="chatRoom.html" class="profile__button--theme-small profile__button--message"></a>
           </li>
           <li>
-            <button type="button" class="profile__button--theme-small profile__button--share"></button>
+            <a href="javascript:void(0)" class="profile__button--theme-small profile__button--share"></a>
           </li>
         </ul>
       </section>
@@ -111,16 +111,33 @@
       <section class="container feed">
         <h2 class="sr-only">피드 목록</h2>
         <form class="feed__button">
-          <label for="list-type" class="feed__label feed__label-list--on">
+          <label for="list-type" class="feed__label feed__label-list feed__label-list--on">
             <strong class="sr-only">목록형으로 보기</strong>
           </label>
-          <input type="radio" id="list-type" name="type" class="sr-only feed__button--list">
+          <input type="radio" id="list-type" name="type" checked class="sr-only feed__button--list">
           <label for="album-type" class="feed__label feed__label-album">
             <strong class="sr-only">앨범형으로 보기</strong>
           </label>
           <input type="radio" id="album-type" name="type" class="sr-only feed__button--album">
         </form>
-        <ul class="feed-list"></ul>
+        <ul class="feed-list list-checked">
+          <article class="feed-article">
+            <img src="../images/Ellipse 1.svg" alt="profile__img" class="article-profile">
+            <div class="article-container">
+              <p class="article-nickname">애월읍 위니브 감귤농장</p>
+              <p class="article-id">@ weniv_Mandarin</p>
+              <p class="article-cont">
+                옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.
+              </p>
+              <img src="../images/post1.png" alt="post-image" class="article-post__img">
+              <img src="../images/icon-heart.svg" alt="post-like" class="article-heart__btn">
+              <span class="article-num">58</span>
+              <img src="../images/icon-comment.svg" alt="post-comment" class="article-comment__btn">
+              <span class="article-num">12</span>
+              <p class="article-date">2020년 10월 12일</p>
+            </div>
+          </article>
+        </ul>
         <ul class="feed-album">
           <li class="feed-album__item">
             <button type="button" class="feed-album__button">
@@ -247,5 +264,6 @@
       </ul>
     </nav>
   </div>
+  <script src="../js/profile.js"></script>
 </body>
 </html>
