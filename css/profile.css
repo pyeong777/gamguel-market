@@ -443,7 +443,6 @@ a, button {
   bottom: 0;
   transform: translateX(-50%);
   width: 100vw;
-  height: 138px;
   max-width: 767px;
   padding: 16px 0 10px;
   border-top-left-radius: 10px;
