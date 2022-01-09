@@ -2,14 +2,27 @@
   box-sizing: border-box;
 }
 
-body {
+.sr-only {
+  border: 0; 
+  clip: rect(0 0 0 0); 
+  clip-path: inset(50%); 
+  width: 1px; 
+  height: 1px; 
+  margin: -1px; 
+  overflow: hidden; 
+  padding: 0; 
+  position: absolute; 
+  white-space: nowrap; 
+}
+
+.splash-container {
   width: 100vw;
+  height: 100vh;
   max-width: 767px;
-  height: 844px;
-  /* 임시 border */
-  border: 1px solid #c4c4c4;
   margin: 0 auto;
   text-align: center;
+  /* 임시 border */
+  border: 1px solid #c4c4c4;
 }
 
 .full-logo {

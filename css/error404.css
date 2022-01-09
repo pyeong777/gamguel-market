@@ -12,6 +12,13 @@ body {
   height: 820px;
 }
 
+.home-container {
+  width: 100vw;
+  height: 100vh;
+  max-width: 767px;
+  margin: 0 auto;
+}
+
 /* page-404 */
 
 .page-404 {

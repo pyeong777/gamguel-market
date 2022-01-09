@@ -11,32 +11,36 @@
 </head>
 
 <body>
-  <main class="main-container">
-    <img src="/images/symbol-logo-W.svg" alt="logo" class="symbol-logo">
+  <div class="login-container">
+    <header class="login-header">
+      <h1 class="sr-only">감귤마켓 로그인 화면</h1>
+      <img src="../images/symbol-logo-W.svg" alt="logo" class="symbol-logo">
+    </header>
 
-    <section class="login-container">
-
-      <button class="kakao-login">
+    <main class="login-main">
+      <button type="button" class="sns-login kakao-login">
+        <span class="sr-only">카카오톡 계정 로그인 버튼</span>
         카카오톡 계정으로 로그인
       </button>
-      <div class="google-login">
+      <button type="button" class="sns-login google-login">
+        <span class="sr-only">구글 계정 로그인 버튼</span>
         구글 계정으로 로그인
-      </div>
-      <div class="facebook-login">
+      </button>
+      <button type="button" class="sns-login facebook-login">
+        <span class="sr-only">페이스북 계정 로그인 버튼</span>
         페이스북 계정으로 로그인
-      </div>
-
+      </button>
       <div class="login-and-join">
         <div class="email-login">
-          <a href="#none">이메일로 로그인</a>
+          <a href="javascript:void(0)">이메일로 로그인</a>
         </div>
         <div class="join">
-          <a href="#none">회원가입</a>
+          <a href="javascript:void(0)">회원가입</a>
         </div>
       </div>
+    </main>
+  </div>
 
-    </section>
-  </main>
 </body>
 
 </html>
