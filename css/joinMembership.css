@@ -98,16 +98,27 @@ a {
   transition: all .5s ease;
 }
 
+.input-area .warning {
+  display: none;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: #eb5757;
+  transition: all .5s ease;
+  margin: 6px 0 16px 0;
+}
+
 .btn-area {
   text-align: center;
 }
 
-#btn-next {
+#next_btn {
   outline: 0;
   border: 0;
   width: 322px;
   height: 44px;
   background: #F26E22;
+  opacity: .3;
   border-radius: 44px;
   font-size: 14px;
   font-weight: 400;

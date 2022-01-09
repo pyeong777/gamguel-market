@@ -22,7 +22,10 @@
         <p>나중에 언제든지 변경할 수 있습니다.</p>
         <div class="profile-img-area">
           <img src="../images/basic-profile-img-.svg" alt="profile-image" class="profile-img">
-          <button type="button" id="btn-img-upload">
+          <form action="upload" id="uploadForm" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="file" style="display:none" />
+          </form>
+          <button type="button" id="btn-img-upload" onclick="onclick=document.all.file.click()">
             <span class="sr-only">프로필 이미지 등록 버튼</span>
           </button>
         </div>
@@ -34,13 +37,15 @@
           <div class="input-area">
             <input type="text" name="id" id="id" placeholder="영문 ,숫자, 특수문자(.),(_)만 사용 가능합니다." required>
             <label for="id">계정 ID</label>
+            <p class="warning1">*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.</p>
+            <p class="warning2">*이미 사용 중인 ID입니다.</p>
           </div>
           <div class="input-area">
             <input type="text" name="introduce" id="introduce" placeholder="자신과 판매할 상품에 대해 소개해 주세요!" required>
             <label for="introduce">소개</label>
           </div>
           <div class="btn-area">
-            <button type="button" id="btn-start">
+            <button type="button" id="start_btn" onclick="nextPage();">
               감귤마켓 시작하기
             </button>
           </div>
@@ -49,6 +54,7 @@
     </main>
   </div>
 
+  <script src="../js/joinMembership2.js"></script>
 </body>
 
 </html>
