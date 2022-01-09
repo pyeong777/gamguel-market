@@ -20,19 +20,19 @@
 
     <main class="login-email-main">
       <section class="login-form">
-        <form>
+        <form name="login">
           <div class="input-container">
             <div class="input-area">
-              <input type="text" name="email" id="email" required>
-              <label for="id">이메일</label>
+              <input type="text" name="login_id" id="login_id" required>
+              <label for="login_id">이메일</label>
             </div>
             <div class="input-area">
-              <input type="password" name="pw" id="pw" required>
-              <label for="pw">비밀번호</label>
+              <input type="password" name="login_pw" id="login_pw" required>
+              <label for="login_pw">비밀번호</label>
+              <p class="warning">*이메일 또는 비밀번호가 일치하지 않습니다.</p>
             </div>
             <div class="btn-area">
-              <button id="btn-login" type="submit">
-                <span class="sr-only">로그인 버튼</span>
+              <button id="login_btn" type="submit">
                 로그인
               </button>
             </div>
@@ -40,12 +40,13 @@
         </form>
 
         <div class="caption">
-          <a href="javascript:void(0)">이메일로 회원가입</a>
+          <a href="javascript:void(0)" onclick="nextPage();">이메일로 회원가입</a>
         </div>
       </section>
     </main>
   </div>
 
+  <script src="../js/loginEmail.js"></script>
 </body>
 
 </html>
