@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PostPage</title>
-    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="../css/reset.css" />
     <link rel="stylesheet" href="../css/postpage.css" />
   </head>
   <body>
@@ -86,11 +86,24 @@
 
    <div class="post-modal">
     <div class="post-modal__content">   
-     <button type="button">
+     <button type="button" class="post-modal__content__report-btn">
       <strong class="sr-only">신고 버튼</strong> 
       신고하기
       </button>
     </div>
    </div>
+
+   <div class="modal-window modal-confirm modal-delete-posting">
+    <p class="modal-confirm__content">신고할까요?</p>
+    <ul class="modal-confirm__list">
+      <li class="modal-confirm__item modal-confirm__item--no">
+        <button type="button" class="modal-confirm__button modal-confirm__button--no">취소</button>
+      </li>
+      <li class="modal-confirm__item modal-confirm__item--yes">
+        <button type="button" class="modal-confirm__button modal-confirm__button--yes">신고</button>
+      </li>
+    </ul>
+  </div>
+   <script src="../js/postpage.js"></script>
   </body>
 </html>
