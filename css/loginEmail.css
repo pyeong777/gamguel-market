@@ -74,12 +74,17 @@
     outline: none;
   }
 
+  .input-area input::placeholder {
+    color: #dbdbdb;
+  }
+
   .input-area input:focus::-webkit-input-placeholder {
     color: transparent;
   }
 
-  .input-area input::placeholder {
-    color: #dbdbdb;
+  .input-area input:focus {
+    border-bottom: 1px solid #f26e22;
+    transition: all 1s ease;
   }
 
   .input-area label {
@@ -91,16 +96,27 @@
     transition: all .5s ease;
   }
 
+  .input-area .warning {
+    display: none;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 400;
+    color: #eb5757;
+    transition: all .5s ease;
+    margin: 6px 0 16px 0;
+  }
+
   .btn-area {
     text-align: center;
   }
 
-  #btn-login {
+  #login_btn {
     outline: 0;
     border: 0;
     width: 322px;
     height: 44px;
-    background: #F26E22;
+    background: #f26e22;
+    opacity: .3;
     border-radius: 44px;
     font-size: 14px;
     font-weight: 400;
