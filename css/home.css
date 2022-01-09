@@ -47,7 +47,11 @@
 }
 
 .main-content{
-    margin: 50% auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 50%;
 }
 
 .main-content .main__logo {
