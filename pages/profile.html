@@ -23,90 +23,50 @@
       <section class="container profile">
         <h2 class="sr-only">프로필</h2>
         <button type="button" class="profile__button-user-img">
-          <img src="../images/basic-profile-img-.svg" alt="프로필 이미지" class="profile__user-img">
+          <img src="../images/basic-profile-img-.svg" alt="프로필 이미지" onerror="this.src='../images/basic-profile-img-.svg'"class="profile__user-img">
         </button>
         <dl class="profile-info">
           <dt class="sr-only">닉네임</dt>
           <dd class="profile-info__user-name">애월읍 위니브 감귤농장</dd>
-          <dt class="sr-only">아이디</dt>
-          <dd class="profile-info__user-id">@ weniv_Mandarin</dd>
+          <dt class="sr-only">계정 이름</dt>
+          <dd class="profile-info__user-account-name">@ weniv_Mandarin</dd>
           <dt class="sr-only">상품 소개</dt>
           <dd class="profile-info__user-desc">애월읍 감귤 전국 배송, 귤따기 체험, 감귤 농장</dd>
         </dl>
         <a href="javascript:void(0)" class="profile__follow-info profile__follow-info--followers">
           <dl>
             <dt class="profile__follow-title">followers</dt>
-            <dd class="profile__follow-value">2950</dd>
+            <dd class="profile__follow-value profile__follow-value--followers">2950</dd>
           </dl>
         </a>
         <a href="javascript:void(0)" class="profile__follow-info profile__follow-info--followings">
           <dl>
             <dt class="profile__follow-title">followings</dt>
-            <dd class="profile__follow-value proflie__follow-value--followings">128</dd>
+            <dd class="profile__follow-value profile__follow-value--followings">128</dd>
           </dl>
         </a>
         <ul class="profile-list-button">
           <li>
-            <button type="button" class="profile__button--theme-big profile__button--theme-orange profile__button--follow is-active">팔로우</button>
+            <button type="button" class="profile__button profile__button--theme-big profile__button--theme-orange profile__button--follow is-active">팔로우</button>
           </li>
           <li>
-            <button type="button" class="profile__button--theme-big profile__button--theme-white profile__button--unfollow">언팔로우</button>
+            <button type="button" class="profile__button profile__button--theme-big profile__button--theme-white profile__button--unfollow">언팔로우</button>
+          </li>
+          <li class="profile-list__item--flex">
+            <a href="javascript:void(0)" class="profile__button profile__button--theme-big profile__button--theme-white profile__button--modify">프로필 수정</a>
+            <a href="javascript:void(0)" class="profile__button profile__button--theme-big profile__button--theme-white profile__button--register">상품 등록</a>
           </li>
           <li>
-            <a href="javascript:void(0)" class="profile__button--theme-big profile__button--theme-white profile__button--modify">프로필 수정</a>
-            <a href="javascript:void(0)" class="profile__button--theme-big profile__button--theme-white profile__button--register">상품 등록</a>
+            <a href="chatRoom.html" class="profile__button profile__button--theme-small profile__button--message is-active"></a>
           </li>
           <li>
-            <a href="chatRoom.html" class="profile__button--theme-small profile__button--message"></a>
-          </li>
-          <li>
-            <a href="javascript:void(0)" class="profile__button--theme-small profile__button--share"></a>
+            <a href="javascript:void(0)" class="profile__button profile__button--theme-small profile__button--share is-active"></a>
           </li>
         </ul>
       </section>
       <section class="container products">
         <h2 class="products__title">판매 중인 상품</h2>
-        <ul class="products__on-sale">
-          <li>
-            <a href="javascript:void(0)">
-              <article class="products__info">
-                <img src="../images/product1.png" alt="감귤 사진" class="products__img">
-                <dl>
-                  <dt class="sr-only">상품명</dt>
-                  <dd class="products__name ellipsis">애월읍 노지 감귤</dd>
-                  <dt class="sr-only">가격</dt>
-                  <dd class="products__price">35,000</dd>
-                </dl>
-              </article>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <article class="products__info">
-                <img src="../images/product2.png" alt="감귤 사진" class="products__img">
-                <dl>
-                  <dt class="sr-only">상품명</dt>
-                  <dd class="products__name ellipsis">애월읍 한라봉 10kg어쩌구저쩌구</dd>
-                  <dt class="sr-only">가격</dt>
-                  <dd class="products__price">45,000</dd>
-                </dl>
-              </article>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <article class="products__info">
-                <img src="../images/product2.png" alt="감귤 사진" class="products__img">
-                <dl>
-                  <dt class="sr-only">상품명</dt>
-                  <dd class="products__name ellipsis">감귤 파치</dd>
-                  <dt class="sr-only">가격</dt>
-                  <dd class="products__price">25,000</dd>
-                </dl>
-              </article>
-            </a>
-          </li>
-        </ul>
+        <ul class="products__on-sale"></ul>
       </section>
       <section class="container feed">
         <h2 class="sr-only">피드 목록</h2>
@@ -121,7 +81,7 @@
           <input type="radio" id="album-type" name="type" class="sr-only feed__button--album">
         </form>
         <ul class="feed-list list-checked">
-          <article class="feed-article">
+          <!-- <article class="feed-article">
             <img src="../images/Ellipse 1.svg" alt="profile__img" class="article-profile">
             <div class="article-container">
               <p class="article-nickname">애월읍 위니브 감귤농장</p>
@@ -136,13 +96,16 @@
               <span class="article-num">12</span>
               <p class="article-date">2020년 10월 12일</p>
             </div>
-          </article>
+            <button type="button" class="feed-article__button">
+              <strong class="sr-only">메뉴</strong>
+            </button>
+          </article> -->
         </ul>
         <ul class="feed-album">
           <li class="feed-album__item">
             <button type="button" class="feed-album__button">
               <img src="../images/album1.png" alt="피드 이미지" class="feed-album__picture">
-            </butto>
+            </button>
           </li>
           <li class="feed-album__item feed-album__item--multi">
             <button type="button" class="feed-album__button">
