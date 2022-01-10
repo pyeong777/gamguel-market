@@ -24,6 +24,15 @@ a, button {
   background-color: #FFFFFF;
 }
 
+.profile__button--follow,
+.profile__button--unfollow,
+.profile__button--modify,
+.profile__button--register,
+.profile__button--message,
+.profile__button--share {
+  display: none;
+}
+
 /* util */
 
 .sr-only {
@@ -41,6 +50,10 @@ a, button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.is-active {
+  display: flex;
 }
 
 /* main header */
@@ -102,7 +115,7 @@ a, button {
   margin-bottom: 6px;
 }
 
-.profile-info__user-id {
+.profile-info__user-account-name {
   font-size: 12px;
   margin-bottom: 16px;
   color: #767676;
@@ -151,7 +164,14 @@ a, button {
   position: relative;
 }
 
+.profile-list__item--flex {
+  display: flex;
+  column-gap: 12px;
+}
+
 .profile__button--theme-big {
+  justify-content: center;
+  align-items: center;
   width: 120px;
   height: 34px;
   border-radius: 30px;
@@ -176,12 +196,6 @@ a, button {
 
 .profile__button--theme-white:hover {
   background-color: #EEEEEE;
-}
-
-.profile__button--unfollow,
-.profile__button--modify,
-.profile__button--register {
-  display: none;
 }
 
 .profile__button--register {
@@ -216,14 +230,24 @@ a, button {
 /* products */
 
 .products {
+  display: none;
   padding: 20px 0 20px 16px;
   margin-bottom: 6px;
+}
+
+.has-products {
+  display: block;
 }
 
 .products__on-sale {
   display: flex;
   column-gap: 10px;
-  overflow: hidden;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.products__on-sale::-webkit-scrollbar {
+  display: none;
 }
 
 .products__title {
@@ -263,7 +287,12 @@ a, button {
 /* feed */
 
 .feed {
+  display: none;
   margin-bottom: 6px;
+}
+
+.has-feed {
+  display: block;
 }
 
 .feed__button {
@@ -299,13 +328,119 @@ a, button {
   background: url('../images/icon-post-album-on.svg') no-repeat;
 }
 
+.feed-list,
 .feed-album {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  display: none;
+}
+
+/* 피드 목록 */
+
+.feed-list {
+  flex-direction: column;
+  row-gap: 24px;
+  padding-bottom: 100px;
+}
+
+.feed-article {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  margin: 20px 16px;
+}
+
+.article-profile {
+  width: 42px;
+  height: 42px;
+  margin-right: 12px;
+}
+
+.article-container {
+  width: calc(100vw - 74px);
+}
+
+.article-nickname {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.article-id {
+  font-size: 12px;
+  line-height: 14px;
+  color: #767676;
+}
+
+.article-cont {
+  font-size: 14px;
+  line-height: 18px;
+  margin: 16px 0;
+}
+
+.article-post__img {
+  display: block;
+  width: 304px;
+  height: 228px;
+  margin-bottom: 14.5px;
+  object-fit: cover;
+}
+
+.article-post__img-list {
+  display: flex;
+  column-gap: 8px;
+  margin-bottom: 14.5px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.article-post__img-list::-webkit-scrollbar {
+  display: none;
+}
+
+.article-post__img--small {
+  display: block;
+  width: 168px;
+  height: 126px;
+  margin: 0;
+  object-fit: cover;
+}
+
+.article-heart__btn {
+  width: 15px;
+  height: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.article-comment__btn {
+  width: 15px;
+  height: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.article-num {
+  font-size: 12px;
+  line-height: 12px;
+  color: #767676;
+  vertical-align: 3px;
+}
+
+.article-date {
+  font-size: 10px;
+  line-height: 12px;
+  color: #767676;
+  margin-top: 20px;
+}
+
+/* 피드 앨범 */
+
+.feed-album {
+  grid-template-columns: repeat(auto-fill, minmax(auto, 114px));
+  grid-template-rows: repeat(auto-fill, minmax(auto, 114px));
+  justify-content: center;
   gap: 8px;
   padding: 16px 16px 30px;
-  margin: 0 auto;
+  margin: 0 auto 60px;
 }
 
 .feed-album__button,
@@ -332,6 +467,31 @@ a, button {
   right: 6px;
 }
 
+.feed-album__picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.list-checked {
+  display: flex;
+}
+
+.album-checked {
+  display: grid;
+}
+
+.feed-article__button {
+  display: inline-block;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 18px;
+  height: 18px;
+  background: url('../images/s-icon-more-vertical.svg') no-repeat;
+  background-size: contain;
+}
+
 /* modal */
 
 .modal {
@@ -355,7 +515,6 @@ a, button {
   bottom: 0;
   transform: translateX(-50%);
   width: 100vw;
-  height: 138px;
   max-width: 767px;
   padding: 16px 0 10px;
   border-top-left-radius: 10px;
@@ -430,6 +589,11 @@ a, button {
 .modal-confirm__button--yes {
   font-weight: 500;
   color: #F26E22;
+}
+
+.is-modal-active {
+  display: block;
+  z-index: 10;
 }
 
 /* gnb */
