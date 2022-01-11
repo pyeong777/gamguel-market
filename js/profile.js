@@ -39,8 +39,10 @@ const API = 'http://146.56.183.55:5050';
 
 
 const renderPage = async () => {
+  // 로그인이 되어 있어야 프로필 화면도 접속할 수 있어서
+  // 여기서 임시로 로그인하고 토큰을 받아 옴
   login();
-  
+
   // 여기 값을 바꿔서 어떤 유저의 프로필을 볼 건지 변경 가능
   localStorage.setItem('selectedUser', 'hey_binky'); 
 
@@ -67,6 +69,12 @@ const login = () => {
     localStorage.setItem('token', user.token);
     localStorage.setItem('accountname', user.accountname);
   });
+};
+
+const logout = () => {
+  localStorage.setItem('accountname', '');
+  localStorage.setItem('token', '');
+  location.href = '../pages/splashScreen.html';
 };
 
 const fetchProfile = () => {
@@ -314,8 +322,10 @@ followButton.addEventListener('click', follow);
 unfollowButton.addEventListener('click', unfollow);
 feedForm.addEventListener('change', switchFeed);
 modal.addEventListener('click', hideModal);
+settingButtons[0].addEventListener('click', hideModal);
 settingButtons[1].addEventListener('click', () => showModal('logout'));
 logoutButtons[0].addEventListener('click', () => showModal('setting'));
+logoutButtons[1].addEventListener('click', logout);
 
 onSale.addEventListener('mousewheel', horizontalScroll);
 
