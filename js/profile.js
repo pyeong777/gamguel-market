@@ -39,29 +39,13 @@ const API = 'http://146.56.183.55:5050';
 
 
 const renderPage = async () => {
-  // 로그인
   login();
   
-  const accountname = localStorage.getItem('accountname');
-  localStorage.setItem('selectedUser', accountname); // 여기 값을 바꿔서 어떤 유저의 프로필을 볼 건지 변경 가능
-  const selectedUser = localStorage.getItem('selectedUser');
+  // 여기 값을 바꿔서 어떤 유저의 프로필을 볼 건지 변경 가능
+  localStorage.setItem('selectedUser', 'hey_binky'); 
 
-  // 프로필 버튼
-  if (selectedUser === accountname) {
-    profileButtons.forEach(btn => {
-      btn.classList.remove('is-active');
-    });
-    modifyButton.classList.add('is-active');
-    registerButton.classList.add('is-active');
-  }
-
-  // 프로필 정보
   fetchProfile();
-
-  // 상품 목록
   fetchProduct();
-
-  // 피드 목록
   fetchFeed();
 };
 
@@ -140,6 +124,17 @@ const renderProfile = (json) => {
   intro.textContent = profile.intro;
   followers.textContent = profile.followerCount;
   followings.textContent = profile.followingCount;
+
+  const accountname = localStorage.getItem('accountname');
+  const selectedUser = localStorage.getItem('selectedUser');
+
+  if (selectedUser === accountname) {
+    profileButtons.forEach(btn => {
+      btn.classList.remove('is-active');
+    });
+    modifyButton.classList.add('is-active');
+    registerButton.classList.add('is-active');
+  }
 };
 
 const renderProduct = (json) => {
