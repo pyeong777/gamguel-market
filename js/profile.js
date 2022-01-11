@@ -40,7 +40,33 @@ const API = 'http://146.56.183.55:5050';
 
 const renderPage = async () => {
   // 로그인
-  await fetch(`${API}/user/login`, {
+  login();
+  
+  const accountname = localStorage.getItem('accountname');
+  localStorage.setItem('selectedUser', accountname); // 여기 값을 바꿔서 어떤 유저의 프로필을 볼 건지 변경 가능
+  const selectedUser = localStorage.getItem('selectedUser');
+
+  // 프로필 버튼
+  if (selectedUser === accountname) {
+    profileButtons.forEach(btn => {
+      btn.classList.remove('is-active');
+    });
+    modifyButton.classList.add('is-active');
+    registerButton.classList.add('is-active');
+  }
+
+  // 프로필 정보
+  fetchProfile();
+
+  // 상품 목록
+  fetchProduct();
+
+  // 피드 목록
+  fetchFeed();
+};
+
+const login = () => {
+  fetch(`${API}/user/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -57,48 +83,39 @@ const renderPage = async () => {
     localStorage.setItem('token', user.token);
     localStorage.setItem('accountname', user.accountname);
   });
-  
-  const accountname = localStorage.getItem('accountname');
-  localStorage.setItem('selectedUser', accountname); // 여기 값을 바꿔서 어떤 유저의 프로필을 볼 건지 변경 가능
-  const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-
-  // 프로필 버튼
-  if (selectedUser === accountname) {
-    profileButtons.forEach(btn => {
-      btn.classList.remove('is-active');
-    });
-    modifyButton.classList.add('is-active');
-    registerButton.classList.add('is-active');
-  }
-
-  // 프로필 정보
-  await fetch(`${API}/profile/${selectedUser}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(res => res.json())
-  .then(data => renderProfile(data));
-
-  // 상품 목록
-  await fetch(`${API}/product/${selectedUser}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(res => res.json())
-  .then(res => renderProduct(res));
-
-  // 피드 목록
-  fetchFeed(selectedUser, token);
 };
 
-const fetchFeed = (selectedUser, token) => {
+const fetchProfile = () => {
+  const selectedUser = localStorage.getItem('selectedUser');
+  const token = localStorage.getItem('token');
+  fetch(`${API}/profile/${selectedUser}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => res.json())
+  .then(json => renderProfile(json));
+};
+
+const fetchProduct = () => {
+  const selectedUser = localStorage.getItem('selectedUser');
+  const token = localStorage.getItem('token');
+  fetch(`${API}/product/${selectedUser}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => res.json())
+  .then(json => renderProduct(json));
+};
+
+const fetchFeed = () => {
+  const selectedUser = localStorage.getItem('selectedUser');
+  const token = localStorage.getItem('token');
   fetch(`${API}/post/${selectedUser}/userpost`, {
     method: 'GET',
     headers: {
@@ -107,11 +124,11 @@ const fetchFeed = (selectedUser, token) => {
     }
   })
   .then(res => res.json())
-  .then(res => renderFeed(res));
-}
+  .then(json => renderFeed(json));
+};
 
-const renderProfile = (res) => {
-  const { profile } = res;
+const renderProfile = (json) => {
+  const { profile } = json;
   const userName = document.querySelector('.profile-info__user-name');
   const accountName = document.querySelector('.profile-info__user-account-name');
   const intro = document.querySelector('.profile-info__user-desc');
@@ -125,8 +142,8 @@ const renderProfile = (res) => {
   followings.textContent = profile.followingCount;
 };
 
-const renderProduct = (res) => {
-  const { product } = res;
+const renderProduct = (json) => {
+  const { product } = json;
   const fragment = document.createDocumentFragment();
   if (!product.length) return;
   product.forEach(({ link, itemImage, itemName, price }) => {
@@ -150,8 +167,8 @@ const renderProduct = (res) => {
   products.classList.add('has-products');
 };
 
-const renderFeed = (res) => {
-  const { post } = res;
+const renderFeed = (json) => {
+  const { post } = json;
   if (!post.length) return;
   const fragment = document.createDocumentFragment();
   if (isFeedList()) {
@@ -294,7 +311,6 @@ const isFeedList = () => {
   return [...feedButtons].find(btn => btn.checked).id === 'list-type';
 };
 
-document.addEventListener('DOMContentLoaded', renderPage);
 backButton.addEventListener('click', goBack);
 menuButton.addEventListener('click', () => showModal('setting'));
 followersButton.addEventListener('click', () => gotoPage('followList.html', 'followers'));
@@ -307,3 +323,5 @@ settingButtons[1].addEventListener('click', () => showModal('logout'));
 logoutButtons[0].addEventListener('click', () => showModal('setting'));
 
 onSale.addEventListener('mousewheel', horizontalScroll);
+
+renderPage();
