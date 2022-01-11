@@ -10,6 +10,8 @@ const followButton = document.querySelector('.profile__button--follow');
 const unfollowButton = document.querySelector('.profile__button--unfollow');
 const modifyButton = document.querySelector('.profile__button--modify');
 const registerButton = document.querySelector('.profile__button--register');
+const messageButton = document.querySelector('.profile__button--message');
+const shareButton = document.querySelector('.profile__button--share');
 
 // 프로필 이미지
 const profileImage = document.querySelector('.profile__user-img');
@@ -166,6 +168,8 @@ const renderProfile = (json) => {
     } else {
       followButton.classList.add('is-active');
     }
+    messageButton.classList.add('is-active');
+    shareButton.classList.add('is-active');
   }
 };
 
@@ -243,7 +247,7 @@ const renderFeed = (json) => {
   feed.classList.add('has-feed');
 };
 
-const getListItem = ({ id, content, image, createdAt, heartCount, commentCount, author }) => {
+const getListItem = ({ id, content, image, createdAt, hearted, heartCount, commentCount, author }) => {
   const images = image.split(',');
   let imageHTML = '';
   if (images.length === 1 && images[0]) {
@@ -260,17 +264,21 @@ const getListItem = ({ id, content, image, createdAt, heartCount, commentCount, 
   const item = document.createElement('li');
   item.innerHTML = `
   <article class="feed-article">
-    <img src="../images/Ellipse 1.svg" alt="profile__img" 
+    <img src="${author.image}" onerror="this.src='../images/Ellipse 1.svg'" alt="profile__img" 
     onerror="this.src='../images/basic-profile-img-.svg'" class="article-profile">
     <div class="article-container">
       <p class="article-nickname">${author.username}</p>
       <p class="article-id">@ ${author.accountname}</p>
       <p class="article-cont">${content}</p>
       ${imageHTML}
-      <img src="../images/icon-heart.svg" alt="post-like" class="article-heart__btn">
-      <span class="article-num">${heartCount}</span>
-      <img src="../images/icon-comment.svg" alt="post-comment" class="article-comment__btn">
-      <span class="article-num">${commentCount}</span>
+      <button type="button" data-hearted="${hearted ? 1 : 0}" data-id="${id}" class="btn-heart">
+        <img src="../images/icon-heart${hearted ? '-active' : ''}.svg" alt="post-like" class="article-heart__btn">
+        <span class="article-num">${heartCount}</span>
+        </button>
+      <button type="button" class="btn-comment">
+        <img src="../images/icon-comment.svg" alt="post-comment" class="article-comment__btn">
+        <span class="article-num">${commentCount}</span>
+      </button>
       <p class="article-date">${year}년 ${month}월 ${day}일</p>
     </div>
     <button type="button" class="feed-article__button">
@@ -279,6 +287,8 @@ const getListItem = ({ id, content, image, createdAt, heartCount, commentCount, 
   </article>
   `;
   item.querySelector('.article-post__img-list')?.addEventListener('mousewheel', horizontalScroll);
+  item.querySelector('.btn-heart').addEventListener('click', toggleHeart);
+  item.querySelector('.btn-comment').addEventListener('click', () => gotoPage('postpage.html', 'readPost'));
   const selectedUser = localStorage.getItem('selectedUser');
   const accountname = localStorage.getItem('accountname');
   if (selectedUser === accountname) {
@@ -458,6 +468,55 @@ const deletePost = () => {
   });
 };
 
+const fetchOneFeed = (id, elem) => {
+  const token = localStorage.getItem('token');
+  fetch(`${API}/post/${id}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => res.json())
+  .then(({ post }) => {
+    const { hearted, heartCount } = post;
+    elem.innerHTML = `
+    <img src="../images/icon-heart${hearted ? '-active' : ''}.svg" alt="post-like" class="article-heart__btn">
+      <span class="article-num">${heartCount}</span>
+    </button>
+    `;
+    elem.setAttribute('data-hearted', hearted ? 1 : 0);
+  });
+};
+
+const toggleHeart = ({ currentTarget }) => {
+  const { hearted, id } = currentTarget.dataset;
+  const token = localStorage.getItem('token');
+  if (+hearted) {
+    fetch(`${API}/post/${id}/unheart`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(() => {
+      fetchOneFeed(id, currentTarget);
+    });
+  } else {
+    fetch(`${API}/post/${id}/heart`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(() => {
+      fetchOneFeed(id, currentTarget);
+    });
+  }
+};
+
 // 헤더 버튼
 backButton.addEventListener('click', goBack);
 menuButton.addEventListener('click', () => showModal('setting'));
@@ -467,6 +526,8 @@ followersButton.addEventListener('click', () => gotoPage('followList.html', 'fol
 followingsButton.addEventListener('click', () => gotoPage('followList.html', 'followings'));
 followButton.addEventListener('click', follow);
 unfollowButton.addEventListener('click', unfollow);
+modifyButton.addEventListener('click', () => gotoPage('modifyProfile.html', 'modifyProfile'));
+registerButton.addEventListener('click', () => gotoPage('modifyProduct.html', 'addProduct'));
 
 // 상품 목록 가로 스크롤
 onSale.addEventListener('mousewheel', horizontalScroll);
