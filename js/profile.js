@@ -26,13 +26,29 @@ const feedAlbum = document.querySelector('.feed-album');
 const feedButtons = feedForm.querySelectorAll('input');
 const feedLabels = document.querySelectorAll('.feed__label');
 
-// 모달
+// 모달 - setting
 const modal = document.querySelector('.modal');
 const modalWindows = document.querySelectorAll('.modal-window');
 const settingModal = document.querySelector('.modal-bottom__setting');
 const logoutModal = document.querySelector('.modal-logout');
 const settingButtons = settingModal.querySelectorAll('.modal-bottom__button');
 const logoutButtons = logoutModal.querySelectorAll('.modal-confirm__button');
+
+// 모달 - product
+const productModal = document.querySelector('.modal-bottom__product--my-account');
+const deleteProductModal = document.querySelector('.modal-delete-product');
+const productButtons = productModal.querySelectorAll('.modal-bottom__button');
+const deleteProductButtons = deleteProductModal.querySelectorAll('.modal-confirm__button');
+
+// 모달 - post
+const postModal = document.querySelector('.modal-bottom__post');
+const postButtons = postModal.querySelectorAll('.modal-bottom__button');
+
+// 모달 - myPost
+const myPostModal = document.querySelector('.modal-bottom__post--my-account');
+const deletePostModal = document.querySelector('.modal-delete-posting');
+const myPostButtons = myPostModal.querySelectorAll('.modal-bottom__button');
+const deletePostButtons = deletePostModal.querySelectorAll('.modal-confirm__button');
 
 // 상수
 const API = 'http://146.56.183.55:5050';
@@ -67,6 +83,7 @@ const login = () => {
   .then(res => res.json())
   .then(({ user }) => {
     localStorage.setItem('token', user.token);
+    localStorage.setItem('userid', user._id);
     localStorage.setItem('accountname', user.accountname);
   });
 };
@@ -133,15 +150,22 @@ const renderProfile = (json) => {
   followers.textContent = profile.followerCount;
   followings.textContent = profile.followingCount;
 
+  const userid = localStorage.getItem('userid');
   const accountname = localStorage.getItem('accountname');
   const selectedUser = localStorage.getItem('selectedUser');
 
+  profileButtons.forEach(btn => {
+    btn.classList.remove('is-active');
+  });
   if (selectedUser === accountname) {
-    profileButtons.forEach(btn => {
-      btn.classList.remove('is-active');
-    });
     modifyButton.classList.add('is-active');
     registerButton.classList.add('is-active');
+  } else {
+    if (profile.follower.includes(userid)) {
+      unfollowButton.classList.add('is-active');
+    } else {
+      followButton.classList.add('is-active');
+    }
   }
 };
 
@@ -149,23 +173,50 @@ const renderProduct = (json) => {
   const { product } = json;
   const fragment = document.createDocumentFragment();
   if (!product.length) return;
-  product.forEach(({ link, itemImage, itemName, price }) => {
-    const item = document.createElement('li');
-    item.innerHTML = `
-    <a href="${link}">
-      <article class="products__info">
-        <img src="${API}/${itemImage}" alt="감귤 사진" class="products__img">
-        <dl>
-          <dt class="sr-only">상품명</dt>
-          <dd class="products__name ellipsis">${itemName}</dd>
-          <dt class="sr-only">가격</dt>
-          <dd class="products__price">${price}</dd>
-        </dl>
-      </article>
-    </a>
-    `;
-    fragment.appendChild(item);
-  });
+  onSale.innerHTML = '';
+  const accountname = localStorage.getItem('accountname');
+  const selectedUser = localStorage.getItem('selectedUser');
+  if (accountname === selectedUser) {
+    product.forEach(({ id, link, itemImage, itemName, price }) => {
+      const item = document.createElement('li');
+      item.innerHTML = `
+      <button type="button" class="products__button">
+        <article class="products__info">
+          <img src="${API}/${itemImage}" alt="감귤 사진" class="products__img">
+          <dl>
+            <dt class="sr-only">상품명</dt>
+            <dd class="products__name ellipsis">${itemName}</dd>
+            <dt class="sr-only">가격</dt>
+            <dd class="products__price">${price}</dd>
+          </dl>
+        </article>
+      </button>
+      `;
+      fragment.appendChild(item);
+      item
+        .querySelector('.products__button')
+        .addEventListener('click', () => showModal('product', id, link));
+    });
+  } else {
+    product.forEach(({ link, itemImage, itemName, price }) => {
+      const item = document.createElement('li');
+      item.innerHTML = `
+      <a href="${link}">
+        <article class="products__info">
+          <img src="${API}/${itemImage}" alt="감귤 사진" class="products__img">
+          <dl>
+            <dt class="sr-only">상품명</dt>
+            <dd class="products__name ellipsis">${itemName}</dd>
+            <dt class="sr-only">가격</dt>
+            <dd class="products__price">${price}</dd>
+          </dl>
+        </article>
+      </a>
+      `;
+      fragment.appendChild(item);
+    });
+  }
+
   onSale.appendChild(fragment);
   products.classList.add('has-products');
 };
@@ -173,6 +224,8 @@ const renderProduct = (json) => {
 const renderFeed = (json) => {
   const { post } = json;
   if (!post.length) return;
+  feedList.innerHTML = '';
+  feedAlbum.innerHTML = '';
   const fragment = document.createDocumentFragment();
   if (isFeedList()) {
     post.forEach(posting => {
@@ -190,7 +243,7 @@ const renderFeed = (json) => {
   feed.classList.add('has-feed');
 };
 
-const getListItem = ({ content, image, createdAt, heartCount, commentCount, author }) => {
+const getListItem = ({ id, content, image, createdAt, heartCount, commentCount, author }) => {
   const images = image.split(',');
   let imageHTML = '';
   if (images.length === 1 && images[0]) {
@@ -226,6 +279,13 @@ const getListItem = ({ content, image, createdAt, heartCount, commentCount, auth
   </article>
   `;
   item.querySelector('.article-post__img-list')?.addEventListener('mousewheel', horizontalScroll);
+  const selectedUser = localStorage.getItem('selectedUser');
+  const accountname = localStorage.getItem('accountname');
+  if (selectedUser === accountname) {
+    item.querySelector('.feed-article__button').addEventListener('click', () => showModal('myPost', id));
+  } else {
+    item.querySelector('.feed-article__button').addEventListener('click', () => showModal('post'));
+  }
   return item;
 };
 
@@ -250,8 +310,9 @@ const goBack = () => {
   window.history.back();
 };
 
-const showModal = (type) => {
+const showModal = (type, ...args) => {
   modal.classList.add('is-modal-active');
+  const [ id, link ] = args;
   switch (type) {
     case 'setting':
       settingModal.classList.add('is-modal-active');
@@ -261,6 +322,29 @@ const showModal = (type) => {
       settingModal.classList.remove('is-modal-active');
       logoutModal.classList.add('is-modal-active');
       break;
+    case 'product':
+      productModal.classList.add('is-modal-active');
+      deleteProductModal.classList.remove('is-modal-active');
+      if (!args.length) return;
+      localStorage.setItem('productId', id);
+      localStorage.setItem('productLink', link);
+      break;
+    case 'deleteProduct':
+      productModal.classList.remove('is-modal-active');
+      deleteProductModal.classList.add('is-modal-active');
+      break;
+    case 'post':
+      postModal.classList.add('is-modal-active');
+      break;
+    case 'myPost':
+      myPostModal.classList.add('is-modal-active');
+      deletePostModal.classList.remove('is-modal-active');
+      if (!args.length) return;
+      localStorage.setItem('postId', id);
+      break;
+    case 'deletePost':
+      myPostModal.classList.remove('is-modal-active');
+      deletePostModal.classList.add('is-modal-active');
   }
 };
 
@@ -270,17 +354,62 @@ const hideModal = (e) => {
   modalWindows.forEach(modal => modal.classList.remove('is-modal-active'));
 };
 
+const deleteProduct = () => {
+  const id = localStorage.getItem('productId');
+  const token = localStorage.getItem('token');
+  fetch(`${API}/product/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(() => {
+    fetchProduct();
+    modal.classList.remove('is-modal-active');
+    modalWindows.forEach(modal => modal.classList.remove('is-modal-active'));
+  });
+};
+
 const gotoPage = (page, type) => {
   location.href = page;
   localStorage.setItem('type', type);
 };
 
+const fetchFollow = () => {
+  const selectedUser = localStorage.getItem('selectedUser');
+  const token = localStorage.getItem('token');
+  fetch(`${API}/profile/${selectedUser}/follow`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(() => fetchProfile());
+};
+
 const follow = () => {
+  fetchFollow();
   followButton.classList.remove('is-active');
   unfollowButton.classList.add('is-active');
 };
 
+const fetchUnfollow = () => {
+  const selectedUser = localStorage.getItem('selectedUser');
+  const token = localStorage.getItem('token');
+  fetch(`${API}/profile/${selectedUser}/unfollow`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(() => fetchProfile());
+};
+
 const unfollow = () => {
+  fetchUnfollow();
   unfollowButton.classList.remove('is-active');
   followButton.classList.add('is-active');
 };
@@ -289,7 +418,7 @@ const horizontalScroll = (e) => {
   const { wheelDelta, currentTarget } = e;
   e.preventDefault();
   currentTarget.scrollLeft -= wheelDelta / 2;
-}
+};
 
 const switchFeed = () => {
   const { id } = [...feedButtons].find(btn => btn.checked);
@@ -298,14 +427,12 @@ const switchFeed = () => {
     feedAlbum.classList.remove('album-checked');
     feedLabels[0].classList.add('feed__label-list--on');
     feedLabels[1].classList.remove('feed__label-album--on');
-    feedList.innerHTML = '';
     fetchFeed(localStorage.getItem('selectedUser'), localStorage.getItem('token'));
   } else if (id === 'album-type') {
     feedAlbum.classList.add('album-checked');
     feedList.classList.remove('list-checked');
     feedLabels[0].classList.remove('feed__label-list--on');
     feedLabels[1].classList.add('feed__label-album--on');
-    feedAlbum.innerHTML = '';
     fetchFeed(localStorage.getItem('selectedUser'), localStorage.getItem('token'));
   }
 };
@@ -314,19 +441,60 @@ const isFeedList = () => {
   return [...feedButtons].find(btn => btn.checked).id === 'list-type';
 };
 
+const deletePost = () => {
+  const id = localStorage.getItem('postId');
+  const token = localStorage.getItem('token');
+  fetch(`${API}/post/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(() => {
+    fetchFeed();
+    modal.classList.remove('is-modal-active');
+    modalWindows.forEach(modal => modal.classList.remove('is-modal-active'));
+  });
+};
+
+// 헤더 버튼
 backButton.addEventListener('click', goBack);
 menuButton.addEventListener('click', () => showModal('setting'));
+
+// 프로필 버튼
 followersButton.addEventListener('click', () => gotoPage('followList.html', 'followers'));
 followingsButton.addEventListener('click', () => gotoPage('followList.html', 'followings'));
 followButton.addEventListener('click', follow);
 unfollowButton.addEventListener('click', unfollow);
+
+// 상품 목록 가로 스크롤
+onSale.addEventListener('mousewheel', horizontalScroll);
+
+// 피드 목록형 앨범형 전환 버튼
 feedForm.addEventListener('change', switchFeed);
+
+// 모달 dimmed
 modal.addEventListener('click', hideModal);
+
+// 상단 메뉴 버튼 누른 후 뜨는 모달 버튼
 settingButtons[0].addEventListener('click', hideModal);
 settingButtons[1].addEventListener('click', () => showModal('logout'));
 logoutButtons[0].addEventListener('click', () => showModal('setting'));
 logoutButtons[1].addEventListener('click', logout);
 
-onSale.addEventListener('mousewheel', horizontalScroll);
+// 내 상품 목록 누를 때 뜨는 모달 버튼
+productButtons[0].addEventListener('click', () => showModal('deleteProduct'));
+productButtons[1].addEventListener('click', () => gotoPage('modifyProduct.html', 'modifyProduct'));
+productButtons[2].addEventListener('click', () => gotoPage(localStorage.getItem('productLink')));
+deleteProductButtons[0].addEventListener('click', () => showModal('product'));
+deleteProductButtons[1].addEventListener('click', deleteProduct);
+
+// 내 피드 게시물 메뉴 누를 때 뜨는 모달 버튼
+postButtons[0].addEventListener('click', hideModal);
+myPostButtons[0].addEventListener('click', () => showModal('deletePost'));
+myPostButtons[1].addEventListener('click', () => gotoPage('upload.html', 'modifyPost'));
+deletePostButtons[0].addEventListener('click', () => showModal('myPost'));
+deletePostButtons[1].addEventListener('click', deletePost);
 
 renderPage();
