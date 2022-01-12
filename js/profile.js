@@ -62,7 +62,7 @@ const renderPage = async () => {
   login();
 
   // 여기 값을 바꿔서 어떤 유저의 프로필을 볼 건지 변경 가능
-  localStorage.setItem('selectedUser', 'hey_binky'); 
+  localStorage.setItem('selectedUser', 'no_deepdive'); 
 
   fetchProfile();
   fetchProduct();
@@ -91,8 +91,7 @@ const login = () => {
 };
 
 const logout = () => {
-  localStorage.setItem('accountname', '');
-  localStorage.setItem('token', '');
+  localStorage.clear();
   location.href = '../pages/splashScreen.html';
 };
 
@@ -186,7 +185,7 @@ const renderProduct = (json) => {
       item.innerHTML = `
       <button type="button" class="products__button">
         <article class="products__info">
-          <img src="${API}/${itemImage}" alt="감귤 사진" class="products__img">
+          <img src="${itemImage}" alt="감귤 사진" class="products__img">
           <dl>
             <dt class="sr-only">상품명</dt>
             <dd class="products__name ellipsis">${itemName}</dd>
@@ -251,11 +250,11 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
   const images = image.split(',');
   let imageHTML = '';
   if (images.length === 1 && images[0]) {
-    imageHTML = `<img src="${API}/${images[0]}" alt="감귤 사진" class="article-post__img">`;
+    imageHTML = `<img src="${images[0]}" alt="감귤 사진" class="article-post__img">`;
   } else if (images.length > 1) {
     const arr = [];
     images.forEach(image => {
-      arr.push(`<li><img src="${API}/${image}" alt="감귤 사진" class="article-post__img--small"></li>`);
+      arr.push(`<li><img src="${image}" alt="감귤 사진" class="article-post__img--small"></li>`);
     });
     imageHTML = `<ul class="article-post__img-list">${arr.join('')}</ul>`;
   }
@@ -307,7 +306,7 @@ const getAlbumItem = ({ image }, index) => {
   const item = document.createElement('li');
   item.innerHTML = `
   <button type="button" class="feed-album__button">
-    <img src="${API}/${images[0]}" alt="피드 이미지"
+    <img src="${images[0]}" alt="피드 이미지"
     onerror="this.src='../images/full-logo.svg'" class="feed-album__picture">
   </button>
   `;
