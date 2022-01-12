@@ -352,10 +352,8 @@ a, button {
   width: 42px;
   height: 42px;
   margin-right: 12px;
-}
-
-.article-container {
-  width: calc(100vw - 74px);
+  border-radius: 21px;
+  border: 1px solid #DBDBDB;
 }
 
 .article-nickname {
@@ -378,9 +376,11 @@ a, button {
 
 .article-post__img {
   display: block;
-  width: 304px;
-  height: 228px;
+  width: calc(100vw - 86px);
+  max-width: 304px;
+  max-height: 228px;
   margin-bottom: 14.5px;
+  border-radius: 10px;
   object-fit: cover;
 }
 
@@ -402,6 +402,11 @@ a, button {
   height: 126px;
   margin: 0;
   object-fit: cover;
+}
+
+.article-post__img:hover,
+.article-post__img--small:hover {
+  outline: 1px solid #DBDBDB;
 }
 
 .article-heart__btn {
