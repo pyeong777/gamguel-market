@@ -52,9 +52,6 @@ const deletePostModal = document.querySelector('.modal-delete-posting');
 const myPostButtons = myPostModal.querySelectorAll('.modal-bottom__button');
 const deletePostButtons = deletePostModal.querySelectorAll('.modal-confirm__button');
 
-// 상수
-const API = 'http://146.56.183.55:5050';
-
 
 const renderPage = async () => {
   // 로그인이 되어 있어야 프로필 화면도 접속할 수 있어서
@@ -190,7 +187,7 @@ const renderProduct = (json) => {
             <dt class="sr-only">상품명</dt>
             <dd class="products__name ellipsis">${itemName}</dd>
             <dt class="sr-only">가격</dt>
-            <dd class="products__price">${price}</dd>
+            <dd class="products__price">${getFormattedPrice(price)}</dd>
           </dl>
         </article>
       </button>
@@ -211,7 +208,7 @@ const renderProduct = (json) => {
             <dt class="sr-only">상품명</dt>
             <dd class="products__name ellipsis">${itemName}</dd>
             <dt class="sr-only">가격</dt>
-            <dd class="products__price">${price}</dd>
+            <dd class="products__price">${getFormattedPrice(price)}</dd>
           </dl>
         </article>
       </a>
