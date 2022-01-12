@@ -1,7 +1,9 @@
 // id, pw 입력 시 버튼 활성화
-const idInput = document.getElementById('login_id'),
-  pwInput = document.getElementById('login_pw');
+const idInput = document.getElementById('login_id');
+const pwInput = document.getElementById('login_pw');
 const nextBtn = document.getElementById('next_btn');
+const warning1 = document.getElementById('warning1');
+const warning2 = document.getElementById('warning2');
 
 const isActiveJoin = () => {
   let idValue = idInput.value;
@@ -9,16 +11,22 @@ const isActiveJoin = () => {
 
   if (
     (idValue && pwValue) &&
-    (pwValue.length >= 7) &&
-    (idValue.includes('@') || idValue.length >= 10)
+    (pwValue.length >= 6) &&
+    (idValue.includes('@')) &&
+    (idValue == "deepdive@naver.com") &&
+    (pwValue == "123456")
   ) {
     nextBtn.disabled = false;
     nextBtn.style.opacity = 1;
     nextBtn.style.cursor = 'pointer';
+    warning1.style.display = "none";
+    warning2.style.display = "none";
   }
   else {
     nextBtn.disabled = true;
     nextBtn.style.opacity = .3;
+    warning1.style.display = "block";
+    warning2.style.display = "block";
   }
 }
 
@@ -38,11 +46,39 @@ function nextPage() {
 }
 
 
-//  유효성 검사
-$(function () {
-  if ("조건1") {
-    document.getElementsByClassName("warning").style.display = "none";
-  } else {
-    document.getElementsByClassName("warning").style.display = "block";
+// 유효성 검사
+// id
+login_id.onblur = function () {
+  if (
+    (login_id.value.includes('@')) &&
+    (login_id.value == "deepdive@naver.com")
+  ) {
+    login_id.classList.add('invalid');
+    error.innerHTML = '*이미 가입된 이메일 주소입니다.'
   }
-})
+};
+
+login_id.onfocus = function () {
+  if (this.classList.contains('invalid')) {
+    this.classList.remove('invalid');
+    error.innerHTML = "";
+  }
+};
+
+
+// pw
+login_pw.onblur = function () {
+  if (
+    (login_pw.value.length < 6)
+  ) {
+    login_pw.classList.add('invalid');
+    error2.innerHTML = '*비밀번호는 6자 이상이어야 합니다.'
+  }
+};
+
+login_pw.onfocus = function () {
+  if (this.classList.contains('invalid')) {
+    this.classList.remove('invalid');
+    error2.innerHTML = "";
+  }
+};

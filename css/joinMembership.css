@@ -98,7 +98,17 @@ a {
   transition: all .5s ease;
 }
 
-.input-area .warning {
+.input-area #warning1 {
+  display: none;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: #eb5757;
+  transition: all .5s ease;
+  margin: 6px 0 16px 0;
+}
+
+.input-area #warning2 {
   display: none;
   font-size: 12px;
   line-height: 14px;
@@ -127,4 +137,24 @@ a {
   color: #fff;
   margin: 30px auto 0;
   cursor: pointer;
+}
+
+.invalid {
+  color: red;
+}
+
+#error {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: red;
+  margin: 6px 0 0 0;
+}
+
+#error2 {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: red;
+  margin: 6px 0 0 0;
 }
