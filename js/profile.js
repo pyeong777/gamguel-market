@@ -53,7 +53,7 @@ const myPostButtons = myPostModal.querySelectorAll('.modal-bottom__button');
 const deletePostButtons = deletePostModal.querySelectorAll('.modal-confirm__button');
 
 
-const renderPage = async () => {
+const renderPage = () => {
   // 로그인이 되어 있어야 프로필 화면도 접속할 수 있어서
   // 여기서 임시로 로그인하고 토큰을 받아 옴
   login();
@@ -312,10 +312,6 @@ const getAlbumItem = ({ image }, index) => {
   return item;
 };
 
-const goBack = () => {
-  window.history.back();
-};
-
 const showModal = (type, ...args) => {
   modal.classList.add('is-modal-active');
   const [ id, link ] = args;
@@ -375,11 +371,6 @@ const deleteProduct = () => {
     modal.classList.remove('is-modal-active');
     modalWindows.forEach(modal => modal.classList.remove('is-modal-active'));
   });
-};
-
-const gotoPage = (page, type) => {
-  location.href = page;
-  localStorage.setItem('type', type);
 };
 
 const fetchFollow = () => {
