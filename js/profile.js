@@ -62,7 +62,7 @@ const renderPage = async () => {
   login();
 
   // 여기 값을 바꿔서 어떤 유저의 프로필을 볼 건지 변경 가능
-  localStorage.setItem('selectedUser', 'no_deepdive'); 
+  localStorage.setItem('selectedUser', 'hey_binky'); 
 
   fetchProfile();
   fetchProduct();
@@ -425,6 +425,9 @@ const unfollow = () => {
 
 const horizontalScroll = (e) => {
   const { wheelDelta, currentTarget } = e;
+  const { offsetWidth, scrollLeft, scrollWidth } = currentTarget
+  if (offsetWidth + scrollLeft >= scrollWidth && wheelDelta < 0) return;
+  if (scrollLeft === 0 && wheelDelta > 0) return;
   e.preventDefault();
   currentTarget.scrollLeft -= wheelDelta / 2;
 };
