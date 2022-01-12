@@ -52,9 +52,6 @@ const deletePostModal = document.querySelector('.modal-delete-posting');
 const myPostButtons = myPostModal.querySelectorAll('.modal-bottom__button');
 const deletePostButtons = deletePostModal.querySelectorAll('.modal-confirm__button');
 
-// 상수
-const API = 'http://146.56.183.55:5050';
-
 
 const renderPage = async () => {
   // 로그인이 되어 있어야 프로필 화면도 접속할 수 있어서
@@ -91,8 +88,7 @@ const login = () => {
 };
 
 const logout = () => {
-  localStorage.setItem('accountname', '');
-  localStorage.setItem('token', '');
+  localStorage.clear();
   location.href = '../pages/splashScreen.html';
 };
 
@@ -186,12 +182,12 @@ const renderProduct = (json) => {
       item.innerHTML = `
       <button type="button" class="products__button">
         <article class="products__info">
-          <img src="${API}/${itemImage}" alt="감귤 사진" class="products__img">
+          <img src="${itemImage}" alt="감귤 사진" class="products__img">
           <dl>
             <dt class="sr-only">상품명</dt>
             <dd class="products__name ellipsis">${itemName}</dd>
             <dt class="sr-only">가격</dt>
-            <dd class="products__price">${price}</dd>
+            <dd class="products__price">${getFormattedPrice(price)}</dd>
           </dl>
         </article>
       </button>
@@ -212,7 +208,7 @@ const renderProduct = (json) => {
             <dt class="sr-only">상품명</dt>
             <dd class="products__name ellipsis">${itemName}</dd>
             <dt class="sr-only">가격</dt>
-            <dd class="products__price">${price}</dd>
+            <dd class="products__price">${getFormattedPrice(price)}</dd>
           </dl>
         </article>
       </a>
@@ -251,11 +247,11 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
   const images = image.split(',');
   let imageHTML = '';
   if (images.length === 1 && images[0]) {
-    imageHTML = `<img src="${API}/${images[0]}" alt="감귤 사진" class="article-post__img">`;
+    imageHTML = `<img src="${images[0]}" alt="감귤 사진" class="article-post__img">`;
   } else if (images.length > 1) {
     const arr = [];
     images.forEach(image => {
-      arr.push(`<li><img src="${API}/${image}" alt="감귤 사진" class="article-post__img--small"></li>`);
+      arr.push(`<li><img src="${image}" alt="감귤 사진" class="article-post__img--small"></li>`);
     });
     imageHTML = `<ul class="article-post__img-list">${arr.join('')}</ul>`;
   }
@@ -307,7 +303,7 @@ const getAlbumItem = ({ image }, index) => {
   const item = document.createElement('li');
   item.innerHTML = `
   <button type="button" class="feed-album__button">
-    <img src="${API}/${images[0]}" alt="피드 이미지"
+    <img src="${images[0]}" alt="피드 이미지"
     onerror="this.src='../images/full-logo.svg'" class="feed-album__picture">
   </button>
   `;
@@ -426,6 +422,9 @@ const unfollow = () => {
 
 const horizontalScroll = (e) => {
   const { wheelDelta, currentTarget } = e;
+  const { offsetWidth, scrollLeft, scrollWidth } = currentTarget
+  if (offsetWidth + scrollLeft >= scrollWidth && wheelDelta < 0) return;
+  if (scrollLeft === 0 && wheelDelta > 0) return;
   e.preventDefault();
   currentTarget.scrollLeft -= wheelDelta / 2;
 };

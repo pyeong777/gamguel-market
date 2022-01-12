@@ -349,11 +349,16 @@ a, button {
 }
 
 .article-profile {
+  flex-shrink: 0;
   width: 42px;
   height: 42px;
   margin-right: 12px;
   border-radius: 21px;
   border: 1px solid #DBDBDB;
+}
+
+.article-container {
+  overflow: hidden;
 }
 
 .article-nickname {
@@ -387,6 +392,7 @@ a, button {
 .article-post__img-list {
   display: flex;
   column-gap: 8px;
+  padding: 1px;
   margin-bottom: 14.5px;
   overflow-x: scroll;
   overflow-y: hidden;
