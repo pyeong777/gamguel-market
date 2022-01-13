@@ -15,7 +15,7 @@ const goBack = () => {
 // 1. 현 상태의 값들을 prev에 저장
 // 2. items의 값들로 로컬 스토리지의 값들을 변경함
 // 3. 해당 페이지로 이동함
-const gotoPage = (url, items) => {
+const gotoPage = (url, items = {}) => {
   const prevStorage = {};
   ['page', 'selectedUser', 'productId', 'postId']
     .forEach(key => prevStorage[key] = localStorage.getItem(key));
