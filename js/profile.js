@@ -256,8 +256,9 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
     });
     imageHTML = `<ul class="article-post__img-list">${arr.join('')}</ul>`;
   }
-  const date = new Date(Date.parse(createdAt));
-  const [ year, month, day ] = [ date.getFullYear(), date.getMonth() + 1, date.getDate() ];
+  const year = createdAt.slice(0, 4);
+  const month = createdAt.slice(5, 7);
+  const day = createdAt.slice(8, 10);
   const item = document.createElement('li');
   item.innerHTML = `
   <article class="feed-article">
@@ -268,7 +269,7 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
       <p class="article-id">@ ${author.accountname}</p>
       <p class="article-cont">${content}</p>
       ${imageHTML}
-      <button type="button" data-hearted="${hearted ? 1 : 0}" class="btn-heart">
+      <button type="button" data-hearted="${hearted ? 1 : 0}" data-id="${id}" class="btn-heart">
         <img src="../images/icon-heart${hearted ? '-active' : ''}.svg" alt="post-like" class="article-heart__btn">
         <span class="article-num">${heartCount}</span>
       </button>
@@ -288,7 +289,7 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
     ?.addEventListener('mousewheel', horizontalScroll);
   item
     .querySelector('.btn-heart')
-    .addEventListener('click', () => toggleHeart(id));
+    .addEventListener('click', toggleHeart);
   item
     .querySelector('.btn-comment')
     .addEventListener('click', () => gotoPage('postpage.html', { page: 'readPost', postId: id }));
@@ -420,15 +421,6 @@ const unfollow = () => {
   fetchUnfollow();
   unfollowButton.classList.remove('is-active');
   followButton.classList.add('is-active');
-};
-
-const horizontalScroll = (e) => {
-  const { wheelDelta, currentTarget } = e;
-  const { offsetWidth, scrollLeft, scrollWidth } = currentTarget
-  if (offsetWidth + scrollLeft >= scrollWidth && wheelDelta < 0) return;
-  if (scrollLeft === 0 && wheelDelta > 0) return;
-  e.preventDefault();
-  currentTarget.scrollLeft -= wheelDelta / 2;
 };
 
 const switchFeed = () => {

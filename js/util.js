@@ -15,7 +15,7 @@ const goBack = () => {
 // 1. 현 상태의 값들을 prev에 저장
 // 2. items의 값들로 로컬 스토리지의 값들을 변경함
 // 3. 해당 페이지로 이동함
-const gotoPage = (url, items) => {
+const gotoPage = (url, items = {}) => {
   const prevStorage = {};
   ['page', 'selectedUser', 'productId', 'postId']
     .forEach(key => prevStorage[key] = localStorage.getItem(key));
@@ -38,4 +38,14 @@ const getFormattedPrice = (price) => {
       return v;
     })
     .join('');
+};
+
+// 이미지 가로 스크롤
+const horizontalScroll = (e) => {
+  const { wheelDelta, currentTarget } = e;
+  const { offsetWidth, scrollLeft, scrollWidth } = currentTarget
+  if (offsetWidth + scrollLeft >= scrollWidth && wheelDelta < 0) return;
+  if (scrollLeft === 0 && wheelDelta > 0) return;
+  e.preventDefault();
+  currentTarget.scrollLeft -= wheelDelta / 2;
 };
