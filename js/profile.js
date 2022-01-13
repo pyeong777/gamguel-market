@@ -423,15 +423,6 @@ const unfollow = () => {
   followButton.classList.add('is-active');
 };
 
-const horizontalScroll = (e) => {
-  const { wheelDelta, currentTarget } = e;
-  const { offsetWidth, scrollLeft, scrollWidth } = currentTarget
-  if (offsetWidth + scrollLeft >= scrollWidth && wheelDelta < 0) return;
-  if (scrollLeft === 0 && wheelDelta > 0) return;
-  e.preventDefault();
-  currentTarget.scrollLeft -= wheelDelta / 2;
-};
-
 const switchFeed = () => {
   const { id } = [...feedButtons].find(btn => btn.checked);
   if (id === 'list-type') {

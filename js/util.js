@@ -39,3 +39,13 @@ const getFormattedPrice = (price) => {
     })
     .join('');
 };
+
+// 이미지 가로 스크롤
+const horizontalScroll = (e) => {
+  const { wheelDelta, currentTarget } = e;
+  const { offsetWidth, scrollLeft, scrollWidth } = currentTarget
+  if (offsetWidth + scrollLeft >= scrollWidth && wheelDelta < 0) return;
+  if (scrollLeft === 0 && wheelDelta > 0) return;
+  e.preventDefault();
+  currentTarget.scrollLeft -= wheelDelta / 2;
+};
