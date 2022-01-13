@@ -56,18 +56,19 @@ const deletePostButtons = deletePostModal.querySelectorAll('.modal-confirm__butt
 const renderPage = () => {
   // 로그인이 되어 있어야 프로필 화면도 접속할 수 있어서
   // 여기서 임시로 로그인하고 토큰을 받아 옴
-  login();
-
-  // 여기 값을 바꿔서 어떤 유저의 프로필을 볼 건지 변경 가능
-  localStorage.setItem('selectedUser', 'hey_binky'); 
-
-  fetchProfile();
-  fetchProduct();
-  fetchFeed();
+  login()
+    .then(() => {
+      // 여기 값을 바꿔서 어떤 유저의 프로필을 볼 건지 변경 가능
+      //localStorage.setItem('selectedUser', 'hey_binky');
+      //localStorage.setItem('prev', '[]');
+      fetchProfile();
+      fetchProduct();
+      fetchFeed();
+    });
 };
 
 const login = () => {
-  fetch(`${API}/user/login`, {
+  return fetch(`${API}/user/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -267,10 +268,10 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
       <p class="article-id">@ ${author.accountname}</p>
       <p class="article-cont">${content}</p>
       ${imageHTML}
-      <button type="button" data-hearted="${hearted ? 1 : 0}" data-id="${id}" class="btn-heart">
+      <button type="button" data-hearted="${hearted ? 1 : 0}" class="btn-heart">
         <img src="../images/icon-heart${hearted ? '-active' : ''}.svg" alt="post-like" class="article-heart__btn">
         <span class="article-num">${heartCount}</span>
-        </button>
+      </button>
       <button type="button" class="btn-comment">
         <img src="../images/icon-comment.svg" alt="post-comment" class="article-comment__btn">
         <span class="article-num">${commentCount}</span>
@@ -282,15 +283,25 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
     </button>
   </article>
   `;
-  item.querySelector('.article-post__img-list')?.addEventListener('mousewheel', horizontalScroll);
-  item.querySelector('.btn-heart').addEventListener('click', toggleHeart);
-  item.querySelector('.btn-comment').addEventListener('click', () => gotoPage('postpage.html', 'readPost'));
+  item
+    .querySelector('.article-post__img-list')
+    ?.addEventListener('mousewheel', horizontalScroll);
+  item
+    .querySelector('.btn-heart')
+    .addEventListener('click', () => toggleHeart(id));
+  item
+    .querySelector('.btn-comment')
+    .addEventListener('click', () => gotoPage('postpage.html', { page: 'readPost', postId: id }));
   const selectedUser = localStorage.getItem('selectedUser');
   const accountname = localStorage.getItem('accountname');
   if (selectedUser === accountname) {
-    item.querySelector('.feed-article__button').addEventListener('click', () => showModal('myPost', id));
+    item
+      .querySelector('.feed-article__button')
+      .addEventListener('click', () => showModal('myPost', id));
   } else {
-    item.querySelector('.feed-article__button').addEventListener('click', () => showModal('post'));
+    item
+      .querySelector('.feed-article__button')
+      .addEventListener('click', () => showModal('post'));
   }
   return item;
 };
@@ -472,8 +483,7 @@ const fetchOneFeed = (id, elem) => {
     const { hearted, heartCount } = post;
     elem.innerHTML = `
     <img src="../images/icon-heart${hearted ? '-active' : ''}.svg" alt="post-like" class="article-heart__btn">
-      <span class="article-num">${heartCount}</span>
-    </button>
+    <span class="article-num">${heartCount}</span>
     `;
     elem.setAttribute('data-hearted', hearted ? 1 : 0);
   });
@@ -512,12 +522,12 @@ backButton.addEventListener('click', goBack);
 menuButton.addEventListener('click', () => showModal('setting'));
 
 // 프로필 버튼
-followersButton.addEventListener('click', () => gotoPage('followList.html', 'followers'));
-followingsButton.addEventListener('click', () => gotoPage('followList.html', 'followings'));
+followersButton.addEventListener('click', () => gotoPage('followList.html', { page: 'followers' }));
+followingsButton.addEventListener('click', () => gotoPage('followList.html', { page: 'followings' }));
 followButton.addEventListener('click', follow);
 unfollowButton.addEventListener('click', unfollow);
-modifyButton.addEventListener('click', () => gotoPage('modifyProfile.html', 'modifyProfile'));
-registerButton.addEventListener('click', () => gotoPage('modifyProduct.html', 'addProduct'));
+modifyButton.addEventListener('click', () => gotoPage('modifyProfile.html', { page: 'modifyProfile' }));
+registerButton.addEventListener('click', () => gotoPage('modifyProduct.html', { page: 'addProduct' }));
 
 // 상품 목록 가로 스크롤
 onSale.addEventListener('mousewheel', horizontalScroll);
@@ -536,7 +546,7 @@ logoutButtons[1].addEventListener('click', logout);
 
 // 내 상품 목록 누를 때 뜨는 모달 버튼
 productButtons[0].addEventListener('click', () => showModal('deleteProduct'));
-productButtons[1].addEventListener('click', () => gotoPage('modifyProduct.html', 'modifyProduct'));
+productButtons[1].addEventListener('click', () => gotoPage('modifyProduct.html', { page: 'modifyProduct' }));
 productButtons[2].addEventListener('click', () => gotoPage(localStorage.getItem('productLink')));
 deleteProductButtons[0].addEventListener('click', () => showModal('product'));
 deleteProductButtons[1].addEventListener('click', deleteProduct);
@@ -544,7 +554,7 @@ deleteProductButtons[1].addEventListener('click', deleteProduct);
 // 내 피드 게시물 메뉴 누를 때 뜨는 모달 버튼
 postButtons[0].addEventListener('click', hideModal);
 myPostButtons[0].addEventListener('click', () => showModal('deletePost'));
-myPostButtons[1].addEventListener('click', () => gotoPage('upload.html', 'modifyPost'));
+myPostButtons[1].addEventListener('click', () => gotoPage('upload.html', { page: 'modifyPost' }));
 deletePostButtons[0].addEventListener('click', () => showModal('myPost'));
 deletePostButtons[1].addEventListener('click', deletePost);
 

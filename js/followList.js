@@ -63,12 +63,15 @@ const renderList = (json) => {
     ${isSelf ? '' : isFollowing ? 'follow__button--active' : ''} button-unfollow">취소</button>
     `;
     item.classList.add('follow__item');
-    item.querySelector('.follow__user').addEventListener('click', () => {
-      localStorage.setItem('selectedUser', accountname);
-      gotoPage('profile.html');
-    });
-    item.querySelector('.button-follow').addEventListener('click', follow);
-    item.querySelector('.button-unfollow').addEventListener('click', unfollow);
+    item
+      .querySelector('.follow__user')
+      .addEventListener('click', () => gotoPage('profile.html', { selectedUser : accountname }));
+    item
+      .querySelector('.button-follow')
+      .addEventListener('click', follow);
+    item
+      .querySelector('.button-unfollow')
+      .addEventListener('click', unfollow);
     fragment.appendChild(item);
   });
   followList.appendChild(fragment);

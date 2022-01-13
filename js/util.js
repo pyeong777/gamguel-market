@@ -1,10 +1,23 @@
 const goBack = () => {
+  const prev = JSON.parse(localStorage.getItem('prev'));
+  Object
+    .entries(prev.pop())
+    .forEach(([ key, value ]) => localStorage.setItem(key, value));
+  localStorage.setItem('prev', JSON.stringify(prev));
   window.history.back();
 };
 
-const gotoPage = (url, page) => {
+const gotoPage = (url, items) => {
+  const prevStorage = {};
+  ['page', 'selectedUser', 'productId', 'postId']
+    .forEach(key => prevStorage[key] = localStorage.getItem(key));
+  const prev = JSON.parse(localStorage.getItem('prev'));
+  prev.push(prevStorage);
+  localStorage.setItem('prev', JSON.stringify(prev));
+  Object
+    .entries(items)
+    .forEach(([ key, value ]) => localStorage.setItem(key, value));
   location.href = url;
-  localStorage.setItem('page', page);
 };
 
 const getFormattedPrice = (price) => {
