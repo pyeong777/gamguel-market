@@ -98,6 +98,7 @@ a, button {
   height: 110px;
   margin-bottom: 16px;
   border-radius: 55px;
+  border: 1px solid #DBDBDB;
 }
 
 .profile__user-img:hover {
