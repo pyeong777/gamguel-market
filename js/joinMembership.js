@@ -2,8 +2,6 @@
 const idInput = document.getElementById('login_id');
 const pwInput = document.getElementById('login_pw');
 const nextBtn = document.getElementById('next_btn');
-const warning1 = document.getElementById('warning1');
-const warning2 = document.getElementById('warning2');
 
 const isActiveJoin = () => {
   let idValue = idInput.value;
@@ -13,20 +11,17 @@ const isActiveJoin = () => {
     (idValue && pwValue) &&
     (pwValue.length >= 6) &&
     (idValue.includes('@')) &&
-    (idValue == "deepdive@naver.com") &&
-    (pwValue == "123456")
+    // 아래는 이미 회원가입 되어 있는 정보라고 가정
+    !(idValue == "deepdive@naver.com")
+    // !(pwValue == "123456")
   ) {
     nextBtn.disabled = false;
     nextBtn.style.opacity = 1;
     nextBtn.style.cursor = 'pointer';
-    warning1.style.display = "none";
-    warning2.style.display = "none";
   }
   else {
     nextBtn.disabled = true;
     nextBtn.style.opacity = .3;
-    warning1.style.display = "block";
-    warning2.style.display = "block";
   }
 }
 
@@ -64,7 +59,6 @@ login_id.onfocus = function () {
     error.innerHTML = "";
   }
 };
-
 
 // pw
 login_pw.onblur = function () {

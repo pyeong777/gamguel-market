@@ -76,7 +76,6 @@ a {
   cursor: pointer;
 }
 
-
 .input-container {
   width: 100vw;
   max-width: 767px;
@@ -122,18 +121,6 @@ a {
   transition: all .5s ease;
 }
 
-.input-area .warning1,
-.input-area .warning2 {
-  display: none;
-  font-size: 12px;
-  line-height: 14px;
-  font-weight: 400;
-  color: #eb5757;
-  transition: all .5s ease;
-  margin: 6px 0 16px 0;
-  text-align: left;
-}
-
 .btn-area {
   text-align: center;
 }
@@ -156,14 +143,18 @@ a {
 }
 
 .invalid {
-  color: red;
+  color: #eb5757;
+}
+
+.invalid2 {
+  color: #eb5757;
 }
 
 #error {
   font-size: 12px;
   line-height: 14px;
   font-weight: 400;
-  color: red;
+  color: #eb5757;
   margin: 6px 0 0 0;
 }
 
@@ -171,6 +162,6 @@ a {
   font-size: 12px;
   line-height: 14px;
   font-weight: 400;
-  color: red;
+  color: #eb5757;
   margin: 6px 0 0 0;
 }

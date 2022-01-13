@@ -1,8 +1,8 @@
 // name, id, introduce 입력 시 버튼 활성화
-let nameInput = document.getElementById('name');
-let idInput = document.getElementById('join_id');
-let introduceInput = document.getElementById('introduce');
-let startBtn = document.getElementById('start_btn');
+const nameInput = document.getElementById('name');
+const idInput = document.getElementById('join_id');
+const introduceInput = document.getElementById('introduce');
+const startBtn = document.getElementById('start_btn');
 
 const isActiveStart = () => {
   let nameValue = nameInput.value;
@@ -10,7 +10,9 @@ const isActiveStart = () => {
   let introduceValue = introduceInput.value;
 
   if (
-    (nameValue && idValue && introduceValue)
+    (nameValue && idValue && introduceValue) &&
+    // 아래는 이미 회원가입 되어 있는 정보라고 가정
+    !(idValue == "deepdive123")
   ) {
     startBtn.disabled = false;
     startBtn.style.opacity = 1;
@@ -42,42 +44,39 @@ function nextPage() {
 
 // 유효성 검사
 // * 이미 사용중인 아이디입니다.
-idInput.onblur = function () {
+idInput.addEventListener('blur', function () {
   if (
+    // 아래는 이미 회원가입 되어 있는 정보라고 가정
     (idInput.value == "deepdive123")
   ) {
     idInput.classList.add('invalid');
     error.innerHTML = '*이미 사용중인 아이디입니다.';
   }
-};
+});
 
-idInput.onfocus = function () {
+idInput.addEventListener('focus', function () {
   if (this.classList.contains('invalid')) {
     this.classList.remove('invalid');
     error.innerHTML = "";
   }
-};
+});
 
 
 // *영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.
-idInput.onblur = function () {
-  let regExp = /[A-Za-z0-9]/;
+idInput.addEventListener('blur', function () {
+  let regExp = /[^A-Za-z0-9._]/;
 
   if (
-    !(
-      (regExp.test(idInput.value)) ||
-      (idInput.value.includes('_')) ||
-      (idInput.value.includes('.'))
-    )
+    regExp.test(idInput.value)
   ) {
-    idInput.classList.add('invalid');
+    idInput.classList.add('invalid2');
     error2.innerHTML = '*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.';
   }
-};
+});
 
-idInput.onfocus = function () {
-  if (this.classList.contains('invalid')) {
-    this.classList.remove('invalid');
+idInput.addEventListener('focus', function () {
+  if (this.classList.contains('invalid2')) {
+    this.classList.remove('invalid2');
     error2.innerHTML = "";
   }
-};
+});
