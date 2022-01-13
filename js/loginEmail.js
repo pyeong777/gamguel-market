@@ -40,11 +40,9 @@ function nextPage() {
 
 
 // 유효성 검사
-let warn2 = document.querySelector(".warning");
-console.log(warn);
-console.log(loginBtn);
+let warn = document.querySelector(".warning");
 
-loginBtn.addEventListener('click', loginError());
+loginBtn.addEventListener('click', loginError);
 
 function loginError() {
   if (
@@ -53,9 +51,25 @@ function loginError() {
       (pwInput.value == "123456")
     )
   ) {
-    warn2.style.display = "block";
+    warn.style.display = "block";
+    idInput.classList.add('invalid');
+    pwInput.classList.add('invalid');
   } else {
-    warn2.style.display = "none";
+    warn.style.display = "none";
     location.href = "../index.html";
   }
 }
+
+idInput.addEventListener('focus', function () {
+  if (this.classList.contains('invalid')) {
+    this.classList.remove('invalid');
+    warn.style.display = "none";
+  }
+});
+
+pwInput.addEventListener('focus', function () {
+  if (this.classList.contains('invalid')) {
+    this.classList.remove('invalid');
+    warn.style.display = "none";
+  }
+});
