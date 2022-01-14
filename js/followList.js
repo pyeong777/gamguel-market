@@ -15,28 +15,14 @@ const renderPage = () => {
 
 const fetchFollower = () => {
   const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/profile/${selectedUser}/follower`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/profile/${selectedUser}/follower`, reqData())
   .then(res => res.json())
   .then(json => renderList(json));
 };
 
 const fetchFollowing = () => {
   const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/profile/${selectedUser}/following`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/profile/${selectedUser}/following`, reqData())
   .then(res => res.json())
   .then(json => renderList(json));
 };
@@ -92,27 +78,13 @@ const fetchButton = (elem) => {
 
 const follow = ({ currentTarget }) => {
   const { accountname } = currentTarget.dataset;
-  const token = localStorage.getItem('token');
-  fetch(`${API}/profile/${accountname}/follow`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/profile/${accountname}/follow`, reqData('POST'))
   .then(() => fetchButton(currentTarget));
 };
 
 const unfollow = ({ currentTarget }) => {
   const { accountname } = currentTarget.dataset;
-  const token = localStorage.getItem('token');
-  fetch(`${API}/profile/${accountname}/unfollow`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/profile/${accountname}/unfollow`, reqData('DELETE'))
   .then(() => fetchButton(currentTarget));
 };
 
