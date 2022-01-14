@@ -247,6 +247,7 @@ a, button {
   display: flex;
   column-gap: 10px;
   overflow: hidden;
+  padding-right: 30px;
 }
 
 .products__on-sale::-webkit-scrollbar {
