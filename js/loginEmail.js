@@ -33,43 +33,65 @@ const init = () => {
 init();
 
 
-// 링크 클릭 시 페이지 전환
-function nextPage() {
-  location.href = "./joinMembership.html";
-}
-
-
 // 유효성 검사
-let warn = document.querySelector(".warning");
+// let warn = document.querySelector(".warning");
 
-loginBtn.addEventListener('click', loginError);
+// loginBtn.addEventListener('click', loginError);
 
-function loginError() {
-  if (
-    !(
-      (idInput.value == "deepdive@naver.com") &&
-      (pwInput.value == "123456")
-    )
-  ) {
-    warn.style.display = "block";
-    idInput.classList.add('invalid');
-    pwInput.classList.add('invalid');
-  } else {
-    warn.style.display = "none";
-    location.href = "../index.html";
-  }
+// function loginError() {
+//   if (
+//     !(
+//       (idInput.value == "deepdive@naver.com") &&
+//       (pwInput.value == "123456")
+//     )
+//   ) {
+//     warn.style.display = "block";
+//     idInput.classList.add('invalid');
+//     pwInput.classList.add('invalid');
+//   } else {
+//     warn.style.display = "none";
+//     location.href = "../index.html";
+//   }
+// }
+
+// idInput.addEventListener('focus', function () {
+//   if (this.classList.contains('invalid')) {
+//     this.classList.remove('invalid');
+//     warn.style.display = "none";
+//   }
+// });
+
+// pwInput.addEventListener('focus', function () {
+//   if (this.classList.contains('invalid')) {
+//     this.classList.remove('invalid');
+//     warn.style.display = "none";
+//   }
+// });
+
+async function login() {
+  const email = document.querySelector("#login_id").value
+  const pw = document.querySelector("#login_pw").value
+  const url = "http://146.56.183.55:5050"
+  const loginData = {
+          "user":{
+                  "email": email,
+                  "password": pw
+                  }
+          }
+  
+  const res = await fetch(url+'/user/login',{
+      method:"POST",
+      headers:{
+          "Content-type" : "application/json"
+      },
+      body:JSON.stringify(loginData)
+  })
+  const json = await res.json()
+  localStorage.setItem("token",json.user.token)
+  localStorage.setItem("userid",json.user._id)
+  localStorage.setItem("accountname",json.user.accountname)
+
+  location.href = "../index.html"
 }
 
-idInput.addEventListener('focus', function () {
-  if (this.classList.contains('invalid')) {
-    this.classList.remove('invalid');
-    warn.style.display = "none";
-  }
-});
-
-pwInput.addEventListener('focus', function () {
-  if (this.classList.contains('invalid')) {
-    this.classList.remove('invalid');
-    warn.style.display = "none";
-  }
-});
+document.querySelector('#login_btn').addEventListener("click", login);
