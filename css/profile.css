@@ -396,7 +396,6 @@ a, button {
 .article-post__img-list {
   display: flex;
   column-gap: 8px;
-  padding: 1px;
   margin-bottom: 14.5px;
   overflow: hidden;
 }
@@ -415,7 +414,7 @@ a, button {
 
 .article-post__img:hover,
 .article-post__img--small:hover {
-  outline: 1px solid #DBDBDB;
+  border: 1px solid #DBDBDB;
 }
 
 .article-heart__btn {
