@@ -59,8 +59,8 @@ const renderPage = () => {
   login()
     .then(() => {
       // 여기 값을 바꿔서 어떤 유저의 프로필을 볼 건지 변경 가능
-      //localStorage.setItem('selectedUser', 'hey_binky');
-      //localStorage.setItem('prev', '[]');
+      localStorage.setItem('selectedUser', 'abcde');
+      localStorage.setItem('prev', '[]');
       fetchProfile();
       fetchProduct();
       fetchFeed();
@@ -144,6 +144,7 @@ const renderProfile = (json) => {
 };
 
 const renderProduct = (json) => {
+  console.log(json);
   const { product } = json;
   const fragment = document.createDocumentFragment();
   if (!product.length) return;
@@ -156,7 +157,7 @@ const renderProduct = (json) => {
       item.innerHTML = `
       <button type="button" class="products__button">
         <article class="products__info">
-          <img src="${itemImage}" alt="감귤 사진" class="products__img">
+          <img src="${itemImage}" alt="감귤 사진" onerror="this.src='../images/full-logo.svg'" class="products__img">
           <dl>
             <dt class="sr-only">상품명</dt>
             <dd class="products__name ellipsis">${itemName}</dd>
@@ -177,7 +178,7 @@ const renderProduct = (json) => {
       item.innerHTML = `
       <a href="${link}">
         <article class="products__info">
-          <img src="${API}/${itemImage}" alt="감귤 사진" class="products__img">
+          <img src="${API}/${itemImage}" alt="감귤 사진" onerror="this.src='../images/full-logo.svg'" class="products__img">
           <dl>
             <dt class="sr-only">상품명</dt>
             <dd class="products__name ellipsis">${itemName}</dd>
@@ -221,11 +222,11 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
   const images = image.split(',');
   let imageHTML = '';
   if (images.length === 1 && images[0]) {
-    imageHTML = `<img src="${images[0]}" alt="감귤 사진" class="article-post__img">`;
+    imageHTML = `<img src="${images[0]}" alt="감귤 사진" onerror="this.src='../images/full-logo.svg'" class="article-post__img">`;
   } else if (images.length > 1) {
     const arr = [];
     images.forEach(image => {
-      arr.push(`<li><img src="${image}" alt="감귤 사진" class="article-post__img--small"></li>`);
+      arr.push(`<li><img src="${image}" alt="감귤 사진" onerror="this.src='../images/full-logo.svg'" class="article-post__img--small"></li>`);
     });
     imageHTML = `<ul class="article-post__img-list">${arr.join('')}</ul>`;
   }
