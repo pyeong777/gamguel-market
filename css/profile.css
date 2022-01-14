@@ -449,8 +449,7 @@ a, button {
 /* 피드 앨범 */
 
 .feed-album {
-  grid-template-columns: repeat(auto-fill, minmax(auto, 114px));
-  grid-template-rows: repeat(auto-fill, minmax(auto, 114px));
+  grid-template-columns: repeat(auto-fill, 114px);
   justify-content: center;
   gap: 8px;
   padding: 16px 16px 30px;
@@ -482,8 +481,7 @@ a, button {
 }
 
 .feed-album__picture {
-  width: 100%;
-  height: 100%;
+  height: 114px;
   object-fit: cover;
 }
 
