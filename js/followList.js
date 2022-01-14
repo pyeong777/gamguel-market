@@ -5,8 +5,7 @@ const backButton = document.querySelector('.main-header__back');
 const followList = document.querySelector('.follow__list');
 
 const renderPage = () => {
-  const page = localStorage.getItem('page');
-  if (page === 'followers') {
+  if (NAME_SPACE.page === 'followers') {
     fetchFollower();
   } else {
     fetchFollowing();
@@ -14,15 +13,13 @@ const renderPage = () => {
 };
 
 const fetchFollower = () => {
-  const selectedUser = localStorage.getItem('selectedUser');
-  fetch(`${API}/profile/${selectedUser}/follower`, reqData())
+  fetch(`${API}/profile/${NAME_SPACE.user}/follower/?limit=100&skip=0`, reqData())
   .then(res => res.json())
   .then(json => renderList(json));
 };
 
 const fetchFollowing = () => {
-  const selectedUser = localStorage.getItem('selectedUser');
-  fetch(`${API}/profile/${selectedUser}/following`, reqData())
+  fetch(`${API}/profile/${NAME_SPACE.user}/following/?limit=100&skip=0`, reqData())
   .then(res => res.json())
   .then(json => renderList(json));
 };
@@ -51,7 +48,9 @@ const renderList = (json) => {
     item.classList.add('follow__item');
     item
       .querySelector('.follow__user')
-      .addEventListener('click', () => gotoPage('profile.html', { selectedUser : accountname }));
+      .addEventListener('click', () => {
+        gotoPage('profile.html', { user : accountname } , [ 'user' ]);
+      });
     item
       .querySelector('.button-follow')
       .addEventListener('click', follow);
@@ -91,4 +90,5 @@ const unfollow = ({ currentTarget }) => {
 // 헤더 버튼
 backButton.addEventListener('click', goBack);
 
+const NAME_SPACE = getNameSpace();
 renderPage();
