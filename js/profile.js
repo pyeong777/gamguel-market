@@ -68,18 +68,12 @@ const renderPage = () => {
 };
 
 const login = () => {
-  return fetch(`${API}/user/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      user: {
-        email: 'test@test.com',
-        password: 'test001'
-      }
-    })
-  })
+  return fetch(`${API}/user/login`, reqData('POST', {
+    user: {
+      email: 'test@test.com',
+      password: 'test001'
+    }
+  }))
   .then(res => res.json())
   .then(({ user }) => {
     localStorage.setItem('token', user.token);
@@ -95,42 +89,21 @@ const logout = () => {
 
 const fetchProfile = () => {
   const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/profile/${selectedUser}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/profile/${selectedUser}`, reqData())
   .then(res => res.json())
   .then(json => renderProfile(json));
 };
 
 const fetchProduct = () => {
   const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/product/${selectedUser}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/product/${selectedUser}/?limit=100&skip=0`, reqData())
   .then(res => res.json())
   .then(json => renderProduct(json));
 };
 
 const fetchFeed = () => {
   const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/post/${selectedUser}/userpost`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/post/${selectedUser}/userpost/?limit=100&skip=0`, reqData())
   .then(res => res.json())
   .then(json => renderFeed(json));
 };
@@ -370,14 +343,7 @@ const hideModal = (e) => {
 
 const deleteProduct = () => {
   const id = localStorage.getItem('productId');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/product/${id}`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/product/${id}`, reqData('DELETE'))
   .then(() => {
     fetchProduct();
     modal.classList.remove('is-modal-active');
@@ -387,14 +353,7 @@ const deleteProduct = () => {
 
 const fetchFollow = () => {
   const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/profile/${selectedUser}/follow`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/profile/${selectedUser}/follow`, reqData('POST'))
   .then(() => fetchProfile());
 };
 
@@ -406,14 +365,7 @@ const follow = () => {
 
 const fetchUnfollow = () => {
   const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/profile/${selectedUser}/unfollow`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/profile/${selectedUser}/unfollow`, reqData('DELETE'))
   .then(() => fetchProfile());
 };
 
@@ -446,14 +398,7 @@ const isFeedList = () => {
 
 const deletePost = () => {
   const id = localStorage.getItem('postId');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/post/${id}`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/post/${id}`, reqData('DELETE'))
   .then(() => {
     fetchFeed();
     modal.classList.remove('is-modal-active');
@@ -462,14 +407,7 @@ const deletePost = () => {
 };
 
 const fetchOneFeed = (id, elem) => {
-  const token = localStorage.getItem('token');
-  fetch(`${API}/post/${id}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/post/${id}`, reqData())
   .then(res => res.json())
   .then(({ post }) => {
     const { hearted, heartCount } = post;
@@ -483,26 +421,13 @@ const fetchOneFeed = (id, elem) => {
 
 const toggleHeart = ({ currentTarget }) => {
   const { hearted, id } = currentTarget.dataset;
-  const token = localStorage.getItem('token');
   if (+hearted) {
-    fetch(`${API}/post/${id}/unheart`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    })
+    fetch(`${API}/post/${id}/unheart`, reqData('DELETE'))
     .then(() => {
       fetchOneFeed(id, currentTarget);
     });
   } else {
-    fetch(`${API}/post/${id}/heart`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    })
+    fetch(`${API}/post/${id}/heart`, reqData('POST'))
     .then(() => {
       fetchOneFeed(id, currentTarget);
     });

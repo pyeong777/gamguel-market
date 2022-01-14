@@ -49,3 +49,14 @@ const horizontalScroll = (e) => {
   e.preventDefault();
   currentTarget.scrollLeft -= wheelDelta / 2;
 };
+
+const reqData = (method = 'GET', body) => {
+  return {
+    method,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  };
+};
