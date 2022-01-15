@@ -58,9 +58,6 @@ const renderPage = () => {
   // 여기서 임시로 로그인하고 토큰을 받아 옴
   login()
     .then(() => {
-      // 여기 값을 바꿔서 어떤 유저의 프로필을 볼 건지 변경 가능
-      //localStorage.setItem('selectedUser', 'hey_binky');
-      //localStorage.setItem('prev', '[]');
       fetchProfile();
       fetchProduct();
       fetchFeed();
@@ -68,18 +65,12 @@ const renderPage = () => {
 };
 
 const login = () => {
-  return fetch(`${API}/user/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      user: {
-        email: 'test@test.com',
-        password: 'test001'
-      }
-    })
-  })
+  return fetch(`${API}/user/login`, reqData('POST', {
+    user: {
+      email: 'test@test.com',
+      password: 'test001'
+    }
+  }))
   .then(res => res.json())
   .then(({ user }) => {
     localStorage.setItem('token', user.token);
@@ -94,43 +85,19 @@ const logout = () => {
 };
 
 const fetchProfile = () => {
-  const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/profile/${selectedUser}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/profile/${NAME_SPACE.user}`, reqData())
   .then(res => res.json())
   .then(json => renderProfile(json));
 };
 
 const fetchProduct = () => {
-  const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/product/${selectedUser}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/product/${NAME_SPACE.user}/?limit=100&skip=0`, reqData())
   .then(res => res.json())
   .then(json => renderProduct(json));
 };
 
 const fetchFeed = () => {
-  const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/post/${selectedUser}/userpost`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/post/${NAME_SPACE.user}/userpost/?limit=100&skip=0`, reqData())
   .then(res => res.json())
   .then(json => renderFeed(json));
 };
@@ -151,12 +118,12 @@ const renderProfile = (json) => {
 
   const userid = localStorage.getItem('userid');
   const accountname = localStorage.getItem('accountname');
-  const selectedUser = localStorage.getItem('selectedUser');
+  const { user } = NAME_SPACE;
 
   profileButtons.forEach(btn => {
     btn.classList.remove('is-active');
   });
-  if (selectedUser === accountname) {
+  if (user === accountname) {
     modifyButton.classList.add('is-active');
     registerButton.classList.add('is-active');
   } else {
@@ -176,14 +143,14 @@ const renderProduct = (json) => {
   if (!product.length) return;
   onSale.innerHTML = '';
   const accountname = localStorage.getItem('accountname');
-  const selectedUser = localStorage.getItem('selectedUser');
-  if (accountname === selectedUser) {
+  const { user } = NAME_SPACE;
+  if (user === accountname) {
     product.forEach(({ id, link, itemImage, itemName, price }) => {
       const item = document.createElement('li');
       item.innerHTML = `
       <button type="button" class="products__button">
         <article class="products__info">
-          <img src="${itemImage}" alt="감귤 사진" class="products__img">
+          <img src="${itemImage}" alt="감귤 사진" onerror="this.src='../images/full-logo.svg'" class="products__img">
           <dl>
             <dt class="sr-only">상품명</dt>
             <dd class="products__name ellipsis">${itemName}</dd>
@@ -204,7 +171,7 @@ const renderProduct = (json) => {
       item.innerHTML = `
       <a href="${link}">
         <article class="products__info">
-          <img src="${API}/${itemImage}" alt="감귤 사진" class="products__img">
+          <img src="${API}/${itemImage}" alt="감귤 사진" onerror="this.src='../images/full-logo.svg'" class="products__img">
           <dl>
             <dt class="sr-only">상품명</dt>
             <dd class="products__name ellipsis">${itemName}</dd>
@@ -248,11 +215,11 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
   const images = image.split(',');
   let imageHTML = '';
   if (images.length === 1 && images[0]) {
-    imageHTML = `<img src="${images[0]}" alt="감귤 사진" class="article-post__img">`;
+    imageHTML = `<img src="${images[0]}" alt="감귤 사진" onerror="this.src='../images/full-logo.svg'" class="article-post__img">`;
   } else if (images.length > 1) {
     const arr = [];
     images.forEach(image => {
-      arr.push(`<li><img src="${image}" alt="감귤 사진" class="article-post__img--small"></li>`);
+      arr.push(`<li><img src="${image}" alt="감귤 사진" onerror="this.src='../images/full-logo.svg'" class="article-post__img--small"></li>`);
     });
     imageHTML = `<ul class="article-post__img-list">${arr.join('')}</ul>`;
   }
@@ -292,10 +259,12 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
     .addEventListener('click', toggleHeart);
   item
     .querySelector('.btn-comment')
-    .addEventListener('click', () => gotoPage('postpage.html', { page: 'readPost', postId: id }));
-  const selectedUser = localStorage.getItem('selectedUser');
+    .addEventListener('click', () => {
+      gotoPage('postpage.html', { page: 'readPost', postId: id }, [ 'page', 'postId' ]);
+    });
   const accountname = localStorage.getItem('accountname');
-  if (selectedUser === accountname) {
+  const { user } = NAME_SPACE;
+  if (user === accountname) {
     item
       .querySelector('.feed-article__button')
       .addEventListener('click', () => showModal('myPost', id));
@@ -340,8 +309,8 @@ const showModal = (type, ...args) => {
       productModal.classList.add('is-modal-active');
       deleteProductModal.classList.remove('is-modal-active');
       if (!args.length) return;
-      localStorage.setItem('productId', id);
-      localStorage.setItem('productLink', link);
+      NAME_SPACE.productId = id;
+      NAME_SPACE.productLink = link;
       break;
     case 'deleteProduct':
       productModal.classList.remove('is-modal-active');
@@ -354,7 +323,7 @@ const showModal = (type, ...args) => {
       myPostModal.classList.add('is-modal-active');
       deletePostModal.classList.remove('is-modal-active');
       if (!args.length) return;
-      localStorage.setItem('postId', id);
+      NAME_SPACE.postId = id;
       break;
     case 'deletePost':
       myPostModal.classList.remove('is-modal-active');
@@ -369,15 +338,7 @@ const hideModal = (e) => {
 };
 
 const deleteProduct = () => {
-  const id = localStorage.getItem('productId');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/product/${id}`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/product/${NAME_SPACE.productId}`, reqData('DELETE'))
   .then(() => {
     fetchProduct();
     modal.classList.remove('is-modal-active');
@@ -386,15 +347,7 @@ const deleteProduct = () => {
 };
 
 const fetchFollow = () => {
-  const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/profile/${selectedUser}/follow`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/profile/${NAME_SPACE.user}/follow`, reqData('POST'))
   .then(() => fetchProfile());
 };
 
@@ -405,15 +358,7 @@ const follow = () => {
 };
 
 const fetchUnfollow = () => {
-  const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/profile/${selectedUser}/unfollow`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/profile/${NAME_SPACE.user}/unfollow`, reqData('DELETE'))
   .then(() => fetchProfile());
 };
 
@@ -430,13 +375,13 @@ const switchFeed = () => {
     feedAlbum.classList.remove('album-checked');
     feedLabels[0].classList.add('feed__label-list--on');
     feedLabels[1].classList.remove('feed__label-album--on');
-    fetchFeed(localStorage.getItem('selectedUser'), localStorage.getItem('token'));
+    fetchFeed(NAME_SPACE.user, localStorage.getItem('token'));
   } else if (id === 'album-type') {
     feedAlbum.classList.add('album-checked');
     feedList.classList.remove('list-checked');
     feedLabels[0].classList.remove('feed__label-list--on');
     feedLabels[1].classList.add('feed__label-album--on');
-    fetchFeed(localStorage.getItem('selectedUser'), localStorage.getItem('token'));
+    fetchFeed(NAME_SPACE.user, localStorage.getItem('token'));
   }
 };
 
@@ -445,15 +390,7 @@ const isFeedList = () => {
 };
 
 const deletePost = () => {
-  const id = localStorage.getItem('postId');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/post/${id}`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/post/${NAME_SPACE.postId}`, reqData('DELETE'))
   .then(() => {
     fetchFeed();
     modal.classList.remove('is-modal-active');
@@ -462,14 +399,7 @@ const deletePost = () => {
 };
 
 const fetchOneFeed = (id, elem) => {
-  const token = localStorage.getItem('token');
-  fetch(`${API}/post/${id}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/post/${id}`, reqData())
   .then(res => res.json())
   .then(({ post }) => {
     const { hearted, heartCount } = post;
@@ -483,26 +413,13 @@ const fetchOneFeed = (id, elem) => {
 
 const toggleHeart = ({ currentTarget }) => {
   const { hearted, id } = currentTarget.dataset;
-  const token = localStorage.getItem('token');
   if (+hearted) {
-    fetch(`${API}/post/${id}/unheart`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    })
+    fetch(`${API}/post/${id}/unheart`, reqData('DELETE'))
     .then(() => {
       fetchOneFeed(id, currentTarget);
     });
   } else {
-    fetch(`${API}/post/${id}/heart`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    })
+    fetch(`${API}/post/${id}/heart`, reqData('POST'))
     .then(() => {
       fetchOneFeed(id, currentTarget);
     });
@@ -514,12 +431,20 @@ backButton.addEventListener('click', goBack);
 menuButton.addEventListener('click', () => showModal('setting'));
 
 // 프로필 버튼
-followersButton.addEventListener('click', () => gotoPage('followList.html', { page: 'followers' }));
-followingsButton.addEventListener('click', () => gotoPage('followList.html', { page: 'followings' }));
+followersButton.addEventListener('click', () => {
+  gotoPage('followList.html', { page: 'followers' }, [ 'user', 'page' ]);
+});
+followingsButton.addEventListener('click', () => {
+  gotoPage('followList.html', { page: 'followings' }, [ 'user', 'page' ]);
+});
 followButton.addEventListener('click', follow);
 unfollowButton.addEventListener('click', unfollow);
-modifyButton.addEventListener('click', () => gotoPage('modifyProfile.html', { page: 'modifyProfile' }));
-registerButton.addEventListener('click', () => gotoPage('modifyProduct.html', { page: 'addProduct' }));
+modifyButton.addEventListener('click', () => {
+  gotoPage('modifyProfile.html', { page: 'modifyProfile' }, [ 'page' ]);
+});
+registerButton.addEventListener('click', () => {
+  gotoPage('modifyProduct.html', { page: 'addProduct' }, [ 'page' ]);
+});
 
 // 상품 목록 가로 스크롤
 onSale.addEventListener('mousewheel', horizontalScroll);
@@ -538,16 +463,21 @@ logoutButtons[1].addEventListener('click', logout);
 
 // 내 상품 목록 누를 때 뜨는 모달 버튼
 productButtons[0].addEventListener('click', () => showModal('deleteProduct'));
-productButtons[1].addEventListener('click', () => gotoPage('modifyProduct.html', { page: 'modifyProduct' }));
-productButtons[2].addEventListener('click', () => gotoPage(localStorage.getItem('productLink')));
+productButtons[1].addEventListener('click', () => {
+  gotoPage('modifyProduct.html', { page: 'modifyProduct' }, [ 'page' ]);
+});
+productButtons[2].addEventListener('click', () => gotoPage(NAME_SPACE.productLink));
 deleteProductButtons[0].addEventListener('click', () => showModal('product'));
 deleteProductButtons[1].addEventListener('click', deleteProduct);
 
 // 내 피드 게시물 메뉴 누를 때 뜨는 모달 버튼
 postButtons[0].addEventListener('click', hideModal);
 myPostButtons[0].addEventListener('click', () => showModal('deletePost'));
-myPostButtons[1].addEventListener('click', () => gotoPage('upload.html', { page: 'modifyPost' }));
+myPostButtons[1].addEventListener('click', () => {
+  gotoPage('upload.html', { page: 'modifyPost' }, [ 'page' ]);
+});
 deletePostButtons[0].addEventListener('click', () => showModal('myPost'));
 deletePostButtons[1].addEventListener('click', deletePost);
 
+const NAME_SPACE = getNameSpace();
 renderPage();
