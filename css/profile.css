@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-body {
+body, html {
   overflow-x: hidden;
 }
 
@@ -380,6 +380,7 @@ a, button {
 .article-cont {
   font-size: 14px;
   line-height: 18px;
+  padding-right: 16px;
   margin: 16px 0;
 }
 
