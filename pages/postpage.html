@@ -19,62 +19,16 @@
           <strong class="sr-only">메뉴</strong>
         </button>
       </header>
-    <div class="home-container">
     <main class="home-main">
-      <article class="main-article">
-          <img src="../images/Ellipse 1.svg" alt="profile__img" class="article-profile">
-          <div class="article-container">
-              <p class="article-nickname">애월읍 위니브 감귤농장</p>
-              <p class="article-id">@ weniv_Mandarin</p>
-              <p class="article-cont">
-                  옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다. 이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는 풍부하게 뛰노는 인생의 힘있다.
-              </p>
-              <img src="../images/post1.png" alt="post-image" class="article-post__img">
-              <img src="../images/icon-heart.svg" alt="post-like" class="article-heart__btn">
-              <span class="article-heart__num">58</span>
-              <img src="../images/icon-comment.svg" alt="post-comment" class="article-comment__btn">
-              <span class="article-comment__num">12</span>
-              <p class="article-date">2020년 10월 12일</p>
-          </div>
-      </article>
-    <section>
-      <h1 class="sr-only">댓글</h2>
-      <article class="comment">
-        <img
-          src="../images/Ellipse 4.svg"
-          alt="Customer image"
-          class="user-img"
-        />
-        <div class="comment-content">
-          <div>
-            <h2>서귀포시 무슨 농장</h2>
-            <span> · 5분 전 </span>
-          </div>
-          <p>게시글 답글 ~~ !! 최고최고</p>
-          <button class="comment-btn"><img src="../images/s-icon-more-vertical.svg" alt="신고 모달창"></button>
-        </div>
-        </article>
-        <article class="comment">
-            <img
-              src="../images/Ellipse 5.svg"
-              alt="Customer image"
-              class="user-img"
-            />
-          <div class="comment-content">
-            <div>    
-            <h2>감귤러버</h2>
-                <span> · 15분 전 </span>
-            </div>
-                <button class="comment-btn"><img src="../images/s-icon-more-vertical.svg" alt="신고 모달창"></button>
-            <p>안녕하세요. 사진이 너무 멋있어요. 한라봉 언제 먹을
-            수 있나요? 기다리기 지쳤어요 땡뻘땡뻘... </p>
-          </div>
-        </article>
-    </section>
-  </main>
+      <article class="main-article"></article>
+      <section>
+        <h1 class="sr-only">댓글</h2>
+        <ul class="comment-list"></ul>
+      </section>
+    </main>
     <footer class="post">
         <div class="post-content">
-            <img src="../images/basic-profile-img-.svg" alt="basic-profile" class="post-profile">
+            <img src="" alt="basic-profile" onerror="this.src='../images/basic-profile-img-.svg'" class="post-profile">
             <input type="text" placeholder="댓글 입력하기..." class="post-input">
         </div>
         <button type="button" class="post-btn">
@@ -84,26 +38,71 @@
     </footer>
   </div>
 
-   <div class="post-modal">
-    <div class="post-modal__content">   
-     <button type="button" class="post-modal__content__report-btn">
-      <strong class="sr-only">신고 버튼</strong> 
-      신고하기
-      </button>
+  
+  <section class="modal">
+    <h2 class="sr-only">상단 바 메뉴</h2>
+    <div class="modal-window modal-bottom modal-bottom__setting">
+      <ul>
+        <li>
+          <button type="button" class="modal-bottom__button">설정 및 개인정보</button>
+        </li>
+        <li>
+          <button type="button" class="modal-bottom__button">로그아웃</button>
+        </li>
+      </ul>
     </div>
-   </div>
-
-   <div class="modal-window modal-confirm modal-delete-posting">
-    <p class="modal-confirm__content">신고할까요?</p>
-    <ul class="modal-confirm__list">
-      <li class="modal-confirm__item modal-confirm__item--no">
-        <button type="button" class="modal-confirm__button modal-confirm__button--no">취소</button>
-      </li>
-      <li class="modal-confirm__item modal-confirm__item--yes">
-        <button type="button" class="modal-confirm__button modal-confirm__button--yes">신고</button>
-      </li>
-    </ul>
-  </div>
+    <div class="modal-window modal-bottom modal-bottom__post--my-account">
+      <ul>
+        <li>
+          <button type="button" class="modal-bottom__button">삭제</button>
+        </li>
+        <li>
+          <button type="button" class="modal-bottom__button">수정</button>
+        </li>
+      </ul>
+    </div>
+    <div class="modal-window modal-bottom modal-bottom__comment--my-account">
+      <button type="button" class="modal-bottom__button">삭제</button>
+    </div>
+    <div class="modal-window modal-bottom modal-bottom__post">
+      <button type="button" class="modal-bottom__button">신고하기</button>
+    </div>
+    <div class="modal-window modal-confirm modal-logout">
+      <p class="modal-confirm__content">로그아웃하시겠어요?</p>
+      <ul class="modal-confirm__list">
+        <li class="modal-confirm__item modal-confirm__item--no">
+          <button type="button" class="modal-confirm__button modal-confirm__button--no">취소</button>
+        </li>
+        <li class="modal-confirm__item modal-confirm__item--yes">
+          <button type="button" class="modal-confirm__button modal-confirm__button--yes">로그아웃</button>
+        </li>
+      </ul>
+    </div>
+    <div class="modal-window modal-confirm modal-delete-posting">
+      <p class="modal-confirm__content">게시글을 삭제할까요?</p>
+      <ul class="modal-confirm__list">
+        <li class="modal-confirm__item modal-confirm__item--no">
+          <button type="button" class="modal-confirm__button modal-confirm__button--no">취소</button>
+        </li>
+        <li class="modal-confirm__item modal-confirm__item--yes">
+          <button type="button" class="modal-confirm__button modal-confirm__button--yes">삭제</button>
+        </li>
+      </ul>
+    </div>
+    <div class="modal-window modal-confirm modal-delete-comment">
+      <p class="modal-confirm__content">댓글을 삭제할까요?</p>
+      <ul class="modal-confirm__list">
+        <li class="modal-confirm__item modal-confirm__item--no">
+          <button type="button" class="modal-confirm__button modal-confirm__button--no">취소</button>
+        </li>
+        <li class="modal-confirm__item modal-confirm__item--yes">
+          <button type="button" class="modal-confirm__button modal-confirm__button--yes">삭제</button>
+        </li>
+      </ul>
+    </div>
+  </section>
+   <script src="../js/constant.js"></script>
+   <script src="../js/util.js"></script>
    <script src="../js/postpage.js"></script>
   </body>
 </html>

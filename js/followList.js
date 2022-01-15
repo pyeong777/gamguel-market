@@ -5,8 +5,7 @@ const backButton = document.querySelector('.main-header__back');
 const followList = document.querySelector('.follow__list');
 
 const renderPage = () => {
-  const page = localStorage.getItem('page');
-  if (page === 'followers') {
+  if (NAME_SPACE.page === 'followers') {
     fetchFollower();
   } else {
     fetchFollowing();
@@ -14,29 +13,13 @@ const renderPage = () => {
 };
 
 const fetchFollower = () => {
-  const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/profile/${selectedUser}/follower`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/profile/${NAME_SPACE.user}/follower/?limit=100&skip=0`, reqData())
   .then(res => res.json())
   .then(json => renderList(json));
 };
 
 const fetchFollowing = () => {
-  const selectedUser = localStorage.getItem('selectedUser');
-  const token = localStorage.getItem('token');
-  fetch(`${API}/profile/${selectedUser}/following`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/profile/${NAME_SPACE.user}/following/?limit=100&skip=0`, reqData())
   .then(res => res.json())
   .then(json => renderList(json));
 };
@@ -65,7 +48,9 @@ const renderList = (json) => {
     item.classList.add('follow__item');
     item
       .querySelector('.follow__user')
-      .addEventListener('click', () => gotoPage('profile.html', { selectedUser : accountname }));
+      .addEventListener('click', () => {
+        gotoPage('profile.html', { user : accountname } , [ 'user' ]);
+      });
     item
       .querySelector('.button-follow')
       .addEventListener('click', follow);
@@ -92,31 +77,18 @@ const fetchButton = (elem) => {
 
 const follow = ({ currentTarget }) => {
   const { accountname } = currentTarget.dataset;
-  const token = localStorage.getItem('token');
-  fetch(`${API}/profile/${accountname}/follow`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/profile/${accountname}/follow`, reqData('POST'))
   .then(() => fetchButton(currentTarget));
 };
 
 const unfollow = ({ currentTarget }) => {
   const { accountname } = currentTarget.dataset;
-  const token = localStorage.getItem('token');
-  fetch(`${API}/profile/${accountname}/unfollow`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    }
-  })
+  fetch(`${API}/profile/${accountname}/unfollow`, reqData('DELETE'))
   .then(() => fetchButton(currentTarget));
 };
 
 // 헤더 버튼
 backButton.addEventListener('click', goBack);
 
+const NAME_SPACE = getNameSpace();
 renderPage();

@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-body {
+body, html {
   overflow-x: hidden;
 }
 
@@ -247,6 +247,7 @@ a, button {
   display: flex;
   column-gap: 10px;
   overflow: hidden;
+  padding-right: 30px;
 }
 
 .products__on-sale::-webkit-scrollbar {
@@ -379,6 +380,7 @@ a, button {
 .article-cont {
   font-size: 14px;
   line-height: 18px;
+  padding-right: 16px;
   margin: 16px 0;
 }
 
@@ -395,7 +397,6 @@ a, button {
 .article-post__img-list {
   display: flex;
   column-gap: 8px;
-  padding: 1px;
   margin-bottom: 14.5px;
   overflow: hidden;
 }
@@ -414,7 +415,7 @@ a, button {
 
 .article-post__img:hover,
 .article-post__img--small:hover {
-  outline: 1px solid #DBDBDB;
+  border: 1px solid #DBDBDB;
 }
 
 .article-heart__btn {
@@ -448,8 +449,7 @@ a, button {
 /* 피드 앨범 */
 
 .feed-album {
-  grid-template-columns: repeat(auto-fill, minmax(auto, 114px));
-  grid-template-rows: repeat(auto-fill, minmax(auto, 114px));
+  grid-template-columns: repeat(auto-fill, 114px);
   justify-content: center;
   gap: 8px;
   padding: 16px 16px 30px;
@@ -481,8 +481,7 @@ a, button {
 }
 
 .feed-album__picture {
-  width: 100%;
-  height: 100%;
+  height: 114px;
   object-fit: cover;
 }
 

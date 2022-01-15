@@ -1,3 +1,4 @@
+/* 공통 */
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
 * {
@@ -23,13 +24,13 @@ a {
   white-space: nowrap; 
 }
 
-.join-membership2-container {
+
+/* join 1 */
+/* 이메일로 회원가입 */
+.join-membership-container {
   width: 100vw;
-  height: 100vh;
   max-width: 767px;
   margin: 0 auto;
-  /* 임시 border */
-  border: 1px solid #c4c4c4;
 }
 
 .header-title {
@@ -42,38 +43,14 @@ a {
   color: #000;
 }
 
-.join-membership2-main {
+.join-membership-header {
+  padding: 11px 16px;
+}
+
+.join-membership-main {
   width: 100vw;
   max-width: 767px;
   margin: 0 auto;
-}
-
-.profile-form p {
-  font-size: 14px;
-  font-weight: 400;
-  text-align: center;
-  line-height: 30px;
-  margin: 12px auto 0;
-  color: #767676;
-}
-
-.profile-img-area {
-  width: 110px;
-  height: 110px;
-  margin: 30px auto 30PX;
-  position: relative;
-}
-
-#btn-img-upload {
-  display: inline-block;
-  width: 36px;
-  height: 36px;
-  background: url("../images/upload-file.svg") no-repeat;
-  background-size: 36px 36px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  cursor: pointer;
 }
 
 .input-container {
@@ -125,7 +102,53 @@ a {
   text-align: center;
 }
 
-#start_btn {
+/* join 2 */
+/* 프로필 설정 */
+.profile-form {
+  display: none;
+}
+
+.form-desc {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 30px;
+  margin: 12px auto 0;
+  color: #767676;
+}
+
+.profile-img-area {
+  width: 110px;
+  height: 110px;
+  margin: 30px auto 30px;
+  position: relative;
+}
+
+.profile-img {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+}
+
+.label-file {
+  position: relative;
+  cursor: pointer;
+}
+
+.label-file:after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 36px;
+  background: url("../images/upload-file.svg") no-repeat;
+  background-size: 36px 36px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.button {
   outline: 0;
   border: 0;
   width: 322px;
@@ -139,26 +162,9 @@ a {
   line-height: 44px;
   color: #fff;
   margin: 30px auto 0;
-  cursor: pointer;
 }
 
-.invalid {
-  color: #eb5757;
-}
-
-.invalid2 {
-  color: #eb5757;
-}
-
-#error {
-  font-size: 12px;
-  line-height: 14px;
-  font-weight: 400;
-  color: #eb5757;
-  margin: 6px 0 0 0;
-}
-
-#error2 {
+.msg-error {
   font-size: 12px;
   line-height: 14px;
   font-weight: 400;
