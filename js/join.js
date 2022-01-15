@@ -48,17 +48,11 @@ nextBtn.addEventListener('click', () => {
 idInput.addEventListener('blur', () => {
   const emailValidation = /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
   if (emailValidation.test(idInput.value)) {
-    fetch('http://146.56.183.55:5050/user/emailvalid', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user: {
-          email: idInput.value
-        }
-      })
-    })
+    fetch('http://146.56.183.55:5050/user/emailvalid', reqData('POST', {
+      user: {
+        email: idInput.value
+      }
+    }))
       .then(res => res.json())
       .then(json => {
         const { message } = json;
@@ -158,13 +152,7 @@ joinIdInput.addEventListener('blur', function () {
     joinIdInput.classList.add('invalid4');
     error4.innerHTML = '*영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.';
   } else {
-    console.log('ㅇㅇ');
-    fetch(`http://146.56.183.55:5050/user`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    fetch(`http://146.56.183.55:5050/user`, reqData())
       .then(res => res.json())
       .then(json => {
         if (json.find(({ accountname }) => accountname === joinIdInput.value)) {
@@ -191,37 +179,25 @@ joinIdInput.addEventListener('focus', function () {
 
 // API 연동
 function joinEmail() {
-  fetch('http://146.56.183.55:5050/user', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      user: {
-        email: idInput.value,
-        password: pwInput.value,
-        username: nameInput.value,
-        accountname: joinIdInput.value,
-        intro: introInput.value,
-        image: fileInput.value
-      }
-    })
-  })
+  fetch('http://146.56.183.55:5050/user', reqData('POST', {
+    user: {
+      email: idInput.value,
+      password: pwInput.value,
+      username: nameInput.value,
+      accountname: joinIdInput.value,
+      intro: introInput.value,
+      image: fileInput.value
+    }
+  }))
     .then(res => res.json())
     .then(({ user }) => {
       if (!user) return;
-      fetch('http://146.56.183.55:5050/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          user: {
-            email: idInput.value,
-            password: pwInput.value
-          }
-        })
-      })
+      fetch('http://146.56.183.55:5050/user/login', reqData('POST', {
+        user: {
+          email: idInput.value,
+          password: pwInput.value
+        }
+      }))
         .then(res => res.json())
         .then(({ user }) => {
           const { _id, accountname, token } = user;
@@ -234,3 +210,4 @@ function joinEmail() {
 }
 
 document.querySelector('#start_btn').addEventListener('click', joinEmail);
+const NAME_SPACE = getNameSpace();
