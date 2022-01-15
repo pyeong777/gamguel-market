@@ -62,12 +62,6 @@ input {
   padding-bottom: 60px;
 }
 
-.home-main .main-article {
-  display: flex;
-  align-items: flex-start;
-  margin: 20px 16px;
-}
-
 .home-main .main-article .article-profile {
   width: 42px;
   height: 42px;
@@ -95,7 +89,6 @@ input {
 .home-main .article-container .article-post__img {
   display: block;
   margin-bottom: 14.5px;
-  max-width: 100%;
 }
 
 .article-container .article-heart__btn {
@@ -135,31 +128,33 @@ input {
   padding: 16px 22px;
 }
 
-.comment:nth-child(2) {
-  border-top: 0.5px solid #dbdbdb;
-}
-
-.comment:nth-child(3) {
-  margin-bottom: 66px;
-}
-
 .user-img {
   width: 36px;
   height: 36px;
   margin-right: 16px;
 }
 
-.comment-content {
-  display: flex;
-  flex-direction: column;
+.user-img,
+.user-name {
+  cursor: pointer;
 }
 
-.comment-content h2 {
+.comment-content {
+  flex: 1;
+  position: relative;
+}
+
+.comment-author {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.user-name {
   font-size: 14px;
   line-height: 18px;
   font-weight: 500;
   display: inline-block;
-  margin-bottom: 16px;
 }
 
 .comment-content span {
@@ -176,7 +171,7 @@ input {
 
 .comment-btn {
   position: absolute;
-  top: 15px;
+  top: 0;
   right: 15px;
 }
 
@@ -212,7 +207,7 @@ input {
   line-height: 18px;
 }
 
-/* post-modal */
+/* modal */
 .post-modal {
   position: fixed;
   top: 50%;
@@ -336,11 +331,183 @@ input {
   color: #f26e22;
 }
 
+/* feed */
+
+.feed {
+  display: none;
+  margin-bottom: 6px;
+}
+
+.has-feed {
+  display: block;
+}
+
+.feed__button {
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 16px;
+  padding: 9px 16px 9px 0;
+}
+
+.feed__label {
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.feed__label:hover {
+  background-position: 1px 1px;
+}
+
+.feed__label-list {
+  background: url('../images/icon-post-list-off.svg') no-repeat;
+}
+
+.feed__label-list--on {
+  background: url('../images/icon-post-list-on.svg') no-repeat;
+}
+
+.feed__label-album {
+  background: url('../images/icon-post-album-off.svg') no-repeat;
+}
+
+.feed__label-album--on {
+  background: url('../images/icon-post-album-on.svg') no-repeat;
+}
+
+.feed-list,
+.feed-album {
+  display: none;
+}
+
+/* 피드 목록 */
+
+.feed-list {
+  flex-direction: column;
+  row-gap: 24px;
+  padding-bottom: 100px;
+}
+
+.main-article {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  padding: 20px 16px 24px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.article-profile {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  margin-right: 12px;
+  border-radius: 21px;
+  border: 1px solid #dbdbdb;
+}
+
+.article-container {
+  overflow: hidden;
+}
+
+.article-nickname {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.article-id {
+  font-size: 12px;
+  line-height: 14px;
+  color: #767676;
+}
+
+.article-cont {
+  font-size: 14px;
+  line-height: 18px;
+  margin: 16px 0;
+}
+
+.article-post__img {
+  display: block;
+  width: calc(100vw - 86px);
+  max-width: 304px;
+  max-height: 228px;
+  margin-bottom: 14.5px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.article-post__img-list {
+  display: flex;
+  column-gap: 8px;
+  padding: 1px;
+  margin-bottom: 14.5px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.article-post__img-list::-webkit-scrollbar {
+  display: none;
+}
+
+.article-post__img--small {
+  display: block;
+  width: 168px;
+  height: 126px;
+  margin: 0;
+  object-fit: cover;
+}
+
+.article-post__img:hover,
+.article-post__img--small:hover {
+  outline: 1px solid #dbdbdb;
+}
+
+.article-heart__btn {
+  width: 15px;
+  height: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.article-comment__btn {
+  width: 15px;
+  height: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.article-num {
+  font-size: 12px;
+  line-height: 12px;
+  color: #767676;
+  vertical-align: 3px;
+}
+
+.article-date {
+  font-size: 10px;
+  line-height: 12px;
+  color: #767676;
+  margin-top: 20px;
+}
+
+.feed-article__button {
+  display: inline-block;
+  position: absolute;
+  top: 20px;
+  right: 16px;
+  width: 18px;
+  height: 18px;
+  background: url('../images/s-icon-more-vertical.svg') no-repeat;
+  background-size: contain;
+}
+
 /* js용 class */
 .on {
   color: #f26e22;
 }
 
-.show {
+.is-modal-active {
   display: block;
+  z-index: 10;
 }
