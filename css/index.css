@@ -43,15 +43,16 @@
 }
 
 .home-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     max-width: 767px;
-    min-height: calc(100vh - 106px);
+    padding-bottom: 60px;
 }
 
 .main-content{
     width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .main-content .main__logo {
@@ -85,8 +86,111 @@
     text-align: center;
 }
 
+
+.home-main .main-article {
+    display: flex;
+    align-items: flex-start;
+    margin: 20px 16px;
+}
+
+.home-main .main-article .article-profile {
+    width: 42px;
+    height: 42px;
+    margin-right: 12px;
+}
+
+
+.home-main .article-container .article-nickname {
+    display: block;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.home-main .article-container .article-id {
+    font-size: 12px;
+    line-height: 14px;
+    color: #767676;
+}
+
+.home-main .article-container .article-cont {
+    font-size: 14px;
+    line-height: 18px;
+    margin: 16px 0;
+}
+
+.article-post__img {
+    display: block;
+    margin-bottom: 14.5px;
+    max-width: 100%;
+    margin-bottom: 14.5px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.article-post__img-list {
+    display: flex;
+    column-gap: 8px;
+    padding: 1px;
+    margin-bottom: 14.5px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.article-post__img-list::-webkit-scrollbar {
+    display: none;
+}
+
+.article-post__img--small {
+    display: block;
+    width: 168px;
+    height: 126px;
+    margin: 0;
+    object-fit: cover;
+}
+
+.article-post__img:hover,
+.article-post__img--small:hover {
+    outline: 1px solid #DBDBDB;
+}
+
+.home-main .article-container .article-post__img {
+    display: block;
+    
+}
+
+.article-container .article-heart__btn {
+    width: 15px;
+    height: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.article-container .article-comment__btn {
+    width: 15px;
+    height: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.article__num {
+    font-size: 12px;
+    line-height: 12px;
+    color: #767676;
+    vertical-align: 3px;
+}
+
+.article-date {
+    display: block;
+    font-size: 10px;
+    line-height: 12px;
+    color: #767676;
+    margin-top: 20px;
+}
+
 .home-nav {
-    position: absolute;
+    position: fixed;
+    background-color: #FFF;
     bottom: 0;
     width: inherit;
     max-width: 767px;
