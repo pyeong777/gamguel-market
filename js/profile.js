@@ -229,11 +229,17 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
   const item = document.createElement('li');
   item.innerHTML = `
   <article class="feed-article">
-    <img src="${author.image}" onerror="this.src='../images/Ellipse 1.svg'" alt="profile__img" 
-    onerror="this.src='../images/basic-profile-img-.svg'" class="article-profile">
+    <a href="profile.html?user=${author.accountname}">
+      <img src="${author.image}" onerror="this.src='../images/Ellipse 1.svg'" alt="profile__img" 
+      onerror="this.src='../images/basic-profile-img-.svg'" class="article-profile">
+    </a>
     <div class="article-container">
-      <p class="article-nickname">${author.username}</p>
-      <p class="article-id">@ ${author.accountname}</p>
+      <p class="article-nickname">
+        <a href="profile.html?user=${author.accountname}"> ${author.username}</a>
+      </p>
+      <p class="article-id">
+        <a href="profile.html?user=${author.accountname}"> @ ${author.accountname}</a>
+      </p>
       <p class="article-cont">${content}</p>
       ${imageHTML}
       <button type="button" data-hearted="${hearted ? 1 : 0}" data-id="${id}" class="btn-heart">
