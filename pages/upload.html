@@ -12,7 +12,11 @@
     <div class="home-container">
       <header>
         <nav class="upload-bar">
-          <img src="../images/icon-arrow-left.svg" alt="뒤로 가기" />
+          <img
+            src="../images/icon-arrow-left.svg"
+            alt="뒤로 가기"
+            class="main-header__back"
+          />
           <button type="button" class="upload-bar__btn">업로드</button>
         </nav>
       </header>
@@ -25,16 +29,26 @@
           />
           <form action="" method="get" class="upload-form">
             <textarea
-              rows="30"
-              cols="40"
               placeholder="게시글 입력하기.."
+              class="upload-form__content"
             ></textarea>
+            <div class="img-thumbnail"></div>
+            <label for="upload-img" class="upload-label">
+              <img src="../images/upload-file.svg" alt="업로드" />
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              id="upload-img"
+              multiple
+              class="sr-only"
+            />
           </form>
         </div>
-        <button type="button" class="upload-btn">
-          <img src="../images/upload-file.svg" alt="업로드" />
-        </button>
       </main>
     </div>
+    <script src="../js/constant.js"></script>
+    <script src="../js/util.js"></script>
+    <script src="../js/upload.js"></script>
   </body>
 </html>
