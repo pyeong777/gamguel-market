@@ -446,7 +446,7 @@ followingsButton.addEventListener('click', () => {
 followButton.addEventListener('click', follow);
 unfollowButton.addEventListener('click', unfollow);
 modifyButton.addEventListener('click', () => {
-  gotoPage('modifyProfile.html', { page: 'modifyProfile' }, [ 'page' ]);
+  gotoPage('modifyProfile.html');
 });
 registerButton.addEventListener('click', () => {
   gotoPage('modifyProduct.html', { page: 'addProduct' }, [ 'page' ]);
