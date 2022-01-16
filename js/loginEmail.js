@@ -3,7 +3,6 @@ let idInput = document.getElementById('login_id');
 let pwInput = document.getElementById('login_pw');
 let loginBtn = document.getElementById('login_btn');
 
-
 const isActiveLogin = () => {
   let idValue = idInput.value;
   let pwValue = pwInput.value;
@@ -34,7 +33,7 @@ init();
 
 
 // 유효성 검사
-// let warn = document.querySelector(".warning");
+
 
 // loginBtn.addEventListener('click', loginError);
 
@@ -69,6 +68,7 @@ init();
 // });
 
 async function login() {
+  try {
   const email = document.querySelector("#login_id").value
   const pw = document.querySelector("#login_pw").value
   const url = "http://146.56.183.55:5050"
@@ -78,7 +78,6 @@ async function login() {
                   "password": pw
                   }
           }
-  
   const res = await fetch(url+'/user/login',{
       method:"POST",
       headers:{
@@ -87,11 +86,18 @@ async function login() {
       body:JSON.stringify(loginData)
   })
   const json = await res.json()
+
   localStorage.setItem("token",json.user.token)
   localStorage.setItem("userid",json.user._id)
   localStorage.setItem("accountname",json.user.accountname)
 
   location.href = "../index.html"
+} 
+ catch (error) {
+  const errorMsg = document.querySelector(".warning");
+  errorMsg.innerText = "";
+  errorMsg.innerText = "*이메일 또는 비밀번호가 일치하지 않습니다.";
+  }
 }
 
 document.querySelector('#login_btn').addEventListener("click", login);
