@@ -222,7 +222,7 @@ const renderComment = (json) => {
       <button type="button" class="comment-btn">
         <img src="../images/s-icon-more-vertical.svg" alt="신고 모달창">
       </button>
-      <p>${content}</p>
+      <p class="comment-text">${content}</p>
     </div>`;
     item.classList.add('comment');
     fragment.appendChild(item);
@@ -288,8 +288,24 @@ const addComment = () => {
   }))
     .then(() => {
       postInput.value = '';
+      postInput.style.height = 'auto';
       fetchComment();
+      activatePost();
     });
+};
+
+const resize = ({ currentTarget }) => {
+  currentTarget.style.height = 'auto';
+  const { scrollHeight } = currentTarget;
+  currentTarget.style.height = (scrollHeight ?? 0) + 'px';
+};
+
+const activatePost = () => {
+  if (postInput.value) {
+    postBtn.classList.add('is-active');
+  } else {
+    postBtn.classList.remove('is-active');
+  }
 };
 
 // 헤더 버튼
@@ -319,12 +335,16 @@ commentButton.addEventListener('click', () => showModal('deleteComment'));
 deleteCommentButtons[0].addEventListener('click', () => showModal('comment'));
 deleteCommentButtons[1].addEventListener('click', deleteComment);
 
-// 댓글
-postInput.addEventListener('keydown', () => {
-  if (postInput.value === '') postBtn.classList.remove('on');
-  else postBtn.classList.add('on');
-});
+// 댓글 textarea 크기 조절
+postInput.addEventListener('keydown', resize);
+postInput.addEventListener('keyup', resize);
+postInput.addEventListener('focus', resize);
 
+// 게시 버튼 활성화
+postInput.addEventListener('keydown', activatePost);
+postInput.addEventListener('keyup', activatePost);
+
+// 댓글 게시 버튼
 postBtn.addEventListener('click', addComment);
 
 const NAME_SPACE = getNameSpace();
