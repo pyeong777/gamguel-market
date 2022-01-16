@@ -81,7 +81,7 @@ const hideModal = (e) => {
 };
 
 const fetchFeed = () => {
-  fetch(`${API}/post/${NAME_SPACE.postId}`, reqData())
+  return fetch(`${API}/post/${NAME_SPACE.postId}`, reqData())
     .then((res) => res.json())
     .then((json) => renderFeed(json));
 };
@@ -198,9 +198,12 @@ const toggleHeart = ({ currentTarget }) => {
 };
 
 const fetchComment = () => {
-  fetch(`${API}/post/${NAME_SPACE.postId}/comments`, reqData())
+  fetch(`${API}/post/${NAME_SPACE.postId}/comments/?limit=100&skip=0`, reqData())
     .then((res) => res.json())
-    .then((json) => renderComment(json));
+    .then((json) => {
+      renderComment(json);
+      updateCommentCount(json);
+    });
 };
 
 const renderComment = (json) => {
@@ -308,6 +311,10 @@ const activatePost = () => {
   }
 };
 
+const updateCommentCount = ({ comments }) => {
+  document.querySelector('.article-comment__num').textContent = comments.length;
+};
+
 // 헤더 버튼
 backButton.addEventListener('click', goBack);
 menuButton.addEventListener('click', () => showModal('setting'));
@@ -348,6 +355,6 @@ postInput.addEventListener('keyup', activatePost);
 postBtn.addEventListener('click', addComment);
 
 const NAME_SPACE = getNameSpace();
-fetchFeed();
-fetchComment();
+fetchFeed()
+  .then(fetchComment());
 fetchCommentImage();
