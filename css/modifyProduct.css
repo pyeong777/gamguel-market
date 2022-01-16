@@ -77,8 +77,6 @@ a, button {
   min-height: 712px;
 }
 
-/* joinMembership2.css 에서 가져와서 수정함 */
-
 .form-product {
   padding-top: 30px;
 }
@@ -99,6 +97,7 @@ a, button {
 
 .input-area__label-file {
   display: block;
+  overflow: hidden;
   position: relative;
   max-width: 322px;
   height: 204px;
@@ -121,6 +120,13 @@ a, button {
   width: 36px;
   height: 36px;
   background: url('../images/img-button.svg') no-repeat;
+}
+
+.input-area__img {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .input-area__label {
@@ -150,7 +156,20 @@ a, button {
 .input-area__input::placeholder {
   color: #DBDBDB;
 }
-/* joinMembership2.css 에서 가져와서 수정함 */
+
+.input-area__input--product-price::-webkit-outer-spin-button,
+.input-area__input--product-price::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.input-area__error {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: #eb5757;
+  margin-top: 6px;
+}
 
 /* gnb */
 
