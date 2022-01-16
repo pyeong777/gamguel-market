@@ -470,7 +470,7 @@ logoutButtons[1].addEventListener('click', logout);
 // 내 상품 목록 누를 때 뜨는 모달 버튼
 productButtons[0].addEventListener('click', () => showModal('deleteProduct'));
 productButtons[1].addEventListener('click', () => {
-  gotoPage('modifyProduct.html', { page: 'modifyProduct' }, [ 'page' ]);
+  gotoPage('modifyProduct.html', { page: 'modifyProduct' }, [ 'page', 'productId' ]);
 });
 productButtons[2].addEventListener('click', () => gotoPage(NAME_SPACE.productLink));
 deleteProductButtons[0].addEventListener('click', () => showModal('product'));
