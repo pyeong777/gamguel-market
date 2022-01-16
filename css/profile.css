@@ -102,6 +102,7 @@ a, button {
   margin-bottom: 16px;
   border-radius: 55px;
   border: 1px solid #DBDBDB;
+  object-fit: cover;
 }
 
 .profile__user-img:hover {
