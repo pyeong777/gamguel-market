@@ -4,5 +4,5 @@ function nextPage1() {
 }
 
 function nextPage2() {
-  location.href = "./joinMembership.html";
+  location.href = "./joinPage.html";
 }

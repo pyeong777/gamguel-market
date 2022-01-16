@@ -28,8 +28,6 @@
     height: 100vh;
     max-width: 767px;
     margin: 0 auto;
-    /* 임시 border */
-    border: 1px solid #c4c4c4;
   }
 
   .header-title {
