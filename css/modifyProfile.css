@@ -61,10 +61,12 @@ a, button {
   font-size: 14px;
   font-weight: 500;
   color: #FFFFFF;
+  cursor: default;
 }
 
 .main-header__button--active {
   background-color: #F26E22;
+  cursor: pointer;
 }
 
 .main-header__button--active:hover {
@@ -77,13 +79,13 @@ a, button {
   min-height: 712px;
 }
 
-/* joinMembership2.css 에서 가져옴 */
 .profile-img-area {
-  display: block; /* 추가됨 */
+  display: block;
   width: 110px;
   height: 110px;
   margin: 30px auto 30px;
   position: relative;
+  cursor: pointer;
 }
 
 .profile-img-area::after {
@@ -98,8 +100,15 @@ a, button {
   right: 0;
 }
 
-.profile-img-area:hover { /* 추가됨 */
+.profile-img-area:hover {
   opacity: .8;
+}
+
+.profile-img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .input-area {
@@ -140,7 +149,14 @@ a, button {
   color: #767676;
   transition: all .5s ease;
 }
-/* joinMembership2.css 에서 가져옴 */
+
+.profile__error {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  color: #eb5757;
+  margin-top: 6px;
+}
 
 /* gnb */
 

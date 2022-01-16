@@ -80,8 +80,8 @@ const validateEmail = ({ currentTarget: { value } }) => {
         } else {
           showMsg(error1, '사용 가능한 이메일입니다.', false);
           NAME_SPACE.isUniqueEmail = true;
-          activateJoin();
         }
+        activateJoin();
       });
   } else {
     showMsg(error1, '올바른 이메일 형식이 아닙니다.');
@@ -171,15 +171,15 @@ const validateId = ({ currentTarget: { value } }) => {
         } else {
           showMsg(error4, '사용 가능한 ID입니다.', false);
           NAME_SPACE.isUniqueId = true;
-          activateStart();
         }
+        activateStart();
       });
   } else {
     showMsg(error4, '영문, 숫자, 밑줄 및 마침표만 사용할 수 있습니다.');
   }
 };
 
-const joinEmail = async () => {
+const getFileName = async () => {
   const formData = new FormData();
   formData.append('image', fileInput.files[0]);
   let res = await fetch(`${API}/image/uploadfile`, {
@@ -187,8 +187,12 @@ const joinEmail = async () => {
     body: formData
   });
   let json = await res.json();
-  
   const { filename } = json;
+  return filename
+};
+
+const joinEmail = async () => {
+  const filename = await getFileName();
 
   res = await fetch(`${API}/user`, reqData('POST', {
     user: {
