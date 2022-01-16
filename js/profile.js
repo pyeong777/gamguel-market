@@ -212,16 +212,18 @@ const renderFeed = (json) => {
 };
 
 const getListItem = ({ id, content, image, createdAt, hearted, heartCount, commentCount, author }) => {
-  const images = image.split(',');
+  const images = image?.split(',');
   let imageHTML = '';
-  if (images.length === 1 && images[0]) {
-    imageHTML = `<img src="${images[0]}" alt="감귤 사진" onerror="this.src='../images/full-logo.svg'" class="article-post__img">`;
-  } else if (images.length > 1) {
-    const arr = [];
-    images.forEach(image => {
-      arr.push(`<li><img src="${image}" alt="감귤 사진" onerror="this.src='../images/full-logo.svg'" class="article-post__img--small"></li>`);
-    });
-    imageHTML = `<ul class="article-post__img-list">${arr.join('')}</ul>`;
+  if (images) {
+    if (images.length === 1 && images[0]) {
+      imageHTML = `<img src="${images[0]}" alt="감귤 사진" onerror="this.src='../images/full-logo.svg'" class="article-post__img">`;
+    } else if (images.length > 1) {
+      const arr = [];
+      images.forEach(image => {
+        arr.push(`<li><img src="${image}" alt="감귤 사진" onerror="this.src='../images/full-logo.svg'" class="article-post__img--small"></li>`);
+      });
+      imageHTML = `<ul class="article-post__img-list">${arr.join('')}</ul>`;
+    }
   }
   const year = createdAt.slice(0, 4);
   const month = createdAt.slice(5, 7);
@@ -470,7 +472,7 @@ logoutButtons[1].addEventListener('click', logout);
 // 내 상품 목록 누를 때 뜨는 모달 버튼
 productButtons[0].addEventListener('click', () => showModal('deleteProduct'));
 productButtons[1].addEventListener('click', () => {
-  gotoPage('modifyProduct.html', { page: 'modifyProduct' }, [ 'page' ]);
+  gotoPage('modifyProduct.html', { page: 'modifyProduct' }, [ 'page', 'productId' ]);
 });
 productButtons[2].addEventListener('click', () => gotoPage(NAME_SPACE.productLink));
 deleteProductButtons[0].addEventListener('click', () => showModal('product'));
