@@ -6,6 +6,22 @@
   font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
 }
 
+body,
+html {
+  overflow-x: hidden;
+}
+
+.sr-only {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+}
+
 .home-container {
   width: 100vw;
   height: 100vh;
@@ -29,6 +45,10 @@
   border-radius: 32px;
 }
 
+.upload-bar__btn--active {
+  background-color: #f26e22;
+}
+
 .upload-content {
   display: flex;
 }
@@ -46,23 +66,89 @@ main {
   margin-right: 13px;
 }
 
-.upload-content textarea {
+.upload-form__content {
+  display: inline-block;
+  width: 100%;
+  min-height: 30px;
   border: none;
   resize: none;
   font-size: 14px;
   line-height: 18px;
-  color: #c4c4c4;
   margin-top: 10px;
+  overflow: hidden;
 }
 
-/* upload-button */
-.upload-btn {
+.upload-form__content:focus {
+  outline: none;
+}
+
+.upload-form__content::placeholder {
+  color: #c4c4c4;
+}
+
+.upload-form {
+  flex: 1;
+  min-width: 0;
+}
+
+.img-thumbnail {
+  margin-top: 16px;
+}
+
+.img-uploaded {
+  display: inline-block;
+  position: relative;
+}
+
+.delete-img {
+  display: block;
+  position: absolute;
+  top: 11.5px;
+  right: 11.5px;
+  width: 22px;
+  height: 22px;
+  background: url('../images/icon-delete.svg') no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.img-big {
+  width: 304px;
+  height: 228px;
+  border-radius: 10px;
+}
+
+.img-small {
+  width: 168px;
+  height: 126px;
+  border-radius: 10px;
+}
+
+.img-list {
+  display: flex;
+  column-gap: 10px;
+  overflow: hidden;
+  padding-right: 30px;
+}
+
+/* upload-label */
+.upload-label {
   position: absolute;
   bottom: 16px;
   right: 16px;
+  cursor: pointer;
 }
 
-.upload-btn img {
+.upload-label img {
   width: 50px;
   height: 50px;
+}
+
+/* js용 클래스 */
+.on {
+  background-color: #f26e22;
+}
+
+.colorchange {
+  color: black;
 }
