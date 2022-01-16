@@ -142,7 +142,15 @@ const renderFeed = (json) => {
       <strong class="sr-only">메뉴</strong>
       </button>
   </div>`;
-
+  
+  ['profile', 'nickname', 'id']
+    .forEach(key => {
+      item
+        .querySelector(`.article-${key}`)
+        .addEventListener('click', () => {
+          gotoPage('profile.html', { user: author.accountname }, [ 'user' ]);
+        });
+    });
   item
     .querySelector('.article-post__img-list')
     ?.addEventListener('mousewheel', horizontalScroll);
@@ -229,15 +237,13 @@ const renderComment = (json) => {
     </div>`;
     item.classList.add('comment');
     fragment.appendChild(item);
-    item
-      .querySelector('.user-img')
-      .addEventListener('click', () => {
-        gotoPage('profile.html', { user: author.accountname }, [ 'user' ]);
-      });
-    item
-      .querySelector('.user-name')
-      .addEventListener('click', () => {
-        gotoPage('profile.html', { user: author.accountname }, [ 'user' ]);
+    ['img', 'name']
+      .forEach(key => {
+        item
+          .querySelector(`.user-${key}`)
+          .addEventListener('click', () => {
+            gotoPage('profile.html', { user: author.accountname }, [ 'user' ]);
+          });
       });
     const accountname = localStorage.getItem('accountname');
     if (author.accountname === accountname) {

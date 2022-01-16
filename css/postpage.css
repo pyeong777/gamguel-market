@@ -131,6 +131,7 @@ input {
 }
 
 .user-img {
+  flex-shrink: 0;
   width: 36px;
   height: 36px;
   margin-right: 16px;
@@ -524,6 +525,12 @@ input {
   line-height: 12px;
   color: #767676;
   margin-top: 20px;
+}
+
+.article-profile,
+.article-nickname,
+.article-id {
+  cursor: pointer;
 }
 
 .feed-article__button {
