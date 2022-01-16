@@ -2,5 +2,5 @@
 window.addEventListener("load", function () {
   setTimeout(() => {
     location.href = "./login.html";
-  }, 1000);
+  }, 1200);
 })
