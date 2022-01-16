@@ -15,29 +15,31 @@
       <a href="javascript:void(0)" class="main-header__back">
         <strong class="sr-only">뒤로 가기</strong>
       </a>
-      <button type="button" class="main-header__button">저장</button>
+      <button type="button" class="main-header__button main-header__button--active">저장</button>
     </header>
     <main>
       <section class="container profile-modify">
-        <!-- joinMembership2.html 에서 가져옴 -->
-        <button type="button" class="profile-img-area"> <!-- div 태그를 button 태그로 변경함 -->
-            <img src="/images/basic-profile-img-.svg" alt="profile-image" class="profile-img">
-        </button>
         <form>
+          <label for="file" class="profile-img-area">
+            <span class="sr-only">프로필 이미지 등록 버튼</span>
+            <img src="/images/basic-profile-img-.svg" alt="profile-image" class="profile-img">
+          </label>
+          <input type="file" name="file" id="file" accept="image/*" class="sr-only">
           <div class="input-area">
             <label for="name">사용자 이름</label>
-            <input type="text" name="name" id="name" placeholder="2- 10자 이내여야 합니다." required>
+            <input type="text" name="name" id="name" placeholder="2~10자 이내여야 합니다." required>
+            <p class="profile__error profile__error--name"></p>
           </div>
           <div class="input-area">
             <label for="id">계정 ID</label>
-            <input type="text" name="id" id="id" placeholder="영문 ,숫자, 특수문자(.),(_)만 사용 가능합니다." required>
+            <input type="text" name="id" id="id" placeholder="영문, 숫자, 특수문자(.), (_)만 사용 가능합니다." required>
+            <p class="profile__error profile__error--id"></p>
           </div>
           <div class="input-area">
             <label for="introduce">소개</label>
             <input type="text" name="introduce" id="introduce" placeholder="자신과 판매할 상품에 대해 소개해 주세요!" required>
           </div>
         </form>
-        <!-- joinMembership2.html 에서 가져옴 -->
       </section>
     </main>
     <nav class="global-nav">
@@ -61,5 +63,8 @@
       </ul>
     </nav>
   </div>
+  <script src="../js/constant.js"></script>
+  <script src="../js/util.js"></script>
+  <script src="../js/modifyProfile.js"></script>
 </body>
 </html>
