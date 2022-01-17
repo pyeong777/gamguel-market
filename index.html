@@ -17,6 +17,7 @@
         </header>
 
         <main class="home-main">
+            
         </main>
 
         <nav class="home-nav">
@@ -47,7 +48,83 @@
                 </li>
             </ul>
         </nav>
+        <section class="modal">
+          <h2 class="sr-only">상단 바 메뉴</h2>
+          <div class="modal-window modal-bottom modal-bottom__setting">
+            <ul>
+              <li>
+                <button type="button" class="modal-bottom__button">설정 및 개인정보</button>
+              </li>
+              <li>
+                <button type="button" class="modal-bottom__button">로그아웃</button>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-window modal-bottom modal-bottom__product--my-account">
+            <ul>
+              <li>
+                <button type="button" class="modal-bottom__button">삭제</button>
+              </li>
+              <li>
+                <button type="button" class="modal-bottom__button">수정</button>
+              </li>
+              <li>
+                <button type="button" class="modal-bottom__button">웹사이트에서 상품 보기</button>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-window modal-bottom modal-bottom__post--my-account">
+            <ul>
+              <li>
+                <button type="button" class="modal-bottom__button">삭제</button>
+              </li>
+              <li>
+                <button type="button" class="modal-bottom__button">수정</button>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-window modal-bottom modal-bottom__post">
+            <button type="button" class="modal-bottom__button">신고하기</button>
+          </div>
+          <div class="modal-window modal-confirm modal-logout">
+            <p class="modal-confirm__content">로그아웃하시겠어요?</p>
+            <ul class="modal-confirm__list">
+              <li class="modal-confirm__item modal-confirm__item--no">
+                <button type="button" class="modal-confirm__button modal-confirm__button--no">취소</button>
+              </li>
+              <li class="modal-confirm__item modal-confirm__item--yes">
+                <button type="button" class="modal-confirm__button modal-confirm__button--yes">로그아웃</button>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-window modal-confirm modal-delete-posting">
+            <p class="modal-confirm__content">게시글을 삭제할까요?</p>
+            <ul class="modal-confirm__list">
+              <li class="modal-confirm__item modal-confirm__item--no">
+                <button type="button" class="modal-confirm__button modal-confirm__button--no">취소</button>
+              </li>
+              <li class="modal-confirm__item modal-confirm__item--yes">
+                <button type="button" class="modal-confirm__button modal-confirm__button--yes">삭제</button>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-window modal-confirm modal-delete-product">
+            <p class="modal-confirm__content">상품을 삭제할까요?</p>
+            <ul class="modal-confirm__list">
+              <li class="modal-confirm__item modal-confirm__item--no">
+                <button type="button" class="modal-confirm__button modal-confirm__button--no">취소</button>
+              </li>
+              <li class="modal-confirm__item modal-confirm__item--yes">
+                <button type="button" class="modal-confirm__button modal-confirm__button--yes">삭제</button>
+              </li>
+            </ul>
+          </div>
+        </section>
     </div>
+
+    
+    <script src="./js/constant.js"></script>
+    <script src="./js/util.js"></script>
     <script src="./js/index.js"></script>
 </body>
 </html>
