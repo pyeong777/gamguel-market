@@ -1,22 +1,3 @@
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css);
-
-* {
-  box-sizing: border-box;
-  font-family: 'Spoqa Han Sans Neo', 'Spoqa Han Sans JP', sans-serif;
-}
-
-.sr-only {
-  position: absolute;
-  overflow: hidden;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  border: 0;
-  clip: rect(0, 0, 0, 0);
-}
-
 .home-container {
   width: 100vw;
   height: 100vh;

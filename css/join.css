@@ -1,29 +1,8 @@
 /* 공통 */
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
-
-* {
-  box-sizing: border-box;
-  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-}
-
 a {
   text-decoration: none;
   color: none;
 }
-
-.sr-only {
-  border: 0; 
-  clip: rect(0 0 0 0); 
-  clip-path: inset(50%); 
-  width: 1px; 
-  height: 1px; 
-  margin: -1px; 
-  overflow: hidden; 
-  padding: 0; 
-  position: absolute; 
-  white-space: nowrap; 
-}
-
 
 /* join 1 */
 /* 이메일로 회원가입 */
