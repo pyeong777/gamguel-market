@@ -42,6 +42,10 @@ const renderThumbnail = () => {
     figure.classList.add('img-uploaded');
     imgList.appendChild(figure);
   } else {
+    if (NAME_SPACE.files.length > 10) {
+      alert('이미지 파일은 최대 10개까지만 업로드할 수 있습니다.');
+      NAME_SPACE.files.splice(10);
+    }
     const list = document.createElement('ol');
     list.classList.add('img-list');
     [...NAME_SPACE.files].forEach((file) => {
