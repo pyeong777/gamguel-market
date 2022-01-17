@@ -280,7 +280,8 @@ const getElapsedTime = (time) => {
   const ms = Date.parse(time);
   const now = Date.now();
   const diff = (now - ms) / 1000;
-  if (diff < MINUTE) return `${parseInt(diff)}초`;
+  if (diff < 1) return '방금';
+  else if (diff < MINUTE) return `${parseInt(diff)}초`;
   else if (diff < HOUR) return `${parseInt(diff / MINUTE)}분`;
   else if (diff < DAY) return `${parseInt(diff / HOUR)}시간`;
   else if (diff < MONTH) return `${parseInt(diff / DAY)}일`;
