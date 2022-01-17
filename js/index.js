@@ -67,7 +67,6 @@ const fetchOneFeed = (id, elem) => {
 
 const toggleHeart = ({ currentTarget }) => {
     const { hearted, id } = currentTarget.dataset;
-    console.log(id);
     if (+hearted) {
       fetch(`${API}/post/${id}/unheart`, reqData('DELETE'))
       .then(() => {
@@ -174,11 +173,11 @@ async function getFeed() {
                     ${imageHTML}
                     <button type="button" data-hearted="${hearted ? 1 : 0}" data-id="${id}" class="btn-heart">
                     <img src="../images/icon-heart${hearted ? '-active' : ''}.svg" alt="post-like" class="article-heart__btn">
-                    <span class="article__num">${heartCount}</span>
+                    <span class="article__num article-heart__num">${heartCount}</span>
                     </button>
                     <button type="button" class="btn-comment">
                         <img src="../images/icon-comment.svg" alt="post-comment" class="article-comment__btn">
-                        <span class="article__num">${commentCount}</span>
+                        <span class="article__num article-comment__num">${commentCount}</span>
                     </button>
                     <strong class="article-date">${year}년 ${month}월 ${day}일</strong>
                 </div>
@@ -205,7 +204,7 @@ async function getFeed() {
                 article
                     .querySelector('.btn-comment')
                     .addEventListener('click', () => {
-                    gotoPage('./pages/postpage.html', { page: 'readPost', postId: id }, [ 'page', 'postId' ]);
+                    gotoPage('./pages/postpage.html', { postId: id }, [ 'postId' ]);
                 });
                 
 
@@ -214,14 +213,14 @@ async function getFeed() {
                 article
                     .querySelector(`.article-${key}`)
                     ?.addEventListener('click', () => {
-                    gotoPage('./pages/postpage.html', { page: 'readPost', postId: id }, [ 'page', 'postId' ]);
+                    gotoPage('./pages/postpage.html', { postId: id }, [ 'postId' ]);
                     });
                 });
 
                 article
                 .querySelector('.article-post__img')
                 ?.addEventListener('click', () => {
-                gotoPage('./pages/postpage.html', { page: 'readPost', postId: id }, [ 'page', 'postId' ]);
+                gotoPage('./pages/postpage.html', { postId: id }, [ 'postId' ]);
                 });
 
                 const accountname = localStorage.getItem('accountname');
@@ -260,5 +259,5 @@ deletePostButtons[1].addEventListener('click', deletePost);
 document
   .querySelector('.nav-profile')
   .addEventListener('click', () => {
-    gotoPage('./pages/profile.html', { user: localStorage.getItem('accountname') }, [ 'user' ]);
+    gotoPage('pages/profile.html', { user: localStorage.getItem('accountname') }, [ 'user' ]);
   });

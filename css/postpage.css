@@ -42,7 +42,7 @@
 }
 
 .home-main .article-container .article-nickname {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
   line-height: 18px;
 }
@@ -62,35 +62,6 @@
 .home-main .article-container .article-post__img {
   display: block;
   margin-bottom: 14.5px;
-}
-
-.article-container .article-heart__btn {
-  width: 15px;
-  height: 15px;
-  border: none;
-  cursor: pointer;
-}
-
-.article-container .article-comment__btn {
-  width: 15px;
-  height: 15px;
-  border: none;
-  cursor: pointer;
-}
-
-.article-heart__num,
-.article-comment__num {
-  font-size: 12px;
-  line-height: 12px;
-  color: #767676;
-  vertical-align: 3px;
-}
-
-.article-date {
-  font-size: 10px;
-  line-height: 12px;
-  color: #767676;
-  margin-top: 20px;
 }
 
 /* comment */
@@ -130,7 +101,7 @@
   display: inline-block;
   padding-right: 6px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 18px;
 }
 
@@ -296,7 +267,7 @@
   height: 64px;
   border-bottom: 1px solid #dbdbdb;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .modal-confirm__list {
@@ -323,7 +294,7 @@
 }
 
 .modal-confirm__button--yes {
-  font-weight: 500;
+  font-weight: 600;
   color: #f26e22;
 }
 
@@ -413,7 +384,7 @@
 }
 
 .article-nickname {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
   line-height: 18px;
 }
@@ -466,13 +437,11 @@
   outline: 1px solid #dbdbdb;
 }
 
-.article-heart__btn {
-  width: 15px;
-  height: 15px;
-  border: none;
-  cursor: pointer;
+.btn-heart {
+  margin-right: 15px;
 }
 
+.article-heart__btn,
 .article-comment__btn {
   width: 15px;
   height: 15px;
@@ -481,7 +450,7 @@
 }
 
 .article-num {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 12px;
   color: #767676;
   vertical-align: 3px;

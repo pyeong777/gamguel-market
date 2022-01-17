@@ -94,15 +94,15 @@ body, html {
   display: block;
   width: calc(100vw - 150px);
   max-width: 240px;
-  padding-bottom: 7px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .follow__user-desc {
   display: block;
   width: calc(100vw - 150px);
   max-width: 240px;
+  padding-top: 7px;
   font-size: 12px;
   color: #767676;
 }
