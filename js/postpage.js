@@ -102,12 +102,12 @@ const renderFeed = (json) => {
   const images = image.split(',');
   let imageHTML = '';
   if (images.length === 1 && images[0]) {
-    imageHTML = `<img src="${images[0]}" alt="감귤 사진" class="article-post__img">`;
+    imageHTML = `<img src="${images[0]}" onerror ="this.src='../images/full-logo.svg'" class="article-post__img">`;
   } else if (images.length > 1) {
     const arr = [];
     images.forEach((image) => {
       arr.push(
-        `<li><img src="${image}" alt="감귤 사진" class="article-post__img--small"></li>`
+        `<li><img src="${image}" onerror ="this.src='../images/full-logo.svg'" class="article-post__img--small"></li>`
       );
     });
     imageHTML = `<ul class="article-post__img-list">${arr.join('')}</ul>`;
