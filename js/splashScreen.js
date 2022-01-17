@@ -1,6 +1,20 @@
-// 스플래시 페이지에서 로그인 페이지로 넘어가는 화면
-window.addEventListener("load", function () {
-  setTimeout(() => {
-    location.href = "./login.html";
-  }, 1200);
-})
+function loginCheck() {
+  // 팔로잉 리스트 api 패치
+  fetch(`http://146.56.183.55:5050/profile/${localStorage.getItem('accountname')}/following`, reqData())
+    .then(res => res.json())
+    .then(json => {
+      if (Array.isArray(json)) {
+        // 홈피드로 이동
+        setTimeout(() => {
+          location.href = "../index.html";
+        }, 1200);
+      } else {
+        // 로그인 페이지로 이동
+        setTimeout(() => {
+          location.href = "./login.html";
+        }, 1200);
+      }
+    })
+}
+
+window.addEventListener("load", loginCheck);
