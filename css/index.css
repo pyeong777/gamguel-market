@@ -124,8 +124,9 @@
 
 .article-post__img {
     display: block;
-    margin-bottom: 14.5px;
-    max-width: 100%;
+    width: calc(100vw - 86px);
+    max-width: 304px;
+    max-height: 228px;
     margin-bottom: 14.5px;
     border-radius: 10px;
     object-fit: cover;
@@ -141,7 +142,7 @@
 }
 
 .article-post__img-list::-webkit-scrollbar {
-    display: block;
+    display: none;
 }
 
 .article-post__img--small {
@@ -155,6 +156,10 @@
 .article-post__img:hover,
 .article-post__img--small:hover {
     outline: 1px solid #DBDBDB; 
+}
+
+.article-container {
+    overflow: hidden;
 }
 
 .home-main .article-container .article-post__img {
