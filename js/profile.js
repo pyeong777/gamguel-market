@@ -268,7 +268,7 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
   item
     .querySelector('.btn-comment')
     .addEventListener('click', () => {
-      gotoPage('postpage.html', { page: 'readPost', postId: id }, [ 'page', 'postId' ]);
+      gotoPage('postpage.html', { postId: id }, [ 'postId' ]);
     });
   const accountname = localStorage.getItem('accountname');
   const { user } = NAME_SPACE;
