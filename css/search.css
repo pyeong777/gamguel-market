@@ -30,7 +30,8 @@
     border-bottom: 1px solid #DBDBDB;
 }
 
-.header__btn-back {
+.main-header__back {
+    display: block;
     width: 24px;
     height: 24px;
     background-image: url("../images/icon-arrow-left.svg");
