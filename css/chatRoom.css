@@ -207,7 +207,7 @@ main {
   height: 64px;
   border-bottom: 1px solid #dbdbdb;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .modal-confirm__list {
@@ -234,7 +234,7 @@ main {
 }
 
 .modal-confirm__button--yes {
-  font-weight: 500;
+  font-weight: 600;
   color: #f26e22;
 }
 

@@ -133,10 +133,10 @@ const renderFeed = (json) => {
         <img src="../images/icon-heart${
           hearted ? '-active' : ''
         }.svg" alt="post-like" class="article-heart__btn">
-        <span class="article-heart__num">${heartCount}</span>
+        <span class="article-num article-heart__num">${heartCount}</span>
       </button>
       <img src="../images/icon-comment.svg" alt="post-comment" class="article-comment__btn">
-      <span class="article-comment__num">${commentCount}</span>
+      <span class="article-num article-comment__num">${commentCount}</span>
       <p class="article-date">${year}년 ${month}월 ${day}일</p>
       <button type="button" class="feed-article__button">
       <strong class="sr-only">메뉴</strong>
@@ -280,7 +280,8 @@ const getElapsedTime = (time) => {
   const ms = Date.parse(time);
   const now = Date.now();
   const diff = (now - ms) / 1000;
-  if (diff < MINUTE) return `${parseInt(diff)}초`;
+  if (diff < 1) return '방금';
+  else if (diff < MINUTE) return `${parseInt(diff)}초`;
   else if (diff < HOUR) return `${parseInt(diff / MINUTE)}분`;
   else if (diff < DAY) return `${parseInt(diff / HOUR)}시간`;
   else if (diff < MONTH) return `${parseInt(diff / DAY)}일`;
