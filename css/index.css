@@ -149,18 +149,23 @@
     display: block;
 }
 
-.article-container .article-heart__btn {
+.btn-heart {
+    margin-right: 15px;
+}
+  
+.article-heart__btn,
+.article-comment__btn {
     width: 15px;
     height: 15px;
     border: none;
     cursor: pointer;
 }
-
-.article-container .article-comment__btn {
-    width: 15px;
-    height: 15px;
-    border: none;
-    cursor: pointer;
+  
+.article-num {
+    font-size: 14px;
+    line-height: 12px;
+    color: #767676;
+    vertical-align: 3px;
 }
 
 .article__num {

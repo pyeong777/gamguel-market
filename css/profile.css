@@ -398,22 +398,18 @@ body, html {
   border: 1px solid #DBDBDB;
 }
 
-.article-heart__btn {
-  width: 15px;
-  height: 15px;
-  border: none;
-  cursor: pointer;
+.btn-heart {
+  margin-right: 15px;
 }
 
+.article-heart__btn,
 .article-comment__btn {
   width: 15px;
   height: 15px;
-  border: none;
-  cursor: pointer;
 }
 
 .article-num {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 12px;
   color: #767676;
   vertical-align: 3px;

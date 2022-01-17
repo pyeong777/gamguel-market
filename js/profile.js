@@ -246,11 +246,11 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
       ${imageHTML}
       <button type="button" data-hearted="${hearted ? 1 : 0}" data-id="${id}" class="btn-heart">
         <img src="../images/icon-heart${hearted ? '-active' : ''}.svg" alt="post-like" class="article-heart__btn">
-        <span class="article-num">${heartCount}</span>
+        <span class="article-num article-heart__num">${heartCount}</span>
       </button>
       <button type="button" class="btn-comment">
         <img src="../images/icon-comment.svg" alt="post-comment" class="article-comment__btn">
-        <span class="article-num">${commentCount}</span>
+        <span class="article-num article-comment__num">${commentCount}</span>
       </button>
       <p class="article-date">${year}년 ${month}월 ${day}일</p>
     </div>
