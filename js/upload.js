@@ -72,29 +72,29 @@ const activateUpload = () => {
   }
 };
 
-const getFileName = () => {
+const getFileName = async () => {
   const { files } = NAME_SPACE;
-  const images = [];
-  files.forEach((file) => {
+  const images = await files.map( async (file) => {
     const formData = new FormData();
     formData.append('image', file);
-    fetch(`${API}/image/uploadfile`, {
+    const { filename } = await fetch(`${API}/image/uploadfile`, {
       method: 'POST',
       body: formData,
     })
       .then((res) => res.json())
-      .then(({ filename }) => images.push(filename));
+      return filename;
   });
   return images.join(',');
 };
 
 const post = async () => {
+  const filename = await getFileName();
   fetch(
     `${API}/post`,
     reqData('POST', {
       post: {
         content: uploadContent.value,
-        image: getFileName(),
+        image: filename
       },
     })
   )
