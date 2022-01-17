@@ -204,7 +204,7 @@ async function getFeed() {
                 article
                     .querySelector('.btn-comment')
                     .addEventListener('click', () => {
-                    gotoPage('./pages/postpage.html', { page: 'readPost', postId: id }, [ 'page', 'postId' ]);
+                    gotoPage('./pages/postpage.html', { postId: id }, [ 'postId' ]);
                 });
                 
 
@@ -213,14 +213,14 @@ async function getFeed() {
                 article
                     .querySelector(`.article-${key}`)
                     ?.addEventListener('click', () => {
-                    gotoPage('./pages/postpage.html', { page: 'readPost', postId: id }, [ 'page', 'postId' ]);
+                    gotoPage('./pages/postpage.html', { postId: id }, [ 'postId' ]);
                     });
                 });
 
                 article
                 .querySelector('.article-post__img')
                 ?.addEventListener('click', () => {
-                gotoPage('./pages/postpage.html', { page: 'readPost', postId: id }, [ 'page', 'postId' ]);
+                gotoPage('./pages/postpage.html', { postId: id }, [ 'postId' ]);
                 });
 
                 const accountname = localStorage.getItem('accountname');
