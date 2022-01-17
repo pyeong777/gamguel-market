@@ -1,193 +1,292 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>감귤마켓</title>
-  <link rel="stylesheet" href="../css/reset.css">
-  <link rel="stylesheet" href="../css/profile.css">
-  <link rel="stylesheet" href="../css/gnb.css">
-</head>
-<body>
-  <div class="wrap">
-    <header class="container main-header">
-      <h1 class="sr-only">감귤마켓 프로필</h1>
-      <a href="javascript:void(0)" class="main-header__back">
-        <strong class="sr-only">뒤로 가기</strong>
-      </a>
-      <button type="button" class="main-header__button">
-        <strong class="sr-only">메뉴</strong>
-      </button>
-    </header>
-    <main>
-      <section class="container profile">
-        <h2 class="sr-only">프로필</h2>
-        <button type="button" class="profile__button-user-img">
-          <img src="" alt="프로필 이미지" onerror="this.src='../images/basic-profile-img-.svg'"class="profile__user-img">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>감귤마켓</title>
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/profile.css" />
+    <link rel="stylesheet" href="../css/gnb.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="container main-header">
+        <h1 class="sr-only">감귤마켓 프로필</h1>
+        <a href="javascript:void(0)" class="main-header__back">
+          <strong class="sr-only">뒤로 가기</strong>
+        </a>
+        <button type="button" class="main-header__button">
+          <strong class="sr-only">메뉴</strong>
         </button>
-        <dl class="profile-info">
-          <dt class="sr-only">닉네임</dt>
-          <dd class="profile-info__user-name"></dd>
-          <dt class="sr-only">계정 이름</dt>
-          <dd class="profile-info__user-account-name"></dd>
-          <dt class="sr-only">상품 소개</dt>
-          <dd class="profile-info__user-desc"></dd>
-        </dl>
-        <a href="javascript:void(0)" class="profile__follow-info profile__follow-info--followers">
-          <dl>
-            <dt class="profile__follow-title">followers</dt>
-            <dd class="profile__follow-value profile__follow-value--followers"></dd>
+      </header>
+      <main>
+        <section class="container profile">
+          <h2 class="sr-only">프로필</h2>
+          <button type="button" class="profile__button-user-img">
+            <img
+              src=""
+              alt="프로필 이미지"
+              onerror="this.src='../images/basic-profile-img-.svg'"
+              class="profile__user-img"
+            />
+          </button>
+          <dl class="profile-info">
+            <dt class="sr-only">닉네임</dt>
+            <dd class="profile-info__user-name"></dd>
+            <dt class="sr-only">계정 이름</dt>
+            <dd class="profile-info__user-account-name"></dd>
+            <dt class="sr-only">상품 소개</dt>
+            <dd class="profile-info__user-desc"></dd>
           </dl>
-        </a>
-        <a href="javascript:void(0)" class="profile__follow-info profile__follow-info--followings">
-          <dl>
-            <dt class="profile__follow-title">followings</dt>
-            <dd class="profile__follow-value profile__follow-value--followings"></dd>
-          </dl>
-        </a>
-        <ul class="profile-list-button">
-          <li>
-            <button type="button" class="profile__button profile__button--theme-big profile__button--theme-orange profile__button--follow">팔로우</button>
+          <a
+            href="javascript:void(0)"
+            class="profile__follow-info profile__follow-info--followers"
+          >
+            <dl>
+              <dt class="profile__follow-title">followers</dt>
+              <dd
+                class="profile__follow-value profile__follow-value--followers"
+              ></dd>
+            </dl>
+          </a>
+          <a
+            href="javascript:void(0)"
+            class="profile__follow-info profile__follow-info--followings"
+          >
+            <dl>
+              <dt class="profile__follow-title">followings</dt>
+              <dd
+                class="profile__follow-value profile__follow-value--followings"
+              ></dd>
+            </dl>
+          </a>
+          <ul class="profile-list-button">
+            <li>
+              <button
+                type="button"
+                class="profile__button profile__button--theme-big profile__button--theme-orange profile__button--follow"
+              >
+                팔로우
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                class="profile__button profile__button--theme-big profile__button--theme-white profile__button--unfollow"
+              >
+                언팔로우
+              </button>
+            </li>
+            <li class="profile-list__item--flex">
+              <a
+                href="javascript:void(0)"
+                class="profile__button profile__button--theme-big profile__button--theme-white profile__button--modify"
+                >프로필 수정</a
+              >
+              <a
+                href="javascript:void(0)"
+                class="profile__button profile__button--theme-big profile__button--theme-white profile__button--register"
+                >상품 등록</a
+              >
+            </li>
+            <li>
+              <a
+                href="chatRoom.html"
+                class="profile__button profile__button--theme-small profile__button--message"
+              ></a>
+            </li>
+            <li>
+              <a
+                href="javascript:void(0)"
+                class="profile__button profile__button--theme-small profile__button--share"
+              ></a>
+            </li>
+          </ul>
+        </section>
+        <section class="container products">
+          <h2 class="products__title">판매 중인 상품</h2>
+          <ul class="products__on-sale"></ul>
+        </section>
+        <section class="container feed">
+          <h2 class="sr-only">피드 목록</h2>
+          <form class="feed__button">
+            <label
+              for="list-type"
+              class="feed__label feed__label-list feed__label-list--on"
+            >
+              <strong class="sr-only">목록형으로 보기</strong>
+            </label>
+            <input
+              type="radio"
+              id="list-type"
+              name="type"
+              checked
+              class="sr-only feed__button--list"
+            />
+            <label for="album-type" class="feed__label feed__label-album">
+              <strong class="sr-only">앨범형으로 보기</strong>
+            </label>
+            <input
+              type="radio"
+              id="album-type"
+              name="type"
+              class="sr-only feed__button--album"
+            />
+          </form>
+          <ul class="feed-list list-checked"></ul>
+          <ul class="feed-album"></ul>
+        </section>
+        <section class="modal">
+          <h2 class="sr-only">상단 바 메뉴</h2>
+          <div class="modal-window modal-bottom modal-bottom__setting">
+            <ul>
+              <li>
+                <button type="button" class="modal-bottom__button">
+                  설정 및 개인정보
+                </button>
+              </li>
+              <li>
+                <button type="button" class="modal-bottom__button">
+                  로그아웃
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="modal-window modal-bottom modal-bottom__product--my-account"
+          >
+            <ul>
+              <li>
+                <button type="button" class="modal-bottom__button">삭제</button>
+              </li>
+              <li>
+                <button type="button" class="modal-bottom__button">수정</button>
+              </li>
+              <li>
+                <button type="button" class="modal-bottom__button">
+                  웹사이트에서 상품 보기
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-window modal-bottom modal-bottom__post--my-account">
+            <ul>
+              <li>
+                <button type="button" class="modal-bottom__button">삭제</button>
+              </li>
+              <li>
+                <button type="button" class="modal-bottom__button">수정</button>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-window modal-bottom modal-bottom__post">
+            <button type="button" class="modal-bottom__button">신고하기</button>
+          </div>
+          <div class="modal-window modal-confirm modal-logout">
+            <p class="modal-confirm__content">로그아웃하시겠어요?</p>
+            <ul class="modal-confirm__list">
+              <li class="modal-confirm__item modal-confirm__item--no">
+                <button
+                  type="button"
+                  class="modal-confirm__button modal-confirm__button--no"
+                >
+                  취소
+                </button>
+              </li>
+              <li class="modal-confirm__item modal-confirm__item--yes">
+                <button
+                  type="button"
+                  class="modal-confirm__button modal-confirm__button--yes"
+                >
+                  로그아웃
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-window modal-confirm modal-delete-posting">
+            <p class="modal-confirm__content">게시글을 삭제할까요?</p>
+            <ul class="modal-confirm__list">
+              <li class="modal-confirm__item modal-confirm__item--no">
+                <button
+                  type="button"
+                  class="modal-confirm__button modal-confirm__button--no"
+                >
+                  취소
+                </button>
+              </li>
+              <li class="modal-confirm__item modal-confirm__item--yes">
+                <button
+                  type="button"
+                  class="modal-confirm__button modal-confirm__button--yes"
+                >
+                  삭제
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-window modal-confirm modal-delete-product">
+            <p class="modal-confirm__content">상품을 삭제할까요?</p>
+            <ul class="modal-confirm__list">
+              <li class="modal-confirm__item modal-confirm__item--no">
+                <button
+                  type="button"
+                  class="modal-confirm__button modal-confirm__button--no"
+                >
+                  취소
+                </button>
+              </li>
+              <li class="modal-confirm__item modal-confirm__item--yes">
+                <button
+                  type="button"
+                  class="modal-confirm__button modal-confirm__button--yes"
+                >
+                  삭제
+                </button>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </main>
+      <nav class="global-nav">
+        <ul class="nav-list">
+          <li class="list-item">
+            <a href="../index.html">
+              <img src="../images/icon-home.svg" alt="home" class="list-img" />
+              홈
+            </a>
           </li>
-          <li>
-            <button type="button" class="profile__button profile__button--theme-big profile__button--theme-white profile__button--unfollow">언팔로우</button>
+          <li class="list-item">
+            <a href="chatList.html">
+              <img
+                src="../images/icon-message-circle.svg"
+                alt="message"
+                class="list-img"
+              />
+              채팅
+            </a>
           </li>
-          <li class="profile-list__item--flex">
-            <a href="javascript:void(0)" class="profile__button profile__button--theme-big profile__button--theme-white profile__button--modify">프로필 수정</a>
-            <a href="javascript:void(0)" class="profile__button profile__button--theme-big profile__button--theme-white profile__button--register">상품 등록</a>
+          <li class="list-item">
+            <a href="upload.html">
+              <img src="../images/icon-edit.svg" alt="edit" class="list-img" />
+              게시물 작성
+            </a>
           </li>
-          <li>
-            <a href="chatRoom.html" class="profile__button profile__button--theme-small profile__button--message"></a>
-          </li>
-          <li>
-            <a href="javascript:void(0)" class="profile__button profile__button--theme-small profile__button--share"></a>
+          <li class="list-item">
+            <a href="javascript:void(0)" class="nav-profile">
+              <img
+                src="../images/icon-user-fill.svg"
+                alt="profile"
+                class="list-img"
+              />
+              프로필
+            </a>
           </li>
         </ul>
-      </section>
-      <section class="container products">
-        <h2 class="products__title">판매 중인 상품</h2>
-        <ul class="products__on-sale"></ul>
-      </section>
-      <section class="container feed">
-        <h2 class="sr-only">피드 목록</h2>
-        <form class="feed__button">
-          <label for="list-type" class="feed__label feed__label-list feed__label-list--on">
-            <strong class="sr-only">목록형으로 보기</strong>
-          </label>
-          <input type="radio" id="list-type" name="type" checked class="sr-only feed__button--list">
-          <label for="album-type" class="feed__label feed__label-album">
-            <strong class="sr-only">앨범형으로 보기</strong>
-          </label>
-          <input type="radio" id="album-type" name="type" class="sr-only feed__button--album">
-        </form>
-        <ul class="feed-list list-checked"></ul>
-        <ul class="feed-album"></ul>
-      </section>
-      <section class="modal">
-        <h2 class="sr-only">상단 바 메뉴</h2>
-        <div class="modal-window modal-bottom modal-bottom__setting">
-          <ul>
-            <li>
-              <button type="button" class="modal-bottom__button">설정 및 개인정보</button>
-            </li>
-            <li>
-              <button type="button" class="modal-bottom__button">로그아웃</button>
-            </li>
-          </ul>
-        </div>
-        <div class="modal-window modal-bottom modal-bottom__product--my-account">
-          <ul>
-            <li>
-              <button type="button" class="modal-bottom__button">삭제</button>
-            </li>
-            <li>
-              <button type="button" class="modal-bottom__button">수정</button>
-            </li>
-            <li>
-              <button type="button" class="modal-bottom__button">웹사이트에서 상품 보기</button>
-            </li>
-          </ul>
-        </div>
-        <div class="modal-window modal-bottom modal-bottom__post--my-account">
-          <ul>
-            <li>
-              <button type="button" class="modal-bottom__button">삭제</button>
-            </li>
-            <li>
-              <button type="button" class="modal-bottom__button">수정</button>
-            </li>
-          </ul>
-        </div>
-        <div class="modal-window modal-bottom modal-bottom__post">
-          <button type="button" class="modal-bottom__button">신고하기</button>
-        </div>
-        <div class="modal-window modal-confirm modal-logout">
-          <p class="modal-confirm__content">로그아웃하시겠어요?</p>
-          <ul class="modal-confirm__list">
-            <li class="modal-confirm__item modal-confirm__item--no">
-              <button type="button" class="modal-confirm__button modal-confirm__button--no">취소</button>
-            </li>
-            <li class="modal-confirm__item modal-confirm__item--yes">
-              <button type="button" class="modal-confirm__button modal-confirm__button--yes">로그아웃</button>
-            </li>
-          </ul>
-        </div>
-        <div class="modal-window modal-confirm modal-delete-posting">
-          <p class="modal-confirm__content">게시글을 삭제할까요?</p>
-          <ul class="modal-confirm__list">
-            <li class="modal-confirm__item modal-confirm__item--no">
-              <button type="button" class="modal-confirm__button modal-confirm__button--no">취소</button>
-            </li>
-            <li class="modal-confirm__item modal-confirm__item--yes">
-              <button type="button" class="modal-confirm__button modal-confirm__button--yes">삭제</button>
-            </li>
-          </ul>
-        </div>
-        <div class="modal-window modal-confirm modal-delete-product">
-          <p class="modal-confirm__content">상품을 삭제할까요?</p>
-          <ul class="modal-confirm__list">
-            <li class="modal-confirm__item modal-confirm__item--no">
-              <button type="button" class="modal-confirm__button modal-confirm__button--no">취소</button>
-            </li>
-            <li class="modal-confirm__item modal-confirm__item--yes">
-              <button type="button" class="modal-confirm__button modal-confirm__button--yes">삭제</button>
-            </li>
-          </ul>
-        </div>
-      </section>
-    </main>
-    <nav class="global-nav">
-      <ul class="nav-list">
-        <li class="list-item">
-          <a href="../index.html">
-            <img src="../images/icon-home-fill.svg" alt="home" class="list-img">
-            홈
-          </a>
-        </li>
-        <li class="list-item">
-          <a href="chatList.html">
-            <img src="../images/icon-message-circle.svg" alt="message" class="list-img">
-            채팅
-          </a>
-        </li>
-        <li class="list-item">
-          <a href="upload.html">
-            <img src="../images/icon-edit.svg" alt="edit" class="list-img">
-            게시물 작성
-          </a>
-        </li>
-        <li class="list-item">
-          <a href="javascript:void(0)" class="nav-profile">
-            <img src="../images/icon-user.svg" alt="profile" class="list-img">
-            프로필
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <script src="../js/constant.js"></script>
-  <script src="../js/util.js"></script>
-  <script src="../js/profile.js"></script>
-</body>
+      </nav>
+    </div>
+    <script src="../js/constant.js"></script>
+    <script src="../js/util.js"></script>
+    <script src="../js/profile.js"></script>
+  </body>
 </html>
