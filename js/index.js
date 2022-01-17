@@ -254,3 +254,10 @@ myPostButtons[1].addEventListener('click', () => {
 });
 deletePostButtons[0].addEventListener('click', () => showModal('myPost'));
 deletePostButtons[1].addEventListener('click', deletePost);
+
+// 하단 네비게이션 바 - 프로필 페이지 이동
+document
+  .querySelector('.nav-profile')
+  .addEventListener('click', () => {
+    gotoPage('pages/profile.html', { user: localStorage.getItem('accountname') }, [ 'user' ]);
+  });
