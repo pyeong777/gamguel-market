@@ -74,16 +74,17 @@ const activateUpload = () => {
 
 const getFileName = async () => {
   const { files } = NAME_SPACE;
-  const images = await files.map( async (file) => {
+  const images = [];
+  for (let i = 0; i < files.length; i++) {
     const formData = new FormData();
-    formData.append('image', file);
-    const { filename } = await fetch(`${API}/image/uploadfile`, {
+    formData.append('image', files[i]);
+    const res = await fetch(`${API}/image/uploadfile`, {
       method: 'POST',
       body: formData,
     })
-      .then((res) => res.json())
-      return filename;
-  });
+    const json = await res.json();
+    images.push(`${API}/${json.filename}`);
+  }
   return images.join(',');
 };
 
