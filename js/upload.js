@@ -4,14 +4,31 @@ const uploadFile = document.getElementById('upload-img');
 const imgList = document.querySelector('.img-thumbnail');
 const backButton = document.querySelector('.main-header__back');
 
+const initThumbnail = async () => {
+  const { initImages } = NAME_SPACE;
+  for (const url of initImages) {
+    const res = await fetch(url);
+    const data = await res.blob();
+    const file = new File([data], url.split('/').pop(), { type: `image/${url.split('.').pop()}` });
+    NAME_SPACE.files.push(file);
+  }
+  renderThumbnail();
+  activateUpload();
+};
+
 const setThumbnail = ({ currentTarget: { files } }) => {
   NAME_SPACE.files = [...NAME_SPACE.files, ...files];
+  renderThumbnail();
+  activateUpload();
+};
+
+const renderThumbnail = () => {
   imgList.innerHTML = '';
 
   if (NAME_SPACE.files.length === 1) {
     const figure = document.createElement('figure');
     figure.innerHTML = `
-      <img src="" class="img-big">
+      <img src="" onerror="this.src='../images/full-logo.svg'" class="img-big">
       <button type="button" class="delete-img"></button>
     `;
     const reader = new FileReader();
@@ -19,19 +36,22 @@ const setThumbnail = ({ currentTarget: { files } }) => {
       figure.querySelector('img').src = result;
     };
     reader.readAsDataURL(NAME_SPACE.files[0]);
-    ``;
     figure
       .querySelector('button')
       .addEventListener('click', () => deleteThumbnail(NAME_SPACE.files[0]));
     figure.classList.add('img-uploaded');
     imgList.appendChild(figure);
   } else {
+    if (NAME_SPACE.files.length > 10) {
+      alert('이미지 파일은 최대 10개까지만 업로드할 수 있습니다.');
+      NAME_SPACE.files.splice(10);
+    }
     const list = document.createElement('ol');
     list.classList.add('img-list');
     [...NAME_SPACE.files].forEach((file) => {
       const item = document.createElement('li');
       item.innerHTML = `
-        <img src="" class="img-small">
+        <img src="" onerror="this.src='../images/full-logo.svg'" class="img-small">
         <button type="button" class="delete-img"></button>
       `;
       const reader = new FileReader();
@@ -49,8 +69,7 @@ const setThumbnail = ({ currentTarget: { files } }) => {
     list.addEventListener('mousewheel', horizontalScroll);
     imgList.appendChild(list);
   }
-  activateUpload();
-};
+}
 
 const deleteThumbnail = (file) => {
   const index = NAME_SPACE.files.indexOf(file);
@@ -65,10 +84,13 @@ const resize = ({ currentTarget }) => {
 };
 
 const activateUpload = () => {
-  if (uploadContent.value || NAME_SPACE.files.length) {
+  const { files, handler } = NAME_SPACE;
+  if (uploadContent.value || files.length) {
     uploadBtn.classList.add('upload-bar__btn--active');
+    uploadBtn.addEventListener('click', handler);
   } else {
     uploadBtn.classList.remove('upload-bar__btn--active');
+    uploadBtn.removeEventListener('click', handler);
   }
 };
 
@@ -81,7 +103,7 @@ const getFileName = async () => {
     const res = await fetch(`${API}/image/uploadfile`, {
       method: 'POST',
       body: formData,
-    })
+    });
     const json = await res.json();
     images.push(`${API}/${json.filename}`);
   }
@@ -105,9 +127,39 @@ const post = async () => {
     });
 };
 
+const modify = async () => {
+  const filename = await getFileName();
+  fetch(
+    `${API}/post/${NAME_SPACE.postId}`,
+    reqData('PUT', {
+      post: {
+        content: uploadContent.value,
+        image: filename
+      },
+    })
+  )
+    .then((res) => res.json())
+    .then(({ post: { id } }) => {
+      gotoPage('postpage.html', { postId: id }, ['postId']);
+    });
+};
+
+const initValues = () => {
+  const { page, postId } = NAME_SPACE;
+  NAME_SPACE.handler = post;
+  if (page !== 'modifyPost') return;
+  fetch(`${API}/post/${postId}`, reqData())
+    .then(res => res.json())
+    .then(({ post: { content, image } }) => {
+      uploadContent.value = content;
+      NAME_SPACE.initImages = image.split(',');
+      NAME_SPACE.handler = modify;
+      initThumbnail();
+    });
+};
+
 // 헤더버튼
 backButton.addEventListener('click', goBack);
-uploadBtn.addEventListener('click', post);
 
 // 업로드 버튼 활성화
 uploadContent.addEventListener('keydown', activateUpload);
@@ -122,3 +174,4 @@ uploadFile.addEventListener('change', setThumbnail);
 
 const NAME_SPACE = getNameSpace();
 NAME_SPACE.files = [];
+initValues();
