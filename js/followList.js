@@ -90,5 +90,12 @@ const unfollow = ({ currentTarget }) => {
 // 헤더 버튼
 backButton.addEventListener('click', goBack);
 
+// 하단 네비게이션 바 - 프로필 페이지 이동
+document
+  .querySelector('.nav-profile')
+  .addEventListener('click', () => {
+    gotoPage('profile.html', { user: localStorage.getItem('accountname') }, [ 'user' ]);
+  });
+
 const NAME_SPACE = getNameSpace();
 renderPage();
