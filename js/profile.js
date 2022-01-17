@@ -56,12 +56,9 @@ const deletePostButtons = deletePostModal.querySelectorAll('.modal-confirm__butt
 const renderPage = () => {
   // 로그인이 되어 있어야 프로필 화면도 접속할 수 있어서
   // 여기서 임시로 로그인하고 토큰을 받아 옴
-  login()
-    .then(() => {
       fetchProfile();
       fetchProduct();
       fetchFeed();
-    });
 };
 
 const login = () => {
