@@ -265,10 +265,11 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
   item
     .querySelector('.btn-heart')
     .addEventListener('click', toggleHeart);
-  item
-    .querySelector('.btn-comment')
-    .addEventListener('click', () => {
-      gotoPage('postpage.html', { postId: id }, [ 'postId' ]);
+  ['.article-cont', '.btn-comment']
+    .forEach(cls => {
+      item
+        .querySelector(cls)
+        .addEventListener('click', () => gotoPage('postpage.html', { postId: id }, [ 'postId' ]));
     });
   const accountname = localStorage.getItem('accountname');
   const { user } = NAME_SPACE;

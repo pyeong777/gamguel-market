@@ -383,6 +383,7 @@ a, button {
   line-height: 18px;
   padding-right: 16px;
   margin: 16px 0;
+  cursor: pointer;
 }
 
 .article-post__img {
