@@ -168,7 +168,7 @@ const renderProduct = (json) => {
       item.innerHTML = `
       <a href="${link}">
         <article class="products__info">
-          <img src="${API}/${itemImage}" alt="감귤 사진" onerror="this.src='../images/full-logo.svg'" class="products__img">
+          <img src="${itemImage}" alt="감귤 사진" onerror="this.src='../images/full-logo.svg'" class="products__img">
           <dl>
             <dt class="sr-only">상품명</dt>
             <dd class="products__name ellipsis">${itemName}</dd>
