@@ -148,11 +148,11 @@ async function getFeed() {
                 let imageHTML = '';
                 if (contentImage) {
                     if(contentImage.length === 1 && contentImage[0]) {
-                        imageHTML = `<img src="${contentImage[0]}" alt="post-image" onerror ="this.src='../images/feed-alt-img.png'" class="article-post__img">`
+                        imageHTML = `<img src="${contentImage[0]}" alt="post-image" onerror ="this.src='../images/full-logo.svg'" class="article-post__img">`
                     } else if (contentImage.length > 1) {
                         const arr = [];
                         contentImage.forEach(image => {
-                            arr.push(`<li><img src="${image}" alt="post-image" onerror ="this.src='../images/feed-alt-img.png'" class="article-post__img--small"></li>`)
+                            arr.push(`<li><img src="${image}" alt="post-image" onerror ="this.src='../images/full-logo.svg'" class="article-post__img--small"></li>`)
                         });
                         imageHTML = `<ul class="article-post__img-list">${arr.join('')}</ul>`;
                     }
@@ -255,3 +255,10 @@ myPostButtons[1].addEventListener('click', () => {
 });
 deletePostButtons[0].addEventListener('click', () => showModal('myPost'));
 deletePostButtons[1].addEventListener('click', deletePost);
+
+// 하단 네비게이션 바 - 프로필 페이지 이동
+document
+  .querySelector('.nav-profile')
+  .addEventListener('click', () => {
+    gotoPage('./pages/profile.html', { user: localStorage.getItem('accountname') }, [ 'user' ]);
+  });
