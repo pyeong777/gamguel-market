@@ -480,7 +480,7 @@ deleteProductButtons[1].addEventListener('click', deleteProduct);
 postButtons[0].addEventListener('click', hideModal);
 myPostButtons[0].addEventListener('click', () => showModal('deletePost'));
 myPostButtons[1].addEventListener('click', () => {
-  gotoPage('upload.html', { page: 'modifyPost' }, [ 'page' ]);
+  gotoPage('upload.html', { page: 'modifyPost' }, [ 'page', 'postId' ]);
 });
 deletePostButtons[0].addEventListener('click', () => showModal('myPost'));
 deletePostButtons[1].addEventListener('click', deletePost);
