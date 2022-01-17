@@ -1,9 +1,4 @@
 /* reset */
-a, button {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
 
 .wrap {
   width: 100vw;

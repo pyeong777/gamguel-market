@@ -53,6 +53,11 @@ input {
 	border: none;
 	background: none;
 }
+a {
+	color: #000000;
+	text-decoration: none;
+	cursor: pointer;
+}
 
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
