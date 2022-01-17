@@ -45,7 +45,7 @@ const error2 = document.getElementById('error2');
 const activateJoin = () => {
   const idValue = idInput.value;
   const pwValue = pwInput.value;
-  
+
   if (
     idValue &&
     pwValue.length >= 6 &&
@@ -180,15 +180,19 @@ const validateId = ({ currentTarget: { value } }) => {
 };
 
 const getFileName = async () => {
-  const formData = new FormData();
-  formData.append('image', fileInput.files[0]);
-  let res = await fetch(`${API}/image/uploadfile`, {
-    method: 'POST',
-    body: formData
-  });
-  let json = await res.json();
-  const { filename } = json;
-  return filename
+  if (fileInput.files.length) {
+    const formData = new FormData();
+    formData.append('image', fileInput.files[0]);
+    let res = await fetch(`${API}/image/uploadfile`, {
+      method: 'POST',
+      body: formData
+    });
+    let json = await res.json();
+    const { filename } = json;
+    return filename
+  } else {
+    return "Ellipse.png"
+  }
 };
 
 const joinEmail = async () => {

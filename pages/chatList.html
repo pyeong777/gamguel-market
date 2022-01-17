@@ -60,15 +60,48 @@
           <span class="chat-date">2020.10.25</span>
         </article>
       </section>
-
+      <section class="modal">
+        <h2 class="sr-only">상단 바 메뉴</h2>
+        <div class="modal-window modal-bottom modal-bottom__setting">
+          <ul>
+            <li>
+              <button type="button" class="modal-bottom__button">
+                설정 및 개인정보
+              </button>
+            </li>
+            <li>
+              <button type="button" class="modal-bottom__button">
+                로그아웃
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div class="modal-window modal-confirm modal-logout">
+          <p class="modal-confirm__content">로그아웃하시겠어요?</p>
+          <ul class="modal-confirm__list">
+            <li class="modal-confirm__item modal-confirm__item--no">
+              <button
+                type="button"
+                class="modal-confirm__button modal-confirm__button--no"
+              >
+                취소
+              </button>
+            </li>
+            <li class="modal-confirm__item modal-confirm__item--yes">
+              <button
+                type="button"
+                class="modal-confirm__button modal-confirm__button--yes"
+              >
+                로그아웃
+              </button>
+            </li>
+          </ul>
+        </div>
+      </section>
       <nav class="home-nav">
         <ul class="nav-list">
           <li class="list-item">
-            <img
-              src="../images/icon-home.svg"
-              alt="home"
-              class="list-img"
-            />
+            <img src="../images/icon-home.svg" alt="home" class="list-img" />
             홈
           </li>
           <li class="list-item">
@@ -90,5 +123,8 @@
         </ul>
       </nav>
     </div>
+    <script src="../js/constant.js"></script>
+    <script src="../js/util.js"></script>
+    <script src="../js/chatlist.js"></script>
   </body>
 </html>

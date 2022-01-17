@@ -14,11 +14,13 @@
   margin: 0 auto;
 }
 
-button,
+button {
+  cursor: pointer;
+}
+
 input {
   border: none;
   background: none;
-  cursor: pointer;
 }
 
 .sr-only {
@@ -129,9 +131,12 @@ input {
 }
 
 .user-img {
+  flex-shrink: 0;
   width: 36px;
   height: 36px;
   margin-right: 16px;
+  border-radius: 50%;
+  border: 1px solid #dbdbdb;
 }
 
 .user-img,
@@ -146,15 +151,16 @@ input {
 
 .comment-author {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 16px;
 }
 
 .user-name {
-  font-size: 14px;
-  line-height: 18px;
-  font-weight: 500;
   display: inline-block;
+  padding-right: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
 }
 
 .comment-content span {
@@ -186,11 +192,17 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 767px;
   padding: 13px 20px 12px 16px;
-  border-top: 0.5px solid #dbdbdb;
+  border-top: 1px solid #dbdbdb;
+  background-color: #fff;
 }
 
 .post-content {
+  flex: 1;
   display: flex;
   align-items: center;
 }
@@ -199,12 +211,29 @@ input {
   width: 36px;
   height: 36px;
   margin-right: 18px;
+  border-radius: 50%;
+  border: 1px solid #dbdbdb;
+}
+
+.post-input {
+  width: 100%;
+  overflow: hidden;
+  padding: 0 15px;
+  border: none;
+  resize: none;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.post-input:focus {
+  outline: none;
 }
 
 .post-btn {
   color: #c4c4c4;
   font-size: 14px;
   line-height: 18px;
+  cursor: default;
 }
 
 /* modal */
@@ -331,6 +360,11 @@ input {
   color: #f26e22;
 }
 
+.modal-bottom__post,
+.modal-bottom__comment--my-account {
+  height: 92px;
+}
+
 /* feed */
 
 .feed {
@@ -407,6 +441,8 @@ input {
 
 .article-container {
   overflow: hidden;
+  width: calc(100vw - 86px);
+  max-width: 680px;
 }
 
 .article-nickname {
@@ -491,6 +527,12 @@ input {
   margin-top: 20px;
 }
 
+.article-profile,
+.article-nickname,
+.article-id {
+  cursor: pointer;
+}
+
 .feed-article__button {
   display: inline-block;
   position: absolute;
@@ -502,9 +544,14 @@ input {
   background-size: contain;
 }
 
-/* js용 class */
-.on {
+.comment-text {
+  width: calc(100vw - 86px);
+  max-width: 680px;
+}
+
+.is-active {
   color: #f26e22;
+  cursor: pointer;
 }
 
 .is-modal-active {
