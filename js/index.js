@@ -148,11 +148,11 @@ async function getFeed() {
                 let imageHTML = '';
                 if (contentImage) {
                     if(contentImage.length === 1 && contentImage[0]) {
-                        imageHTML = `<img src="${contentImage[0]}" alt="post-image" class="article-post__img">`
+                        imageHTML = `<img src="${contentImage[0]}" alt="post-image" onerror ="this.src='../images/feed-alt-img.png'" class="article-post__img">`
                     } else if (contentImage.length > 1) {
                         const arr = [];
                         contentImage.forEach(image => {
-                            arr.push(`<li><img src="${image}" alt="post-image" class="article-post__img--small"></li>`)
+                            arr.push(`<li><img src="${image}" alt="post-image" onerror ="this.src='../images/feed-alt-img.png'" class="article-post__img--small"></li>`)
                         });
                         imageHTML = `<ul class="article-post__img-list">${arr.join('')}</ul>`;
                     }
@@ -166,7 +166,7 @@ async function getFeed() {
                 article.classList.add('main-article');
 
                 article.innerHTML = `
-                <img src="${authorImage}" alt="profile__img" class="article-profile">
+                <img src="${authorImage}" alt="profile__img" onerror ="this.src='../images/basic-profile.svg'" class="article-profile">
                 <div class="article-container">
                     <strong class="article-nickname">${authorName}</strong>
                     <strong class="article-id">@ ${authorAccount}</strong>
