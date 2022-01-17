@@ -42,7 +42,7 @@
 }
 
 .home-main .article-container .article-nickname {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
   line-height: 18px;
 }
@@ -101,7 +101,7 @@
   display: inline-block;
   padding-right: 6px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 18px;
 }
 
@@ -267,7 +267,7 @@
   height: 64px;
   border-bottom: 1px solid #dbdbdb;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .modal-confirm__list {
@@ -294,7 +294,7 @@
 }
 
 .modal-confirm__button--yes {
-  font-weight: 500;
+  font-weight: 600;
   color: #f26e22;
 }
 
@@ -384,7 +384,7 @@
 }
 
 .article-nickname {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
   line-height: 18px;
 }

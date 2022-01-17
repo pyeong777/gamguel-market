@@ -14,7 +14,7 @@
 
 .home-header .header-title {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 22px;
 }
 
@@ -61,7 +61,7 @@
     margin-top: 33px;
     background-color: #F26E22;
     border-radius: 44px;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14px;
     line-height: 44px;
     color: #FFF;
@@ -88,7 +88,7 @@
 
 .home-main .article-container .article-nickname {
     display: block;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14px;
     line-height: 18px;
 }
@@ -300,7 +300,7 @@
     height: 64px;
     border-bottom: 1px solid #DBDBDB;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
 }
   
 .modal-confirm__list {
@@ -327,7 +327,7 @@
 }
   
 .modal-confirm__button--yes {
-    font-weight: 500;
+    font-weight: 600;
     color: #F26E22;
 }
   

@@ -159,7 +159,7 @@ body, html {
   height: 34px;
   border-radius: 30px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .profile__button--theme-orange {
@@ -345,7 +345,7 @@ body, html {
 }
 
 .article-nickname {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
   line-height: 18px;
 }
@@ -548,7 +548,7 @@ body, html {
   height: 64px;
   border-bottom: 1px solid #DBDBDB;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .modal-confirm__list {
@@ -575,7 +575,7 @@ body, html {
 }
 
 .modal-confirm__button--yes {
-  font-weight: 500;
+  font-weight: 600;
   color: #F26E22;
 }
 
