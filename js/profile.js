@@ -283,8 +283,8 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
 };
 
 const getAlbumItem = ({ image }, index) => {
-  const images = image.split(',').filter(img => img !== '');
-  if (!images.length) return;
+  const images = image?.split(',').filter(img => img !== '');
+  if (!images || !images.length) return;
   let multiHTML = '';
   if (images.length > 1) multiHTML = 'feed-album__item--multi';
   const item = document.createElement('li');
