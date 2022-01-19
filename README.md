@@ -7,9 +7,9 @@
 
 ## 🍊 감귤마켓 서비스 소개 
 
-**배포 링크** : 
-**개발 기간** : 2022-01-03 ~ 2022-01-17
-**프론트 개발 환경** : HTML5 & CSS3 & Vanilla JS
+**배포 링크** :  <br>
+**개발 기간** : 2022-01-03 ~ 2022-01-17 <br>
+**프론트 개발 환경** : HTML5 & CSS3 & Vanilla JS <br>
 **백엔드 개발 환경** : 제공된 API 사용
 
 ### 🛒 나만의 스토어에 상품을 등록해서 판매해 보세요!
@@ -39,8 +39,8 @@
 
 ##  👩‍💻 팀원소개
 
-**서대평** : https://github.com/pyeong777
-**여운화** : https://github.com/ywhkr
-**임준홍** : https://github.com/tesseractjh
+**서대평** : https://github.com/pyeong777 <br>
+**여운화** : https://github.com/ywhkr <br>
+**임준홍** : https://github.com/tesseractjh <br>
 **황지영** : https://github.com/jenionote
 
