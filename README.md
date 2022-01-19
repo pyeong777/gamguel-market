@@ -1,7 +1,7 @@
 # 감귤마켓 SNS 서비스
 
 <p align='center'>
-<img width="250" alt="readmeIMG" src="https://user-images.githubusercontent.com/80046065/150065847-4c421d6d-a7c3-47e1-b638-c20cfebd968c.png">
+<img width="250" alt="readmeIMG" src="https://user-images.githubusercontent.com/80046065/150081875-93273245-9a6b-46f2-ae11-8d2673ec1e78.png">
 </p>
 
 
