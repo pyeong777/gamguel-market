@@ -114,12 +114,25 @@ const fetchProfile = () => {
 
 const fetchProduct = () => {
   const { user, productSkip } = NAME_SPACE;
-  return fetch(`${API}/product/${user}/?limit=10&skip=${productSkip}`, reqData())
+  return fetch(`${API}/product/${user}/?limit=${productSkip >= 5 ? 15 : 5}&skip=${productSkip >= 5 ? productSkip - 5 : productSkip}`, reqData())
   .then(res => res.json())
   .then(json => {
-    if (json.product.length) {
+    const { prevProduct } = NAME_SPACE;
+    let uniquePost;
+    if (prevProduct.length) {
+      const prevId = prevProduct.map(({ id }) => id);
+      uniquePost = json.product
+        .filter(({ id }) => !prevId.includes(id) && id < prevProduct[0].id)
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .slice(0, 5);
+      NAME_SPACE.productSkip += uniquePost.length;
+    } else {
+      uniquePost = [...json.product];
       NAME_SPACE.productSkip += json.product.length;
-      renderProduct(json);
+    }
+    if (json.product.length) {
+      renderProduct(uniquePost);
+      NAME_SPACE.prevProduct = uniquePost;
       return false;
     } else {
       unobserveLastItem(onSale, 'product');
@@ -222,8 +235,7 @@ const renderProfile = (json) => {
   }
 };
 
-const renderProduct = (json) => {
-  const { product } = json;
+const renderProduct = (product) => {
   const fragment = document.createDocumentFragment();
   if (!product.length) return;
   const accountname = localStorage.getItem('accountname');

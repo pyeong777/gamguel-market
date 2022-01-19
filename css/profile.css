@@ -225,12 +225,26 @@ body, html {
 .products__on-sale {
   display: flex;
   column-gap: 10px;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding-right: 30px;
 }
 
 .products__on-sale::-webkit-scrollbar {
-  display: none;
+  height: 12px;
+}
+
+.products__on-sale::-webkit-scrollbar-thumb {
+  width: 4px;
+  height: 79px;
+  background-color: #F26E22;
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 4px solid transparent;
+}
+
+.products__on-sale::-webkit-scrollbar-track {
+  background: none;
 }
 
 .products__title {
