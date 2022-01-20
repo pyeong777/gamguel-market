@@ -358,11 +358,13 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
   item
     .querySelector('.btn-heart')
     .addEventListener('click', toggleHeart);
-  ['.article-cont', '.btn-comment']
+  ['article-cont', 'btn-comment', 'article-post__img', 'article-post__img--small']
     .forEach(cls => {
       item
-        .querySelector(cls)
-        .addEventListener('click', () => gotoPage('postpage.html', { postId: id }, [ 'postId' ]));
+        .querySelectorAll(`.${cls}`)
+        .forEach(elem => {
+          elem.addEventListener('click', () => gotoPage('postpage.html', { postId: id }, [ 'postId' ]));
+        });
     });
   const accountname = localStorage.getItem('accountname');
   const { user } = NAME_SPACE;
@@ -378,7 +380,7 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
   return item;
 };
 
-const getAlbumItem = ({ image }) => {
+const getAlbumItem = ({ id, image }) => {
   const images = image?.split(',').filter(img => img !== '');
   if (!images || !images.length) return;
   let multiHTML = '';
@@ -391,6 +393,7 @@ const getAlbumItem = ({ image }) => {
   </button>
   `;
   item.setAttribute('class', `feed-album__item ${multiHTML}`);
+  item.addEventListener('click', () => gotoPage('postpage.html', { postId: id }, [ 'postId' ]));
   return item;
 };
 
