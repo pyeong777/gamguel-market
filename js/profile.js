@@ -53,32 +53,57 @@ const myPostButtons = myPostModal.querySelectorAll('.modal-bottom__button');
 const deletePostButtons = deletePostModal.querySelectorAll('.modal-confirm__button');
 
 
-const renderPage = () => {
-  // 로그인이 되어 있어야 프로필 화면도 접속할 수 있어서
-  // 여기서 임시로 로그인하고 토큰을 받아 옴
-      fetchProfile();
-      fetchProduct();
-      fetchFeed();
+const renderPage = async () => {
+  NAME_SPACE.productObserver = new IntersectionObserver(getIoCallback(onSale, 'product', fetchProduct), { threshold: 0.1 });
+  NAME_SPACE.feedObserver = new IntersectionObserver(getIoCallback(feedList, 'feed', fetchFeedList), { threshold: 0.1 });
+  NAME_SPACE.albumObserver = new IntersectionObserver(getIoCallback(feedAlbum, 'album', fetchFeedAlbum), { threshold: 0.8 });
+  NAME_SPACE.productSkip = 0;
+  NAME_SPACE.feedSkip = 0;
+  NAME_SPACE.albumSkip = 0;
+  fetchProfile();
+  await fetchProduct();
+  await fetchFeedList();
+  await fetchFeedAlbum();
+  observeLastItem(onSale, 'product');
+  observeLastItem(feedList, 'feed');
+  observeLastItem(feedAlbum, 'album');
 };
 
-const login = () => {
-  return fetch(`${API}/user/login`, reqData('POST', {
-    user: {
-      email: 'test@test.com',
-      password: 'test001'
-    }
-  }))
-  .then(res => res.json())
-  .then(({ user }) => {
-    localStorage.setItem('token', user.token);
-    localStorage.setItem('userid', user._id);
-    localStorage.setItem('accountname', user.accountname);
-  });
+const observeLastItem = (item, observer) => {
+  const lastChild = item.lastElementChild;
+  if (!lastChild) return;
+  NAME_SPACE[`${observer}LastChild`] = lastChild;
+  NAME_SPACE[`${observer}Observer`].observe(lastChild);
+};
+
+const unobserveLastItem = (item, observer) => {
+  const lastChild = item.lastElementChild;
+  if (!lastChild) return;
+  NAME_SPACE[`${observer}Observer`].unobserve(lastChild);
+};
+
+const getIoCallback = (target, observer, fetchFunc) => {
+  return (entries, io) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        io.unobserve(entry.target);
+        fetchFunc()
+          .then(isLast => {
+            if (!isLast) observeLastItem(target, observer);
+          });
+      }
+    });
+  };
 };
 
 const logout = () => {
   localStorage.clear();
   location.href = '../pages/splashScreen.html';
+};
+
+const fetchFeed = () => {
+  if (isFeedList()) fetchFeedList();
+  else fetchFeedAlbum();
 };
 
 const fetchProfile = () => {
@@ -87,16 +112,92 @@ const fetchProfile = () => {
   .then(json => renderProfile(json));
 };
 
-const fetchProduct = () => {
-  fetch(`${API}/product/${NAME_SPACE.user}/?limit=100&skip=0`, reqData())
+const fetchProduct = (count = 5) => {
+  const { user, productSkip } = NAME_SPACE;
+  return fetch(`${API}/product/${user}/?limit=${productSkip >= 5 ? 15 : 5}&skip=${productSkip >= 5 ? productSkip - 5 : productSkip}`, reqData())
   .then(res => res.json())
-  .then(json => renderProduct(json));
+  .then(json => {
+    const { prevProduct } = NAME_SPACE;
+    let uniquePost;
+    if (prevProduct.length) {
+      const prevId = prevProduct.map(({ id }) => id);
+      uniquePost = json.product
+        .filter(({ id }) => !prevId.includes(id) && id < prevProduct[0].id)
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .slice(0, count);
+      NAME_SPACE.productSkip += uniquePost.length;
+    } else {
+      uniquePost = [...json.product];
+      NAME_SPACE.productSkip += json.product.length;
+    }
+    if (uniquePost.length) {
+      renderProduct(uniquePost);
+      NAME_SPACE.prevProduct = uniquePost;
+      return false;
+    } else {
+      unobserveLastItem(onSale, 'product');
+      return true;
+    }
+  });
 };
 
-const fetchFeed = () => {
-  fetch(`${API}/post/${NAME_SPACE.user}/userpost/?limit=100&skip=0`, reqData())
+const fetchFeedList = (count = 10) => {
+  const { user, feedSkip } = NAME_SPACE;
+  return fetch(`${API}/post/${user}/userpost/?limit=${feedSkip >= 10 ? 30 : 10}&skip=${feedSkip >= 10 ? feedSkip - 10 : feedSkip}`, reqData())
   .then(res => res.json())
-  .then(json => renderFeed(json));
+  .then(json => {
+    const { prevFeed } = NAME_SPACE;
+    let uniquePost;
+    if (prevFeed.length) {
+      const prevId = prevFeed.map(({ id }) => id);
+      uniquePost = json.post
+        .filter(({ id }) => !prevId.includes(id) && id < prevFeed[0].id)
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .slice(0, count);
+      NAME_SPACE.feedSkip += uniquePost.length;
+    } else {
+      uniquePost = [...json.post];
+      NAME_SPACE.feedSkip += json.post.length;
+    }
+    if (uniquePost.length) {
+      renderFeed(uniquePost);
+      NAME_SPACE.prevFeed = uniquePost;
+      return false;
+    } else {
+      unobserveLastItem(feedList, 'feed');
+      return true;
+    }
+  });
+};
+
+const fetchFeedAlbum = () => {
+  const { user, albumSkip } = NAME_SPACE;
+  return fetch(`${API}/post/${user}/userpost/?limit=${albumSkip >= 10 ? 30 : 10}&skip=${albumSkip >= 10 ? albumSkip - 10 : albumSkip}`, reqData())
+  .then(res => res.json())
+  .then(json => {
+    const { prevAlbum } = NAME_SPACE;
+    let uniquePost;
+    if (prevAlbum.length) {
+      const prevId = prevAlbum.map(({ id }) => id);
+      uniquePost = json.post
+        .filter(({ id, image }) => !prevId.includes(id) && id < prevAlbum[0].id && image?.split(',').every(imgName => imgName))
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .slice(0, 10);
+      NAME_SPACE.albumSkip += uniquePost.length;
+    } else {
+      uniquePost = [...json.post].filter(({ image }) => image?.split(',').every(imgName => imgName));
+      NAME_SPACE.albumSkip += json.post.length;
+    }
+
+    if (uniquePost.length) {
+      renderFeed(uniquePost, false);
+      NAME_SPACE.prevAlbum = uniquePost;
+      return false;
+    } else {
+      unobserveLastItem(feedAlbum, 'album');
+      return true;
+    }
+  });
 };
 
 const renderProfile = (json) => {
@@ -134,11 +235,9 @@ const renderProfile = (json) => {
   }
 };
 
-const renderProduct = (json) => {
-  const { product } = json;
+const renderProduct = (product) => {
   const fragment = document.createDocumentFragment();
   if (!product.length) return;
-  onSale.innerHTML = '';
   const accountname = localStorage.getItem('accountname');
   const { user } = NAME_SPACE;
   if (user === accountname) {
@@ -160,7 +259,7 @@ const renderProduct = (json) => {
       fragment.appendChild(item);
       item
         .querySelector('.products__button')
-        .addEventListener('click', () => showModal('product', id, link));
+        .addEventListener('click', () => showModal('product', id, link, item));
     });
   } else {
     product.forEach(({ link, itemImage, itemName, price }) => {
@@ -186,13 +285,10 @@ const renderProduct = (json) => {
   products.classList.add('has-products');
 };
 
-const renderFeed = (json) => {
-  const { post } = json;
+const renderFeed = (post, isList = true) => {
   if (!post.length) return;
-  feedList.innerHTML = '';
-  feedAlbum.innerHTML = '';
   const fragment = document.createDocumentFragment();
-  if (isFeedList()) {
+  if (isList) {
     post.forEach(posting => {
       const item = getListItem(posting);
       fragment.appendChild(item);
@@ -273,7 +369,7 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
   if (user === accountname) {
     item
       .querySelector('.feed-article__button')
-      .addEventListener('click', () => showModal('myPost', id));
+      .addEventListener('click', () => showModal('myPost', id, item));
   } else {
     item
       .querySelector('.feed-article__button')
@@ -282,9 +378,9 @@ const getListItem = ({ id, content, image, createdAt, hearted, heartCount, comme
   return item;
 };
 
-const getAlbumItem = ({ image }, index) => {
-  const images = image.split(',').filter(img => img !== '');
-  if (!images.length) return;
+const getAlbumItem = ({ image }) => {
+  const images = image?.split(',').filter(img => img !== '');
+  if (!images || !images.length) return;
   let multiHTML = '';
   if (images.length > 1) multiHTML = 'feed-album__item--multi';
   const item = document.createElement('li');
@@ -295,13 +391,11 @@ const getAlbumItem = ({ image }, index) => {
   </button>
   `;
   item.setAttribute('class', `feed-album__item ${multiHTML}`);
-  item.setAttribute('style', `order:${index}`);
   return item;
 };
 
 const showModal = (type, ...args) => {
   modal.classList.add('is-modal-active');
-  const [ id, link ] = args;
   switch (type) {
     case 'setting':
       settingModal.classList.add('is-modal-active');
@@ -315,8 +409,9 @@ const showModal = (type, ...args) => {
       productModal.classList.add('is-modal-active');
       deleteProductModal.classList.remove('is-modal-active');
       if (!args.length) return;
-      NAME_SPACE.productId = id;
-      NAME_SPACE.productLink = link;
+      NAME_SPACE.productId = args[0];
+      NAME_SPACE.productLink = args[1];
+      NAME_SPACE.productElement = args[2];
       break;
     case 'deleteProduct':
       productModal.classList.remove('is-modal-active');
@@ -329,7 +424,8 @@ const showModal = (type, ...args) => {
       myPostModal.classList.add('is-modal-active');
       deletePostModal.classList.remove('is-modal-active');
       if (!args.length) return;
-      NAME_SPACE.postId = id;
+      NAME_SPACE.postId = args[0];
+      NAME_SPACE.feedElement = args[1];
       break;
     case 'deletePost':
       myPostModal.classList.remove('is-modal-active');
@@ -344,9 +440,17 @@ const hideModal = (e) => {
 };
 
 const deleteProduct = () => {
-  fetch(`${API}/product/${NAME_SPACE.productId}`, reqData('DELETE'))
+  const { productId, productElement } = NAME_SPACE;
+  fetch(`${API}/product/${productId}`, reqData('DELETE'))
   .then(() => {
-    fetchProduct();
+    let count = 1;
+    while (!productElement.nextElementSibling) {
+      onSale.removeChild(productElement.nextElementSibling);
+      count++;
+    }
+    onSale.removeChild(productElement);
+    NAME_SPACE.productSkip = onSale.children.length;
+    fetchProduct(count);
     modal.classList.remove('is-modal-active');
     modalWindows.forEach(modal => modal.classList.remove('is-modal-active'));
   });
@@ -381,13 +485,13 @@ const switchFeed = () => {
     feedAlbum.classList.remove('album-checked');
     feedLabels[0].classList.add('feed__label-list--on');
     feedLabels[1].classList.remove('feed__label-album--on');
-    fetchFeed(NAME_SPACE.user, localStorage.getItem('token'));
+    fetchFeed();
   } else if (id === 'album-type') {
     feedAlbum.classList.add('album-checked');
     feedList.classList.remove('list-checked');
     feedLabels[0].classList.remove('feed__label-list--on');
     feedLabels[1].classList.add('feed__label-album--on');
-    fetchFeed(NAME_SPACE.user, localStorage.getItem('token'));
+    fetchFeed();
   }
 };
 
@@ -396,9 +500,17 @@ const isFeedList = () => {
 };
 
 const deletePost = () => {
-  fetch(`${API}/post/${NAME_SPACE.postId}`, reqData('DELETE'))
+  const { postId, feedElement } = NAME_SPACE;
+  fetch(`${API}/post/${postId}`, reqData('DELETE'))
   .then(() => {
-    fetchFeed();
+    let count = 1;
+    while (!feedElement.nextElementSibling) {
+      feedList.removeChild(feedElement.nextElementSibling);
+      count++;
+    }
+    feedList.removeChild(feedElement);
+    NAME_SPACE.feedSkip = feedList.children.length;
+    fetchFeedList(count);
     modal.classList.remove('is-modal-active');
     modalWindows.forEach(modal => modal.classList.remove('is-modal-active'));
   });
@@ -493,4 +605,7 @@ document
   });
 
 const NAME_SPACE = getNameSpace();
+NAME_SPACE.prevProduct = [];
+NAME_SPACE.prevFeed = [];
+NAME_SPACE.prevAlbum = [];
 renderPage();

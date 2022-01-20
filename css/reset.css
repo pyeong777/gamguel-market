@@ -66,8 +66,25 @@ a {
 	font-family: 'Spoqa Han Sans Neo', sans-serif;
 }
 
+body {
+	overflow-x: hidden;
+}
+
 body::-webkit-scrollbar {
-	display: none;
+  width: 12px;
+}
+
+body::-webkit-scrollbar-thumb {
+  width: 4px;
+  height: 79px;
+  background-color: #F26E22;
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 4px solid transparent;
+}
+
+body::-webkit-scrollbar-track {
+  background: none;
 }
 
 textarea:focus {
