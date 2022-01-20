@@ -1,4 +1,5 @@
 const uploadBtn = document.querySelector('.upload-bar__btn');
+const postProfile = document.querySelector('.user-image');
 const uploadContent = document.querySelector('.upload-form__content');
 const uploadFile = document.getElementById('upload-img');
 const imgList = document.querySelector('.img-thumbnail');
@@ -158,6 +159,13 @@ const initValues = () => {
     });
 };
 
+const fetchCommentImage = () => {
+  const accountname = localStorage.getItem('accountname');
+  fetch(`${API}/profile/${accountname}`, reqData())
+    .then((res) => res.json())
+    .then(({ profile }) => (postProfile.src = profile.image));
+};
+
 // 헤더버튼
 backButton.addEventListener('click', goBack);
 
@@ -175,3 +183,4 @@ uploadFile.addEventListener('change', setThumbnail);
 const NAME_SPACE = getNameSpace();
 NAME_SPACE.files = [];
 initValues();
+fetchCommentImage();
