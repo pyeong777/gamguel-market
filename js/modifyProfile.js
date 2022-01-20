@@ -79,13 +79,19 @@ const validateName = ({ currentTarget: { value } }) => {
 
 const validateId = ({ currentTarget: { value } }) => {
   NAME_SPACE.isUniqueId = false;
-  if (isValidId(value)) {
+  const curId = localStorage.getItem('accountname');
+  if (value === curId) {
+    showMsg(idError, '사용 가능한 ID입니다.', false);
+    NAME_SPACE.isUniqueId = true;
+    activateSave();
+  } else if (isValidId(value)) {
     if (!value.length) return;
-    fetch(`${API}/user`, reqData())
+    fetch(`${API}/user/accountnamevalid`, reqData('POST', {
+      user: { accountname: value }
+    }))
       .then(res => res.json())
-      .then(json => {
-        const curId = localStorage.getItem('accountname');
-        if (json.find(({ accountname }) => accountname === value && accountname !== curId)) {
+      .then(({ message }) => {
+        if (message === '이미 가입된 계정ID 입니다.') {
           showMsg(idError, '이미 사용 중인 ID입니다.');
         } else {
           showMsg(idError, '사용 가능한 ID입니다.', false);
