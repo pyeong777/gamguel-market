@@ -62,6 +62,7 @@ const renderPage = async () => {
   NAME_SPACE.albumSkip = 0;
   fetchProfile();
   await fetchProduct();
+  switchFeed();
   await fetchFeedList();
   await fetchFeedAlbum();
   observeLastItem(onSale, 'product');
