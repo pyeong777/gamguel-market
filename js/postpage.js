@@ -99,18 +99,20 @@ const renderFeed = (json) => {
     commentCount,
     author,
   } = post;
-  const images = image.split(',');
+  const images = image?.split(',');
   let imageHTML = '';
-  if (images.length === 1 && images[0]) {
-    imageHTML = `<img src="${images[0]}" onerror ="this.src='../images/full-logo.svg'" class="article-post__img">`;
-  } else if (images.length > 1) {
-    const arr = [];
-    images.forEach((image) => {
-      arr.push(
-        `<li><img src="${image}" onerror ="this.src='../images/full-logo.svg'" class="article-post__img--small"></li>`
-      );
-    });
-    imageHTML = `<ul class="article-post__img-list">${arr.join('')}</ul>`;
+  if (images) {
+    if (images.length === 1 && images[0]) {
+      imageHTML = `<img src="${images[0]}" onerror ="this.src='../images/full-logo.svg'" class="article-post__img">`;
+    } else if (images.length > 1) {
+      const arr = [];
+      images.forEach((image) => {
+        arr.push(
+          `<li><img src="${image}" onerror ="this.src='../images/full-logo.svg'" class="article-post__img--small"></li>`
+        );
+      });
+      imageHTML = `<ul class="article-post__img-list">${arr.join('')}</ul>`;
+    }
   }
   const year = createdAt.slice(0, 4);
   const month = createdAt.slice(5, 7);
@@ -363,5 +365,5 @@ postBtn.addEventListener('click', addComment);
 
 const NAME_SPACE = getNameSpace();
 fetchFeed()
-  .then(fetchComment());
+  .then(() => fetchComment());
 fetchCommentImage();
