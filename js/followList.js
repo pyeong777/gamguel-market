@@ -1,4 +1,5 @@
-// 헤더 버튼
+// 헤더
+const headerTitle = document.querySelector('.main-header__title');
 const backButton = document.querySelector('.main-header__back');
 
 // 팔로워 목록
@@ -6,8 +7,10 @@ const followList = document.querySelector('.follow__list');
 
 const renderPage = () => {
   if (NAME_SPACE.page === 'followers') {
+    headerTitle.textContent = 'Followers';
     fetchFollower();
   } else {
+    headerTitle.textContent = 'Followings';
     fetchFollowing();
   }
 };
