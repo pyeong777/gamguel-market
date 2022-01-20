@@ -167,6 +167,14 @@
   line-height: 18px;
 }
 
+.post-input::placeholder {
+  padding-top: 9px;
+}
+
+.post-input:focus::placeholder {
+  opacity: 0;
+}
+
 .post-btn {
   color: #c4c4c4;
   font-size: 14px;
