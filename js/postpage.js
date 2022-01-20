@@ -157,7 +157,7 @@ const renderFeed = (json) => {
   item.querySelector('.btn-heart').addEventListener('click', toggleHeart);
 
   const accountname = localStorage.getItem('accountname');
-  if (NAME_SPACE.user === accountname) {
+  if (author.accountname === accountname) {
     item
       .querySelector('.feed-article__button')
       .addEventListener('click', () => showModal('myPost', id));
@@ -171,7 +171,7 @@ const renderFeed = (json) => {
 const deletePost = () => {
   fetch(`${API}/post/${NAME_SPACE.postId}`, reqData('DELETE'))
     .then(() => {
-      gotoPage('main.html');
+      goBack();
     });
 };
 
