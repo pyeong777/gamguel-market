@@ -112,7 +112,7 @@ const fetchProfile = () => {
   .then(json => renderProfile(json));
 };
 
-const fetchProduct = () => {
+const fetchProduct = (count = 5) => {
   const { user, productSkip } = NAME_SPACE;
   return fetch(`${API}/product/${user}/?limit=${productSkip >= 5 ? 15 : 5}&skip=${productSkip >= 5 ? productSkip - 5 : productSkip}`, reqData())
   .then(res => res.json())
@@ -124,13 +124,13 @@ const fetchProduct = () => {
       uniquePost = json.product
         .filter(({ id }) => !prevId.includes(id) && id < prevProduct[0].id)
         .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-        .slice(0, 5);
+        .slice(0, count);
       NAME_SPACE.productSkip += uniquePost.length;
     } else {
       uniquePost = [...json.product];
       NAME_SPACE.productSkip += json.product.length;
     }
-    if (json.product.length) {
+    if (uniquePost.length) {
       renderProduct(uniquePost);
       NAME_SPACE.prevProduct = uniquePost;
       return false;
@@ -185,8 +185,8 @@ const fetchFeedAlbum = () => {
         .slice(0, 10);
       NAME_SPACE.albumSkip += uniquePost.length;
     } else {
-      NAME_SPACE.albumSkip += json.post.length;
       uniquePost = [...json.post].filter(({ image }) => image?.split(',').every(imgName => imgName));
+      NAME_SPACE.albumSkip += json.post.length;
     }
 
     if (uniquePost.length) {
@@ -259,7 +259,7 @@ const renderProduct = (product) => {
       fragment.appendChild(item);
       item
         .querySelector('.products__button')
-        .addEventListener('click', () => showModal('product', id, link));
+        .addEventListener('click', () => showModal('product', id, link, item));
     });
   } else {
     product.forEach(({ link, itemImage, itemName, price }) => {
@@ -411,6 +411,7 @@ const showModal = (type, ...args) => {
       if (!args.length) return;
       NAME_SPACE.productId = args[0];
       NAME_SPACE.productLink = args[1];
+      NAME_SPACE.productElement = args[2];
       break;
     case 'deleteProduct':
       productModal.classList.remove('is-modal-active');
@@ -439,9 +440,17 @@ const hideModal = (e) => {
 };
 
 const deleteProduct = () => {
-  fetch(`${API}/product/${NAME_SPACE.productId}`, reqData('DELETE'))
+  const { productId, productElement } = NAME_SPACE;
+  fetch(`${API}/product/${productId}`, reqData('DELETE'))
   .then(() => {
-    fetchProduct();
+    let count = 1;
+    while (!productElement.nextElementSibling) {
+      onSale.removeChild(productElement.nextElementSibling);
+      count++;
+    }
+    onSale.removeChild(productElement);
+    NAME_SPACE.productSkip = onSale.children.length;
+    fetchProduct(count);
     modal.classList.remove('is-modal-active');
     modalWindows.forEach(modal => modal.classList.remove('is-modal-active'));
   });
