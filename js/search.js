@@ -9,7 +9,6 @@ async function getUser(searchText) {
   const data = await res.json();
 
   data.forEach(user => {
-    console.log(user)
     const authorName = user.username;
     const authorAccount = user.accountname;
     const profileImg = user.image;
