@@ -38,9 +38,43 @@
 <br>
 
 ##  👩‍💻 팀원소개
-
-**서대평** : https://github.com/pyeong777 <br>
-**여운화** : https://github.com/ywhkr <br>
-**임준홍** : https://github.com/tesseractjh <br>
-**황지영** : https://github.com/jenionote
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/pyeong777"
+        ><img
+          src="https://avatars.githubusercontent.com/pyeong777"
+          width="100px;"
+          alt=""
+        /><br /><sub><b>서대평</b></sub></a
+      ><br />
+    </td>
+    <td align="center">
+      <a href="https://github.com/ywhkr"
+        ><img
+          src="https://avatars.githubusercontent.com/ywhkr"
+          width="100px;"
+          alt=""
+        /><br /><sub><b>여운화</b></sub></a
+      ><br />
+    </td>
+    <td align="center">
+      <a href="https://github.com/tesseractjh "
+        ><img
+          src="https://avatars.githubusercontent.com/tesseractjh"
+          width="100px;"
+          alt=""
+        /><br /><sub><b>임준홍</b></sub></a
+      ><br />
+    </td>
+    <td align="center">
+      <a href="https://github.com/jenionote"
+        ><img
+          src="https://avatars.githubusercontent.com/jenionote"
+          width="100px;"
+          alt=""
+        /><br /><sub><b>황지영</b></sub></a><br />
+    </td>
+  </tr>
+</table>
 
