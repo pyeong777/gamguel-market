@@ -1,4 +1,5 @@
-// 헤더 버튼
+// 헤더
+const headerTitle = document.querySelector('.main-header__title');
 const backButton = document.querySelector('.main-header__back');
 
 // 팔로워 목록
@@ -6,8 +7,10 @@ const followList = document.querySelector('.follow__list');
 
 const renderPage = () => {
   if (NAME_SPACE.page === 'followers') {
+    headerTitle.textContent = 'Followers';
     fetchFollower();
   } else {
+    headerTitle.textContent = 'Followings';
     fetchFollowing();
   }
 };
@@ -27,10 +30,9 @@ const fetchFollowing = () => {
 const renderList = (json) => {
   const userid = localStorage.getItem('userid');
   const fragment = document.createDocumentFragment();
-  json.reverse().forEach(({ username, accountname, intro, image, follower }) => {
+  json.reverse().forEach(({ username, accountname, intro, image, isfollow }) => {
     const item = document.createElement('li');
     const isSelf = localStorage.getItem('accountname') === accountname;
-    const isFollowing = follower.includes(userid);
     item.innerHTML = `
     <a href="javascript:void(0)" class="follow__user">
       <img src="${image}" alt="프로필 사진"
@@ -41,9 +43,9 @@ const renderList = (json) => {
       </p>
     </a>
     <button type="button" data-accountname="${accountname}" class="follow__button follow__button--theme-orange
-    ${isSelf ? '' : isFollowing ? '' : 'follow__button--active'} button-follow">팔로우</button>
+    ${isSelf ? '' : isfollow ? '' : 'follow__button--active'} button-follow">팔로우</button>
     <button type="button" data-accountname="${accountname}" class="follow__button follow__button--theme-white
-    ${isSelf ? '' : isFollowing ? 'follow__button--active' : ''} button-unfollow">취소</button>
+    ${isSelf ? '' : isfollow ? 'follow__button--active' : ''} button-unfollow">취소</button>
     `;
     item.classList.add('follow__item');
     item

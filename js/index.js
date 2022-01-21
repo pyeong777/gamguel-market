@@ -158,48 +158,48 @@ const renderFeed = (posts) => {
     ['profile', 'nickname', 'id']
     .forEach(key => {
     article
-        .querySelector(`.article-${key}`)
-        .addEventListener('click', () => {
+      .querySelector(`.article-${key}`)
+      .addEventListener('click', () => {
         gotoPage('./pages/profile.html', { user: post.author.accountname }, [ 'user' ]);
-        });
+      });
     });
 
     article
-        .querySelector('.article-post__img-list')
-        ?.addEventListener('mousewheel', horizontalScroll);
+      .querySelector('.article-post__img-list')
+      ?.addEventListener('mousewheel', horizontalScroll);
     article
-        .querySelector('.btn-heart')
-        .addEventListener('click', toggleHeart);
+      .querySelector('.btn-heart')
+      .addEventListener('click', toggleHeart);
     article
-        .querySelector('.btn-comment')
-        .addEventListener('click', () => {
-        gotoPage('./pages/postpage.html', { postId: id }, [ 'postId' ]);
+      .querySelector('.btn-comment')
+      .addEventListener('click', () => {
+      gotoPage('./pages/postpage.html', { postId: id }, [ 'postId' ]);
     });
     
 
     ['cont', 'post__img', 'post__img-list']
     .forEach(key => {
     article
-        .querySelector(`.article-${key}`)
-        ?.addEventListener('click', () => {
+      .querySelector(`.article-${key}`)
+      ?.addEventListener('click', () => {
         gotoPage('./pages/postpage.html', { postId: id }, [ 'postId' ]);
-        });
+      });
     });
 
     article
-    .querySelector('.article-post__img')
-    ?.addEventListener('click', () => {
-    gotoPage('./pages/postpage.html', { postId: id }, [ 'postId' ]);
-    });
+      .querySelector('.article-post__img')
+      ?.addEventListener('click', () => {
+        gotoPage('./pages/postpage.html', { postId: id }, [ 'postId' ]);
+      });
 
     const accountname = localStorage.getItem('accountname');
     const { user } = NAME_SPACE;
     if (user === accountname) {
-        article
+      article
         .querySelector('.feed-article__button')
         .addEventListener('click', () => showModal('myPost', id));
     } else {
-        article
+      article
         .querySelector('.feed-article__button')
         .addEventListener('click', () => showModal('post'));
     }

@@ -56,6 +56,9 @@ main {
   width: 42px;
   height: 42px;
   margin-right: 13px;
+  border-radius: 50%;
+  border: 1px solid #dbdbdb;
+  object-fit: cover;
 }
 
 .upload-form__content {
@@ -104,12 +107,14 @@ main {
   width: 304px;
   height: 228px;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .img-small {
   width: 168px;
   height: 126px;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .img-list {

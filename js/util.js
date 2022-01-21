@@ -31,14 +31,7 @@ const gotoPage = (url, items = {}, query = []) => {
 
 // 세 자리씩 쉼표로 끊은 가격으로 변환 (70000 => 70,000)
 const getFormattedPrice = (price) => {
-  const strPrice = '' + price;
-  if (strPrice.length <= 3) return strPrice;
-  return [...strPrice]
-    .map((v, i) => {
-      if ((strPrice.length - i) % 3 === 0 && i !== 0) return ',' + v;
-      return v;
-    })
-    .join('');
+  return (+price).toLocaleString();
 };
 
 // 이미지 가로 스크롤

@@ -163,10 +163,12 @@ const validateId = ({ currentTarget: { value } }) => {
   NAME_SPACE.isUniqueId = false;
   if (isValidId(value)) {
     if (!value.length) return;
-    fetch(`${API}/user`, reqData())
+    fetch(`${API}/user/accountnamevalid`, reqData('POST', {
+      user: { accountname: value }
+    }))
       .then(res => res.json())
-      .then(json => {
-        if (json.find(({ accountname }) => accountname === value)) {
+      .then(({ message }) => {
+        if (message === '이미 가입된 계정ID 입니다.') {
           showMsg(error4, '이미 사용 중인 ID입니다.');
         } else {
           showMsg(error4, '사용 가능한 ID입니다.', false);
