@@ -35,11 +35,47 @@
 .home-main {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     max-width: 767px;
     min-height: calc(100vh - 106px);
 }
 
 .main-content {
     width: 100%;
+    margin-bottom: 60px;
 }
+
+.main-content .user-list {
+    display: flex;
+    margin: 20px 16px;
+}
+
+.main-content .user-list .article-profile {
+    display: block;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 0.5px solid #DBDBDB;
+    width: 50px;
+    height: 50px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.main-content .user-list .article-nickname {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    cursor: pointer;
+}
+
+.main-content .user-list .article-id {
+    display: block;
+    font-size: 12px;
+    line-height: 15px;
+    color: #767676;
+    cursor: pointer;
+}
+
+.highlight {color: #f26e22; }
