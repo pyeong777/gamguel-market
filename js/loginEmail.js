@@ -33,71 +33,50 @@ init();
 
 
 // 유효성 검사
-
-
-// loginBtn.addEventListener('click', loginError);
-
-// function loginError() {
-//   if (
-//     !(
-//       (idInput.value == "deepdive@naver.com") &&
-//       (pwInput.value == "123456")
-//     )
-//   ) {
-//     warn.style.display = "block";
-//     idInput.classList.add('invalid');
-//     pwInput.classList.add('invalid');
-//   } else {
-//     warn.style.display = "none";
-//     location.href = "../index.html";
-//   }
-// }
-
-// idInput.addEventListener('focus', function () {
-//   if (this.classList.contains('invalid')) {
-//     this.classList.remove('invalid');
-//     warn.style.display = "none";
-//   }
-// });
-
-// pwInput.addEventListener('focus', function () {
-//   if (this.classList.contains('invalid')) {
-//     this.classList.remove('invalid');
-//     warn.style.display = "none";
-//   }
-// });
+const errorMsg = document.querySelector(".warning");
+const email = document.querySelector("#login_id");
+const pw = document.querySelector("#login_pw");
+const hideMsg = (elem) => {
+  if (elem.textContent !== '') {
+    elem.textContent = '';
+    loginBtn.style.opacity = .3;
+  }
+};
 
 async function login() {
   try {
-  const email = document.querySelector("#login_id").value
-  const pw = document.querySelector("#login_pw").value
-  const url = "http://146.56.183.55:5050"
-  const loginData = {
-          "user":{
-                  "email": email,
-                  "password": pw
-                  }
-          }
-  const res = await fetch(url+'/user/login',{
-      method:"POST",
-      headers:{
-          "Content-type" : "application/json"
+    const email = document.querySelector("#login_id").value
+    const pw = document.querySelector("#login_pw").value
+    const url = "http://146.56.183.55:5050"
+    const loginData = {
+      "user": {
+        "email": email,
+        "password": pw
+      }
+    }
+    const res = await fetch(url + '/user/login', {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
       },
-      body:JSON.stringify(loginData)
-  })
-  const json = await res.json()
+      body: JSON.stringify(loginData)
+    })
+    const json = await res.json()
 
-  localStorage.setItem("token",json.user.token)
-  localStorage.setItem("userid",json.user._id)
-  localStorage.setItem("accountname",json.user.accountname)
+    localStorage.setItem("token", json.user.token)
+    localStorage.setItem("userid", json.user._id)
+    localStorage.setItem("accountname", json.user.accountname)
 
-  location.href = "../index.html"
-} 
- catch (error) {
-  const errorMsg = document.querySelector(".warning");
-  errorMsg.innerText = "";
-  errorMsg.innerText = "*이메일 또는 비밀번호가 일치하지 않습니다.";
+    location.href = "../index.html"
+  }
+  catch (error) {
+    const errorMsg = document.querySelector(".warning");
+    errorMsg.innerText = "";
+    errorMsg.innerText = "*이메일 또는 비밀번호가 일치하지 않습니다.";
   }
 }
 
 document.querySelector('#login_btn').addEventListener("click", login);
+
+email.addEventListener('focus', () => hideMsg(errorMsg));
+pw.addEventListener('focus', () => hideMsg(errorMsg));
