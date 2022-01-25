@@ -1,6 +1,6 @@
 function loginCheck() {
   // 팔로잉 리스트 api 패치
-  fetch(`http://146.56.183.55:5050/profile/${localStorage.getItem('accountname')}/following`, reqData())
+  fetch(`${API}/${localStorage.getItem('accountname')}/following`, reqData())
     .then(res => res.json())
     .then(json => {
       if (Array.isArray(json)) {
