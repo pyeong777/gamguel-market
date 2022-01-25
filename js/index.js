@@ -66,38 +66,27 @@ async function getFeed() {
   const res = await fetch(`${API}/post/feed/?limit=${feedSkip >= 10 ? 30 : 10}&skip=${feedSkip >= 10 ? feedSkip - 10 : feedSkip}`, reqData());
   const json = await res.json();
   const posts = json.posts;
-
-  if (posts.length) {
-    const { prevFeed } = NAME_SPACE;
-    let uniquePost;
-    if (prevFeed.length) {
-      const prevId = prevFeed.map(({ id }) => id);
-      uniquePost = posts
-        .filter(({ id }) => !prevId.includes(id) && id < prevFeed[0].id)
-        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-        .slice(0, 10);
-      NAME_SPACE.feedSkip += uniquePost.length;
-    } else {
-      uniquePost = [...posts];
-      NAME_SPACE.feedSkip += posts.length;
-    }
-    if (uniquePost.length) {
-      renderFeed(uniquePost);
-      NAME_SPACE.prevFeed = uniquePost;
-      return false;
-    } else {
-      unobserveLastItem(homeMain, 'feed');
-      return true;
-    }
+  const { prevFeed } = NAME_SPACE;
+  let uniquePost;
+  if (prevFeed.length) {
+    const prevId = prevFeed.map(({ id }) => id);
+    uniquePost = posts
+      .filter(({ id }) => !prevId.includes(id) && id < prevFeed[0].id)
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .slice(0, 10);
+    NAME_SPACE.feedSkip += uniquePost.length;
   } else {
-    homeMain.innerHTML = `
-      <div class = "main-content">
-      <img src="./images/symbol-logo.svg" class="main__logo">
-      <p class="main__txt">유저를 검색해 팔로우 해보세요!</p>
-      <a href="./pages/search.html" class="main__btn">검색하기</a>
-      </div>
-    `;
+    uniquePost = [...posts];
+    NAME_SPACE.feedSkip += posts.length;
   }
+  if (uniquePost.length) {
+    renderFeed(uniquePost);
+    NAME_SPACE.prevFeed = uniquePost;
+    return false;
+  } else {
+    unobserveLastItem(homeMain, 'feed');
+    return true;
+  } 
 };
 
 const renderFeed = (posts) => {
@@ -208,8 +197,11 @@ const renderFeed = (posts) => {
   homeMain.appendChild(fragment);
 };
 
-const initPage = () => {
-  fetch(`${API}/user/checktoken`, reqData())
+const initPage = async () => {
+  const res = await fetch(`${API}/post/feed`, reqData())
+  const { posts } = await res.json();
+  if (posts.length) {
+    fetch(`${API}/user/checktoken`, reqData())
     .then(res => res.json())
     .then(async ({ isValid }) => {
       if (isValid) {
@@ -223,6 +215,15 @@ const initPage = () => {
         location.href = './pages/login.html';
       }
     });
+  } else {
+    homeMain.innerHTML = `
+    <div class = "main-content">
+    <img src="./images/symbol-logo.svg" class="main__logo">
+    <p class="main__txt">유저를 검색해 팔로우 해보세요!</p>
+    <a href="./pages/search.html" class="main__btn">검색하기</a>
+    </div>
+  `;
+  }
 };
 
 const observeLastItem = (item, observer) => {
