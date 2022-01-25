@@ -198,33 +198,32 @@ const renderFeed = (posts) => {
 };
 
 const initPage = async () => {
-  const res = await fetch(`${API}/post/feed`, reqData())
-  const { posts } = await res.json();
-  if (posts.length) {
-    fetch(`${API}/user/checktoken`, reqData())
+  const res = await fetch(`${API}/user/checktoken`, reqData())
+  const checktoken  = await res.json();
+  if (checktoken.isValid === true) {
+    fetch(`${API}/post/feed`, reqData())
     .then(res => res.json())
-    .then(async ({ isValid }) => {
-      if (isValid) {
+    .then(async ({ posts }) => {
+      if (posts?.length) {
         NAME_SPACE.feedSkip = 0;
         NAME_SPACE.prevFeed = [];
         NAME_SPACE.feedObserver = new IntersectionObserver(getIoCallback(homeMain, 'feed', getFeed), { threshold: 0.1 });
         await getFeed();
         observeLastItem(homeMain, 'feed');
+      } else {
+        homeMain.innerHTML = `
+          <div class = "main-content">
+          <img src="./images/symbol-logo.svg" class="main__logo">
+          <p class="main__txt">유저를 검색해 팔로우 해보세요!</p>
+          <a href="./pages/search.html" class="main__btn">검색하기</a>
+          </div>
+        `;
       }
-      else {
-        location.href = './pages/login.html';
-      }
-    });
+    })  
   } else {
-    homeMain.innerHTML = `
-    <div class = "main-content">
-    <img src="./images/symbol-logo.svg" class="main__logo">
-    <p class="main__txt">유저를 검색해 팔로우 해보세요!</p>
-    <a href="./pages/search.html" class="main__btn">검색하기</a>
-    </div>
-  `;
+    location.href = './pages/login.html'
   }
-};
+}
 
 const observeLastItem = (item, observer) => {
   const lastChild = item.lastElementChild;
