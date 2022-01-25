@@ -47,14 +47,13 @@ async function login() {
   try {
     const email = document.querySelector("#login_id").value
     const pw = document.querySelector("#login_pw").value
-    const url = "http://146.56.183.55:5050"
     const loginData = {
       "user": {
         "email": email,
         "password": pw
       }
     }
-    const res = await fetch(url + '/user/login', {
+    const res = await fetch(`${API}/user/login`, {
       method: "POST",
       headers: {
         "Content-type": "application/json"
