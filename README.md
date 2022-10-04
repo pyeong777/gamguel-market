@@ -8,6 +8,7 @@
 ## 🍊 감귤마켓 서비스 소개 
 
 **배포 링크** : https://gamguel-market.netlify.app/ <br>
+**테스트 접속 계정** : ID: deepdive@naver.com PW: 123456 <br>
 **개발 기간** : 2022-01-03 ~ 2022-01-17 <br>
 **프론트 개발 환경** : HTML5 & CSS3 & Vanilla JS <br>
 **백엔드 개발 환경** : 제공된 API 사용
